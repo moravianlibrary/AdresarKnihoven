@@ -14,7 +14,7 @@ def post(l)
 
   address = l["address"].kind_of?(Array) ? l["address"][0] : l["address"]
 
-  uri = URI.parse("http://localhost:3000/libraries")
+  uri = URI.parse("http://czech-libraries.herokuapp.com/libraries")
   email = value(l, "email", "email")
   web = value(l, "url", "link")
 	context = value(l, "type", "full")
