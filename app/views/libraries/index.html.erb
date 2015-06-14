@@ -1,0 +1,22 @@
+<!--<h1>Knihovny</h1>-->
+
+
+<div class="cl-libraries">
+  
+  <div class="cl-search">
+
+    <%= form_tag("/libraries", method: "get") do %>
+      <%= label_tag :q, "Vyhledat knihovnu", class: "cl-search-label"%>
+      <%= text_field_tag :q , @query, class: "form-control cl-search-input"%>
+      <%= submit_tag "Vyhledat" , class: "btn btn-primary cl-search-submit" %>
+    <% end %>
+
+  </div> 
+
+
+  <div class="cl-list">
+    <%= will_paginate %>
+    <%= render @libraries %>
+    <%= will_paginate %>
+  </div>
+</div>

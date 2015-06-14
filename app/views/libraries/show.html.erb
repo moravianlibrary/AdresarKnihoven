@@ -1,0 +1,32 @@
+
+<div class="cl-library-detail">
+<h2><%= @library.name %></h2>
+
+<div class="row">
+  <div class="col-md-8">
+    <p><%= @library.description %></p>
+    <br/>
+    <p><%= @library.context %></p>
+    <br/>
+    <p>Kraj: <%= @library.district %></p>
+    <p>Město: <%= @library.town %></p>
+    <br/>
+    <p>Sigla: <%= @library.sigla %></p>
+  </div>
+
+  <div class="col-md-4">
+   <div class="cl-right">
+    <p><%= @library.street %></p>
+    <p><%= @library.city %></p>
+    <p><%= @library.zip %></p>
+    <p><%= @library.coordinates %></p>
+    <br/>
+    <p>Web: <a href="<%= @library.url %>"><%= @library.url %></a></p>
+    <p>Tel.: <%= @library.phone %></p>
+    <p>Email: <%= @library.email %></p>
+   </div> 
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_library_path(@library) %>
+</div>

@@ -1,0 +1,77 @@
+<%= form_for(@library) do |f| %>
+  <% if @library.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@library.errors.count, "error") %> prohibited this library from being saved:</h2>
+
+      <ul>
+      <% @library.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :code %><br>
+    <%= f.text_field :code %>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br>
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :street %><br>
+    <%= f.text_field :street %>
+  </div>
+  <div class="field">
+    <%= f.label :zip %><br>
+    <%= f.text_field :zip %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :coordinates %><br>
+    <%= f.text_field :coordinates %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :sigla %><br>
+    <%= f.text_field :sigla %>
+  </div>
+  <div class="field">
+    <%= f.label :district %><br>
+    <%= f.text_field :district %>
+  </div>
+  <div class="field">
+    <%= f.label :town %><br>
+    <%= f.text_field :town %>
+  </div>
+  <div class="field">
+    <%= f.label :url %><br>
+    <%= f.text_field :url %>
+  </div>
+  <div class="field">
+    <%= f.label :context %><br>
+    <%= f.text_field :context %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br>
+    <%= f.text_field :phone %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
