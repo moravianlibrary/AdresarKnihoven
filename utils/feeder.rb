@@ -23,7 +23,8 @@ def post(l)
 
   address = l["address"].kind_of?(Array) ? l["address"][0] : l["address"]
 
-  uri = URI.parse("http://czech-libraries.herokuapp.com/libraries")
+  #uri = URI.parse("http://czech-libraries.herokuapp.com/libraries")
+  uri = URI.parse("http://localhost:3000/libraries")
   email = value(l, "email", "email")
   web = value(l, "url", "link")
 	context = value(l, "type", "full")
@@ -83,5 +84,5 @@ File.open("sigla-list.txt", "r") do |f|
 end
 end
 
-#go("ABG008")
+#go("ABA001")
 all()

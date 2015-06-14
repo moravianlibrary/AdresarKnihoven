@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150614035905) do
+ActiveRecord::Schema.define(version: 20150614203017) do
 
   create_table "libraries", force: :cascade do |t|
     t.string   "name"
@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20150614035905) do
     t.string   "street"
     t.string   "zip"
     t.string   "description"
-    t.string   "coordinates"
     t.string   "email"
     t.string   "sigla"
     t.string   "district"
@@ -30,6 +29,8 @@ ActiveRecord::Schema.define(version: 20150614035905) do
     t.string   "phone"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.float    "longitude"
+    t.float    "latitude"
   end
 
   add_index "libraries", ["name"], name: "index_libraries_on_name"
