@@ -6,7 +6,7 @@ class LibrariesController < ApplicationController
   # GET /libraries.json
   def index
     @query = params[:q];
-    @q = @query.upcase unless @query.nil?        
+    @q = @query.downcase unless @query.nil?        
     @libraries = Library.search(@q, params[:page])
   end
 

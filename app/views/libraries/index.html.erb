@@ -6,7 +6,7 @@
 
     <%= form_tag("/libraries", enforce_utf8: false, method: "get") do %>
       <%= label_tag :q, "Vyhledat knihovnu", class: "cl-search-label"%>
-      <%= text_field_tag :q , @query, class: "form-control cl-search-input"%>
+      <%= text_field_tag :q , @query, placeholder: "Název, kód, nebo sigla knihovny ..." ,class: "form-control cl-search-input"%>
       <%= submit_tag "Vyhledat" , name: nil, class: "btn btn-primary cl-search-submit" %>
     <% end %>
 
