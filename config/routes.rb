@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :libraries
-
+  
+  resources :libraries do
+    get :autocomplete_library_name, on: :collection
+  end
 
   root "libraries#index"
 

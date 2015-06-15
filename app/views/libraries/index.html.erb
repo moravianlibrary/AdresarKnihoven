@@ -4,10 +4,20 @@
   
   <div class="cl-search">
 
+
+<!--<%= autocomplete_field_tag :name, '', autocomplete_library_name_libraries_path, :size => 75%>-->
+
     <%= form_tag("/libraries", enforce_utf8: false, method: "get") do %>
+      
+<!--
       <%= label_tag :q, "Vyhledat knihovnu", class: "cl-search-label"%>
       <%= text_field_tag :q , @query, placeholder: "Název, kód, nebo sigla knihovny ..." ,class: "form-control cl-search-input"%>
-      <%= submit_tag "Vyhledat" , name: nil, class: "btn btn-primary cl-search-submit" %>
+       
+-->
+<%= autocomplete_field_tag :q, @query, autocomplete_library_name_libraries_path, :size => 75,
+    placeholder: "Název, kód, nebo sigla knihovny ..." ,class: "search-query form-control cl-search-input"%>
+      <%= submit_tag "Vyhledat" , name: nil, class: "search-me btn btn-primary cl-search-submit" %>
+
     <% end %>
 
   </div> 
@@ -19,3 +29,12 @@
     <%= will_paginate %>
   </div>
 </div>
+
+
+<script>
+$( document ).ready(function() {
+  $('.search-query').bind('railsAutocomplete.select', function(event, data) {
+    $('.search-me').trigger('click')
+  });
+});
+</script>

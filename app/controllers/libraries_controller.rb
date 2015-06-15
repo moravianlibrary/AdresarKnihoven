@@ -2,6 +2,9 @@ class LibrariesController < ApplicationController
   before_action :set_library, only: [:edit, :update, :destroy]
 
 
+  autocomplete :library, :name  
+
+
   # GET /libraries
   # GET /libraries.json
   def index
