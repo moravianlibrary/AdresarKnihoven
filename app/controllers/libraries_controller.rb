@@ -11,6 +11,9 @@ class LibrariesController < ApplicationController
     @query = params[:q];
     @q = @query.downcase unless @query.nil?        
     @libraries = Library.search(@q, params[:page])
+    if @libraries.count == 1 && request.format.html?
+      redirect_to action: "show", id: @libraries[0].id
+    end
   end
 
   # GET /libraries/1
