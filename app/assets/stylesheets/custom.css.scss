@@ -234,15 +234,24 @@ a:hover, a:focus, a:active {
   color: #bbbbbb;
 }
 
+.navbar-collapse {
+  border-color: #fff !important;;
+}
+
+.navbar-toggle {
+  border-color: transparent !important;;
+  &:hover {
+    background-color: transparent !important;;
+  }
+  &:focus {
+    background-color: transparent !important;;
+  }
+}
+
 
 #logo {
-  float: left;
-  margin-right: 10px;
-  font-size: 1.7em;
+  font-size: 1.5em;
   color: #fff;
-  /*text-transform: uppercase;*/
-  letter-spacing: -1px;
-  padding-top: 10px;
   font-weight: bold;
   &:hover {
     color: #fff;
