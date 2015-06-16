@@ -24,7 +24,7 @@ body {
 }
 
 html, body {
-  min-height: 100%;
+  height: 100%;
 }
 
 section {
@@ -97,6 +97,10 @@ a:hover, a:focus, a:active {
   text-decoration: none;
 }
 
+.cl-map {
+  height: 100%;
+  padding-bottom: 15px;
+}
 
 .cl-marker-info {
   .cl-title {
@@ -114,6 +118,7 @@ a:hover, a:focus, a:active {
 }
 
 .pagination {
+  margin: 10px 0;
   @media (max-width: 630px) {
     li {
       display: none;
