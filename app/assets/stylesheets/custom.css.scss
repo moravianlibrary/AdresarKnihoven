@@ -94,6 +94,17 @@ a:hover, a:focus, a:active {
 }
 
 
+.pagination {
+  @media (max-width: 630px) {
+    li {
+      display: none;
+      &.active,&.prev,&.next {
+        display: inline;
+      }
+    }
+  }
+}
+
 .form-control:focus {
   border-color: $color-primary;
   outline: 0;
@@ -132,10 +143,16 @@ a:hover, a:focus, a:active {
     .cl-search-input {
       float:left;
       width:calc(100% - 160px);
+      @media (max-width: 480px) {
+        width: 100%;
+      }      
     }
-    .cl-search-submit {
+    .cl-search-submit {      
       float:right;
       width:150px;
+      @media (max-width: 480px) {
+        display: none;
+      }
     }
   }
 
