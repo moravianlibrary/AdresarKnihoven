@@ -1,0 +1,47 @@
+<div class="cl-map">
+
+<div id="map-canvas" style="width: 100%; height: 600px;"></div>
+
+</div>
+
+
+<script type="text/javascript">  
+  function initialize() {
+    var latlng = new google.maps.LatLng(49.9, 15.6);
+    var mapOptions = {
+        zoom: 7,
+        center: latlng
+    };
+    var infoWindow = new google.maps.InfoWindow();
+    var libraries = [];
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    <% @libraries.each_with_index do |library, index| %>    
+      <% unless library.latitude.nil? || library.longitude.nil? %>
+        libraries.push({id:<%= library.id %>, lat:<%= library.latitude%>, lon:<%= library.longitude %>, name:'<%= library.name %>', address:'<%= library.street %>'});
+      <% end %>
+    <% end %>
+    var info = [];
+    for(var i = 0; i < libraries.length; i++) {
+      var l = libraries[i];
+     
+      var contentString = '<div id="content" class="cl-marker-info">'+      
+        '<div class="cl-title">' + l.name + '</div>'+
+        '<div class="cl-subtitle">' + l.address + '</div>'+
+        '<a href="/libraries/' + l.id + '">Detail knihovny</a>' +
+        '</div>';
+      info.push(contentString);
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng (l.lat, l.lon),
+        map: map,
+        title: l.title
+      }); 
+      google.maps.event.addListener(marker, 'click', (function(marker, index) {
+        return function() {       
+          infoWindow.setContent(info[index]);
+          infoWindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+  }
+  initialize();
+</script>

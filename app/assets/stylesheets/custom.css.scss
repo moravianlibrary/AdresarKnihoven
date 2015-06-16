@@ -23,6 +23,10 @@ body {
   padding-top: 60px;
 }
 
+html, body {
+  min-height: 100%;
+}
+
 section {
   overflow: auto;
 }
@@ -94,6 +98,21 @@ a:hover, a:focus, a:active {
 }
 
 
+.cl-marker-info {
+  .cl-title {
+    color: #333;
+    font-size: 20px;
+    margin-top: 2px;
+    margin-bottom: 8px;
+  }
+  .cl-subtitle {
+    color: #888;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+}
+
 .pagination {
   @media (max-width: 630px) {
     li {
@@ -130,6 +149,35 @@ a:hover, a:focus, a:active {
     color: #464646;
   }
 }
+
+
+
+.cl-districts {
+  .cl-list {
+    .cl-list-item {
+      padding: 5px;
+      cursor: pointer;
+      &:hover {
+        background: #f7f7f7;
+      }
+      border-bottom: 1px solid #eee;
+      .cl-name {
+        font-size: 18px;
+        color: #333;
+      }
+      .cl-count {
+        font-size: 16px;
+        color: #999;   
+      }
+    }
+  }
+}
+
+
+
+
+
+
 
 .cl-libraries {
   .cl-search {
