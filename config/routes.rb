@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   #get '/districts', to: 'districts#index'
   get '/map', to: 'map#index'
+  get '/feeder/:sigla', to: 'feeder#handle'
+  get '/feeder/show/:sigla', to: 'feeder#show'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -67,3 +69,5 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 end
+
+
