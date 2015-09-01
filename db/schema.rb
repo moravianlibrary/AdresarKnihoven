@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150901210726) do
+ActiveRecord::Schema.define(version: 20150901220029) do
 
   create_table "emails", force: :cascade do |t|
     t.string   "email"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20150901210726) do
     t.datetime "updated_at",  null: false
     t.float    "longitude"
     t.float    "latitude"
+    t.boolean  "active"
   end
 
   add_index "libraries", ["name"], name: "index_libraries_on_name"

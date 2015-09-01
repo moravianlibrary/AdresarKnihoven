@@ -4,11 +4,6 @@ class FeederController < ApplicationController
 
   def handle
   	sigla = params[:sigla].upcase
-    #url = "http://aleph.nkp.cz/X?op=find&find_code=wrd&base=ADR&request=sig=" + sigla
-    
-    #xml_data = Net::HTTP.get_response(URI.parse(url)).body
-    #doc = Nokogiri::XML(xml_data)
-    #logger.debug doc
 
     library = Library.find_by(sigla:sigla)
     if library.nil? 
@@ -25,59 +20,37 @@ class FeederController < ApplicationController
 
     doc = record(sigla)
     html = ""
-    name = check(doc.elements["//varfield[@id='NAZ']/subfield[@label='a']"])
-    code = check(doc.elements["//varfield[@id='ZKR']/subfield[@label='a']"])
-    district = check(doc.elements["//varfield[@id='KRJ']/subfield[@label='a']"])
-    town = check(doc.elements["//varfield[@id='KRJ']/subfield[@label='b']"])
-    description = check(doc.elements["//varfield[@id='POI']/subfield[@label='a']"])
-    context = check(doc.elements["//varfield[@id='TYP']/subfield[@label='b']"])
+    library.name = check(doc.elements["//varfield[@id='NAZ']/subfield[@label='a']"])
+    library.code = check(doc.elements["//varfield[@id='ZKR']/subfield[@label='a']"])
+    library.district = check(doc.elements["//varfield[@id='KRJ']/subfield[@label='a']"])
+    library.town = check(doc.elements["//varfield[@id='KRJ']/subfield[@label='b']"])
+    library.description = check(doc.elements["//varfield[@id='POI']/subfield[@label='a']"])
+    library.context = check(doc.elements["//varfield[@id='TYP']/subfield[@label='b']"])
 
-    library.name = name
-    library.code = code
-    library.town = town
-    library.district = district
-    library.description = description    
-    library.context = context
+    if doc.elements["//varfield[@id='STT']"]
+      library.active = false
+    else
+      library.active = true
+    end
+
 
     addr = doc.elements["//varfield[@id='ADR']"]    
     if addr
-      city = check(addr.elements["subfield[@label='m']"])
-      street = check(addr.elements["subfield[@label='u']"])
-      zip = check(addr.elements["subfield[@label='c']"])
-      library.city = city
-      library.street = street
-      library.zip = zip
-      
+      library.city = check(addr.elements["subfield[@label='m']"])
+      library.street = check(addr.elements["subfield[@label='u']"])
+      library.zip = check(addr.elements["subfield[@label='c']"])
 
       s_coor = check(addr.elements["subfield[@label='g']"])
       if s_coor
         coor = latlong s_coor      
-        latitude = coor[:latitude]
-        longitude = coor[:longitude]
-        library.latitude = latitude
-        library.longitude = longitude
+        library.latitude = coor[:latitude]
+        library.longitude = coor[:longitude]
       end
     end
     
     library.save
 
-    html = add(html, "name", name)
-    html = add(html, "code", code)
-    html = add(html, "city", city)    
-    html = add(html, "zip", zip)    
-    html = add(html, "street", street)    
-    html = add(html, "district", district)    
-    html = add(html, "town", town)    
-    html = add(html, "context", context)    
-    html = add(html, "sigla", sigla)    
-    html = add(html, "description", description)    
-
-
-    html = add(html, "lat", latitude)    
-    html = add(html, "lon", longitude)    
-    
     doc.elements().each("//varfield[@id='TEL']") do |p|      
-      html = add(html, "phone", p.elements["subfield[@label='a']"])
       phone = Phone.new
       phone.phone = check(p.elements["subfield[@label='a']"])
       library.phones.push(phone)
@@ -86,15 +59,12 @@ class FeederController < ApplicationController
 
 
     doc.elements().each("//varfield[@id='FAX']") do |f|      
-      html = add(html, "fax", f.elements["subfield[@label='a']"])
       fax = Fax.new
       fax.fax = check(f.elements["subfield[@label='a']"])
       library.faxes.push(fax)
     end
 
     doc.elements().each("//varfield[@id='JMN']") do |p|      
-      
-      html = add(html, "person", p.elements["subfield[@label='t']"])
       person = Person.new
       person.first_name = check(p.elements["subfield[@label='k']"])
       person.last_name = check(p.elements["subfield[@label='p']"])
@@ -108,7 +78,6 @@ class FeederController < ApplicationController
     end    
 
     doc.elements().each("//varfield[@id='EML']") do |e|      
-      html = add(html, "email", e.elements["subfield[@label='u']"])
       email = Email.new
       email.email = check(e.elements["subfield[@label='u']"])
       email.note = check(e.elements["subfield[@label='z']"])
@@ -116,22 +85,13 @@ class FeederController < ApplicationController
     end    
 
     doc.elements().each("//varfield[@id='URL']") do |w|      
-      html = add(html, "url", w.elements["subfield[@label='u']"])
       website = Website.new
       website.url = check(w.elements["subfield[@label='u']"])
       website.note = check(w.elements["subfield[@label='z']"])
       library.websites.push(website)
     end    
-
-
-
-    #/subfield[@label='a']"]
-    #.each |tel| do 
-    #  html += tel.elements["/subfield[@label='a']"].text + "\n"
-    #end
-    
-    #html = doc.xpath("//set_number").text
     render :text => html,:content_type => "text/plain"
+
     #respond_to do |format|
     #  format.json { head :ok }  
     #  format.html { head :ok }  
