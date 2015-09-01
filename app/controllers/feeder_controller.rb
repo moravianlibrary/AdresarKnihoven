@@ -2,13 +2,22 @@ require 'open-uri'
 class FeederController < ApplicationController
 
   def handle
-  	sigla = params[:sigla]
+  	sigla = params[:sigla].upcase
     #url = "http://aleph.nkp.cz/X?op=find&find_code=wrd&base=ADR&request=sig=" + sigla
     
     #xml_data = Net::HTTP.get_response(URI.parse(url)).body
     #doc = Nokogiri::XML(xml_data)
     #logger.debug doc
-    l = Library.new
+
+    library = Library.find_by(sigla:sigla)
+    if library.nil? 
+      library = Library.new
+    elsif 
+      library.phones.destroy_all
+      library.faxes.destroy_all
+      library.people.destroy_all
+    end
+      
 
     doc = record(sigla)
     html = ""
@@ -16,7 +25,7 @@ class FeederController < ApplicationController
     code = doc.elements["//varfield[@id='ZKR']/subfield[@label='a']"].text
     district = doc.elements["//varfield[@id='KRJ']/subfield[@label='a']"].text
     town = doc.elements["//varfield[@id='KRJ']/subfield[@label='b']"].text
-    description = doc.elements["//varfield[@id='POI']/subfield[@label='a']"].text
+    description = check(doc.elements["//varfield[@id='POI']/subfield[@label='a']"])
     addr = doc.elements["//varfield[@id='ADR']"]
     city = addr.elements["subfield[@label='m']"].text
     street = addr.elements["subfield[@label='u']"].text
@@ -27,19 +36,19 @@ class FeederController < ApplicationController
     longitude = coor[:longitude]
     context = doc.elements["//varfield[@id='TYP']/subfield[@label='b']"].text
 
-    l.name = name
-    l.description = description
-    l.code = code
-    l.city = city
-    l.street = street
-    l.zip = zip
-    l.latitude = latitude
-    l.longitude = longitude
-    l.sigla = sigla.upcase
-    l.context = context
-    l.district = district
-    l.town = town
-    l.save
+    library.name = name
+    library.description = description
+    library.code = code
+    library.city = city
+    library.street = street
+    library.zip = zip
+    library.latitude = latitude
+    library.longitude = longitude
+    library.sigla = sigla.upcase
+    library.context = context
+    library.district = district
+    library.town = town
+    library.save
 
     html = add(html, "name", name)
     html = add(html, "code", code)
@@ -58,8 +67,38 @@ class FeederController < ApplicationController
     
     tel = doc.elements["//varfield[@id='TEL']"]
     tel.elements().each("subfield[@label='a']") do |t|
-      html = add(html, "phone", t.text)  
+      html = add(html, "phone", t.text)
+      phone = Phone.new
+      phone.phone = t.text
+      library.phones.push(phone)
     end
+
+    fax = doc.elements["//varfield[@id='FAX']"]
+    fax.elements().each("subfield[@label='a']") do |t|      
+      html = add(html, "fax", t.text)
+      f = Fax.new
+      f.fax = t.text
+      library.faxes.push(f)
+    end
+
+    #people = doc.elements["//varfield[@id='JMN']"]
+    doc.elements().each("//varfield[@id='JMN']") do |p|      
+      
+      html = add(html, "person", p.elements["subfield[@label='t']"])
+      person = Person.new
+      person.first_name = check(p.elements["subfield[@label='k']"])
+      person.last_name = check(p.elements["subfield[@label='p']"])
+      person.degree1 = check(p.elements["subfield[@label='t']"])
+      person.degree2 = check(p.elements["subfield[@label='c']"])
+      person.phone = check(p.elements["subfield[@label='f']"])
+      person.email = check(p.elements["subfield[@label='e']"])
+      person.addressing = check(p.elements["subfield[@label='o']"])
+      person.role = check(p.elements["subfield[@label='r']"])
+      library.people.push(person)
+      #f.fax = t.text
+      #library.faxes.push(f)
+    end    
+
     #/subfield[@label='a']"]
     #.each |tel| do 
     #  html += tel.elements["/subfield[@label='a']"].text + "\n"
@@ -81,6 +120,10 @@ class FeederController < ApplicationController
     render :text => html,:content_type => "text/plain"
   end
 
+
+def check(value)
+  return value.text unless value.nil?
+end
 
 def set_number(sigla)
   url = "http://aleph.nkp.cz/X?op=find&find_code=wrd&base=ADR&request=sig=" + sigla
@@ -107,6 +150,5 @@ end
 def add(s, k, v) 
   s+ "\n---" + k + "---\n" + v.to_s + "\n"
 end
-
 
 end

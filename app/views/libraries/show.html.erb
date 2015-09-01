@@ -47,6 +47,30 @@
 </div>
 
 
+<div style="margin-top:15px;">
+<h3>Telefony</h3>
+<% @library.phones.each do |phone| %>
+  <div><%= phone.phone %></div>
+<% end %>
+</div>
+
+<div style="margin-top:15px;">
+<h3>Faxy</h3>
+<% @library.faxes.each do |fax| %>
+  <div><%= fax.fax %></div>
+<% end %>
+</div>
+
+<div style="margin-top:15px;">
+<h3>Odpovědné osoby</h3>
+<% @library.people.each do |person| %>
+  <h4><%= person.role %></h4>
+  <div><%= person.degree1 %> <%= person.first_name %> <%= person.last_name %> <%= person.degree2 %></div>
+  <div>email: <%= person.email %></div>
+  <div>tel.: <%= person.phone %></div>
+<% end %>
+</div>
+
 
 <% unless @library.latitude.nil? || @library.longitude.nil? %>
 <script type="text/javascript">  
