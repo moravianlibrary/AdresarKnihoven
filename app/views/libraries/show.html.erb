@@ -19,20 +19,23 @@
     <p style ="margin-left:26px;"><%= @library.city %>, <%= @library.zip %></p>
     <br/>
     <br/>
+    
+<!--
     <p style="margin-bottom:5px;">
-    <img src="<%= asset_path 'ic_web.png' %>" style="width:16px; height:24px;padding:4px 0px; margin-right:5px;"/>
-    <a href="<%= @library.url %>"><%= @library.url %></a>
+    <img src="<%= asset_path 'ic_web.png' %>" style="width:16px; height:24px;padding:4px 0px; margin-right:5px;"/>    
     </p>
+-->    
     <!--
     <p style="margin-bottom:5px;">
     <img src="<%= asset_path 'ic_phone.png' %>" style="width:16px; height:24px;padding:4px 0px; margin-right:5px;"/>
     
     </p>
     -->
+    <!--
     <p>
     <img src="<%= asset_path 'ic_email.png' %>" style="width:16px; height:24px;padding:4px 0px; margin-right:5px;"/>
-    <%= @library.email %>
     </p>
+    -->
     <br/>
     <br/>
     <p>Typ: <%= @library.context %></p>    
@@ -43,7 +46,6 @@
   </div>
 </div>
 
-<%= link_to 'Upravit', edit_library_path(@library) %>
 </div>
 
 
@@ -53,6 +55,27 @@
   <div><%= phone.phone %></div>
 <% end %>
 </div>
+
+
+<div style="margin-top:15px;">
+<h3>Emaily</h3>
+<% @library.emails.each do |email| %>
+  <div><%= email.email %> (<%= email.note %>)</div>
+<% end %>
+</div>
+
+<div style="margin-top:15px;">
+<h3>Websites</h3>
+<% @library.websites.each do |website| %>
+  <div>
+    <%= website.url %> 
+    <% if website.note %> 
+    (<%= website.note %>)
+    <% end %>
+  </div>
+<% end %>
+</div>
+
 
 <div style="margin-top:15px;">
 <h3>Faxy</h3>

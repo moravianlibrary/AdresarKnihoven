@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'rexml/document'
 class FeederController < ApplicationController
 
   def handle
@@ -16,38 +17,48 @@ class FeederController < ApplicationController
       library.phones.destroy_all
       library.faxes.destroy_all
       library.people.destroy_all
+      library.emails.destroy_all
+      library.websites.destroy_all
     end
       
+    library.sigla = sigla.upcase
 
     doc = record(sigla)
     html = ""
-    name = doc.elements["//varfield[@id='NAZ']/subfield[@label='a']"].text
-    code = doc.elements["//varfield[@id='ZKR']/subfield[@label='a']"].text
-    district = doc.elements["//varfield[@id='KRJ']/subfield[@label='a']"].text
-    town = doc.elements["//varfield[@id='KRJ']/subfield[@label='b']"].text
+    name = check(doc.elements["//varfield[@id='NAZ']/subfield[@label='a']"])
+    code = check(doc.elements["//varfield[@id='ZKR']/subfield[@label='a']"])
+    district = check(doc.elements["//varfield[@id='KRJ']/subfield[@label='a']"])
+    town = check(doc.elements["//varfield[@id='KRJ']/subfield[@label='b']"])
     description = check(doc.elements["//varfield[@id='POI']/subfield[@label='a']"])
-    addr = doc.elements["//varfield[@id='ADR']"]
-    city = addr.elements["subfield[@label='m']"].text
-    street = addr.elements["subfield[@label='u']"].text
-    zip = addr.elements["subfield[@label='c']"].text
-    s_coor = addr.elements["subfield[@label='g']"].text
-    coor = latlong s_coor
-    latitude = coor[:latitude]
-    longitude = coor[:longitude]
-    context = doc.elements["//varfield[@id='TYP']/subfield[@label='b']"].text
+    context = check(doc.elements["//varfield[@id='TYP']/subfield[@label='b']"])
 
     library.name = name
-    library.description = description
     library.code = code
-    library.city = city
-    library.street = street
-    library.zip = zip
-    library.latitude = latitude
-    library.longitude = longitude
-    library.sigla = sigla.upcase
-    library.context = context
-    library.district = district
     library.town = town
+    library.district = district
+    library.description = description    
+    library.context = context
+
+    addr = doc.elements["//varfield[@id='ADR']"]    
+    if addr
+      city = check(addr.elements["subfield[@label='m']"])
+      street = check(addr.elements["subfield[@label='u']"])
+      zip = check(addr.elements["subfield[@label='c']"])
+      library.city = city
+      library.street = street
+      library.zip = zip
+      
+
+      s_coor = check(addr.elements["subfield[@label='g']"])
+      if s_coor
+        coor = latlong s_coor      
+        latitude = coor[:latitude]
+        longitude = coor[:longitude]
+        library.latitude = latitude
+        library.longitude = longitude
+      end
+    end
+    
     library.save
 
     html = add(html, "name", name)
@@ -65,23 +76,22 @@ class FeederController < ApplicationController
     html = add(html, "lat", latitude)    
     html = add(html, "lon", longitude)    
     
-    tel = doc.elements["//varfield[@id='TEL']"]
-    tel.elements().each("subfield[@label='a']") do |t|
-      html = add(html, "phone", t.text)
+    doc.elements().each("//varfield[@id='TEL']") do |p|      
+      html = add(html, "phone", p.elements["subfield[@label='a']"])
       phone = Phone.new
-      phone.phone = t.text
+      phone.phone = check(p.elements["subfield[@label='a']"])
       library.phones.push(phone)
     end
 
-    fax = doc.elements["//varfield[@id='FAX']"]
-    fax.elements().each("subfield[@label='a']") do |t|      
-      html = add(html, "fax", t.text)
-      f = Fax.new
-      f.fax = t.text
-      library.faxes.push(f)
+
+
+    doc.elements().each("//varfield[@id='FAX']") do |f|      
+      html = add(html, "fax", f.elements["subfield[@label='a']"])
+      fax = Fax.new
+      fax.fax = check(f.elements["subfield[@label='a']"])
+      library.faxes.push(fax)
     end
 
-    #people = doc.elements["//varfield[@id='JMN']"]
     doc.elements().each("//varfield[@id='JMN']") do |p|      
       
       html = add(html, "person", p.elements["subfield[@label='t']"])
@@ -95,9 +105,25 @@ class FeederController < ApplicationController
       person.addressing = check(p.elements["subfield[@label='o']"])
       person.role = check(p.elements["subfield[@label='r']"])
       library.people.push(person)
-      #f.fax = t.text
-      #library.faxes.push(f)
     end    
+
+    doc.elements().each("//varfield[@id='EML']") do |e|      
+      html = add(html, "email", e.elements["subfield[@label='u']"])
+      email = Email.new
+      email.email = check(e.elements["subfield[@label='u']"])
+      email.note = check(e.elements["subfield[@label='z']"])
+      library.emails.push(email)
+    end    
+
+    doc.elements().each("//varfield[@id='URL']") do |w|      
+      html = add(html, "url", w.elements["subfield[@label='u']"])
+      website = Website.new
+      website.url = check(w.elements["subfield[@label='u']"])
+      website.note = check(w.elements["subfield[@label='z']"])
+      library.websites.push(website)
+    end    
+
+
 
     #/subfield[@label='a']"]
     #.each |tel| do 

@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150624171503) do
+ActiveRecord::Schema.define(version: 20150901210726) do
+
+  create_table "emails", force: :cascade do |t|
+    t.string   "email"
+    t.string   "note"
+    t.integer  "library_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "emails", ["library_id"], name: "index_emails_on_library_id"
 
   create_table "faxes", force: :cascade do |t|
     t.string   "fax"
@@ -29,11 +39,9 @@ ActiveRecord::Schema.define(version: 20150624171503) do
     t.string   "street"
     t.string   "zip"
     t.string   "description"
-    t.string   "email"
     t.string   "sigla"
     t.string   "district"
     t.string   "town"
-    t.string   "url"
     t.string   "context"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -68,5 +76,15 @@ ActiveRecord::Schema.define(version: 20150624171503) do
   end
 
   add_index "phones", ["library_id"], name: "index_phones_on_library_id"
+
+  create_table "websites", force: :cascade do |t|
+    t.string   "url"
+    t.string   "note"
+    t.integer  "library_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "websites", ["library_id"], name: "index_websites_on_library_id"
 
 end
