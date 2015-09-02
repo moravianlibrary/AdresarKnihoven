@@ -27,6 +27,8 @@ class FeederController < ApplicationController
     library.town = check(doc.elements["//varfield[@id='KRJ']/subfield[@label='b']"])
     library.description = check(doc.elements["//varfield[@id='POI']/subfield[@label='a']"])
     library.context = check(doc.elements["//varfield[@id='TYP']/subfield[@label='b']"])
+    library.ico = check(doc.elements["//varfield[@id='ICO']/subfield[@label='a']"])
+    library.dic = check(doc.elements["//varfield[@id='ICO']/subfield[@label='b']"])
 
     if doc.elements["//varfield[@id='STT']"]
       library.active = false
@@ -51,18 +53,22 @@ class FeederController < ApplicationController
     
     library.save
 
-    doc.elements().each("//varfield[@id='TEL']") do |p|      
-      phone = Phone.new
-      phone.phone = check(p.elements["subfield[@label='a']"])
-      library.phones.push(phone)
+    phone_array = doc.elements["//varfield[@id='TEL']"]
+    if phone_array
+      phone_array.elements().each("subfield[@label='a']") do |p|
+        phone = Phone.new
+        phone.phone = check(p)
+        library.phones.push(phone)
+      end
     end
 
-
-
-    doc.elements().each("//varfield[@id='FAX']") do |f|      
-      fax = Fax.new
-      fax.fax = check(f.elements["subfield[@label='a']"])
-      library.faxes.push(fax)
+    fax_array = doc.elements["//varfield[@id='FAX']"]
+    if fax_array
+      fax_array.elements().each("subfield[@label='a']") do |f|      
+        fax = Fax.new
+        fax.fax = check(f)
+        library.faxes.push(fax)
+      end
     end
 
     doc.elements().each("//varfield[@id='JMN']") do |p|      
