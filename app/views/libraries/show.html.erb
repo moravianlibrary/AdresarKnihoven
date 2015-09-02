@@ -84,6 +84,15 @@
 <% end %>
 </div>
 
+
+<div style="margin-top:15px;">
+<h3>Pobočky</h3>
+<% @library.branches.each do |branch| %>
+  <div><%= branch.name %></div>
+  <div><%= branch.address %></div>
+<% end %>
+</div>
+
 <div style="margin-top:15px;">
 <h3>Odpovědné osoby</h3>
 <% @library.people.each do |person| %>

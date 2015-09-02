@@ -14,6 +14,7 @@ class FeederController < ApplicationController
       library.people.destroy_all
       library.emails.destroy_all
       library.websites.destroy_all
+      library.branches.destroy_all
     end
       
     library.sigla = sigla.upcase
@@ -89,7 +90,15 @@ class FeederController < ApplicationController
       website.url = check(w.elements["subfield[@label='u']"])
       website.note = check(w.elements["subfield[@label='z']"])
       library.websites.push(website)
+    end  
+
+    doc.elements().each("//varfield[@id='POB']") do |b|      
+      branch = Branch.new
+      branch.name = check(b.elements["subfield[@label='n']"])
+      branch.address = check(b.elements["subfield[@label='a']"])
+      library.branches.push(branch)
     end    
+
     render :text => html,:content_type => "text/plain"
 
     #respond_to do |format|
