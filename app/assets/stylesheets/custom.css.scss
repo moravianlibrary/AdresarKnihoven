@@ -1,10 +1,11 @@
 /*$color-primary: #107067; */
 
-$color-primary: #AD129E;
+/*$color-primary: #AD129E;*/
+$color-primary: #E10F4E;
 
 $brand-primary:         $color-primary !default;
 $brand-success:         #5cb85c !default;
-$brand-info:            #5bc0de !default;
+$brand-info:            #898989 !default;
 $brand-warning:         #f0ad4e !default;
 $brand-danger:          #d9534f !default;
 
@@ -61,7 +62,7 @@ h1 {
   margin-bottom: 30px;
   text-align: center;
 }
-
+/*
 h2 {
   font-size: 1.2em;
   letter-spacing: -1px;
@@ -70,7 +71,7 @@ h2 {
   font-weight: normal;
   color: $gray-light;
 }
-
+*/
 p {
   font-size: 1.1em;
   line-height: 1.7em;
@@ -97,6 +98,15 @@ a:hover, a:focus, a:active {
   text-decoration: none;
 }
 
+
+
+.cl-logo {
+  height: 50px;
+  width: auto;
+  padding: 2px 0px;
+}
+
+
 .cl-map {
   height: 100%;
   padding-bottom: 15px;
@@ -118,7 +128,8 @@ a:hover, a:focus, a:active {
 }
 
 .pagination {
-  margin: 10px 0;
+  margin-top: 20px;
+  margin-bottom: 0px;
   @media (max-width: 630px) {
     li {
       display: none;
@@ -139,11 +150,29 @@ a:hover, a:focus, a:active {
 
 .cl-library-detail {  
   h2 {
-    color: #333;
-    width:100%;
-    text-align: left;
-    font-size: 23px;
-    float: left;
+    color: #555555;
+    font-size: 21px;
+    margin-bottom: 20px;
+  }
+  .cl-address {
+    margin-bottom: 8px;
+    img {
+      width:20px;
+      height:20px;
+      padding-right: 2px;
+      padding-bottom: 2px;
+    }
+    .cl-address-text {
+      color: #777777;
+      font-size: 14px;
+    }
+  }
+  .cl-links {
+    padding: 5px 0px 15px 0px;
+    .cl-btn {
+      margin-right:10px;
+      border-radius: 2px;
+    }
   }
   .cl-right {
     padding-left: 0px;
@@ -153,9 +182,46 @@ a:hover, a:focus, a:active {
     margin-bottom: 0px;
     color: #464646;
   }
+  .cl-contact-wrapper {
+    padding-top: 10px;
+    padding-left: 10px;
+    .cl-category {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      padding-bottom: 10px;      
+      .cl-title {
+        color: #666666;
+        font-size: 20px;
+        margin-bottom: 8px;
+      }
+      .cl-items {
+        .cl-item {
+          color: #777777;
+          font-size: 14px;          
+        }
+        .cl-person {
+          .cl-person-name {
+            color: #666666;
+            font-size: 15px;     
+          }
+          .cl-person-contact {
+            color: #888888;
+            font-size: 14px;     
+          }
+        }
+      }
+    }
+  }
 }
 
+.cl-border-bottom {
+  border-bottom: 1px solid #ddd;
+}
 
+.cl-pagination-centered {
+  width: 100%;
+  text-align: center;
+}
 
 .cl-districts {
   .cl-list {
@@ -236,7 +302,7 @@ a:hover, a:focus, a:active {
 }
 
 .navbar-inverse .navbar-nav > li > a {
-  color: #bbbbbb;
+  color: #ffffff;
 }
 
 .navbar-collapse {
@@ -268,10 +334,15 @@ a:hover, a:focus, a:active {
 /* footer */
 
 footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid $gray-medium-light;
-  color:$gray-light;
+  border-top: 1px solid #bbbbbb;     
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  overflow:hidden;
+  color: #666666;
+  padding: 5px; 
+    /*
   a {
     color: #555;
     &:hover {
@@ -288,7 +359,7 @@ footer {
       float: left;
       margin-left: 15px;
     }
-  }
+  }*/
 
 }
 

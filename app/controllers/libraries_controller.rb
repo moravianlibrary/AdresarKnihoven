@@ -19,7 +19,21 @@ class LibrariesController < ApplicationController
   # GET /libraries/1
   # GET /libraries/1.json
   def show
-     @library = Library.find(params[:id])
+    @library = Library.find(params[:id])
+    no_note = nil
+    @library.websites.each do |web|
+      if web.note.nil?
+        no_note = web.url unless no_note
+      elsif web.note.downcase == 'web' || web.note.downcase == 'knihovna'
+        @web = web.url
+      elsif web.note.downcase == 'online katalog' || web.note.downcase == 'on-line katalog'
+        @catalog = web.url
+      end        
+    end
+    if @web.nil? && no_note
+      @web = no_note
+    end
+
   end
 
   def sigla    

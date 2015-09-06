@@ -7,12 +7,17 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       </button>
-      <%= link_to "České knihovny", root_path, id: "logo", class:"navbar-brand" %>    
+
+      <%= link_to root_path do %>
+        <%= image_tag 'logo_main_white.png', class: "cl-logo" %>
+      <% end %>
+
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Mapa knihoven", map_path %></li>
-        <li><%= link_to "Seznam knihoven", root_path %></li>
+        <li><%= link_to "Databáze knihoven", map_path %></li>
+        <li><%= link_to "Informace o knihovnách", root_path %></li>
+        <li><%= link_to "Významné akce", root_path %></li>
       </ul>
     </div>
   </div>

@@ -24,10 +24,9 @@
 
 
   <div class="cl-list">
-    <%= will_paginate %>
     <%= render @libraries %>
-    <%= will_paginate %>
-  </div>
+    <%= will_paginate @libraries, class: "pagination cl-pagination-centered"%>
+  </div>  
 </div>
 
 

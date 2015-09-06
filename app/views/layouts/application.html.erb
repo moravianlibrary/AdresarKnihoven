@@ -27,11 +27,16 @@
 <body>
   <%= render 'layouts/header' %>
   
-  <div class="container" style="height:100%;">
-    <% flash.each do |message_type, message| %>
-      <div class="flash flash-<%= message_type %>"><%= message %></div>
-    <% end %>
-    <%= yield %>    
+  <div class="container" style="min-height:100%;position:relative;">
+    <div style="margin: 0 0 60px;">
+      <% flash.each do |message_type, message| %>
+        <div class="flash flash-<%= message_type %>"><%= message %></div>
+      <% end %>
+      <%= yield %>  
+    </div>    
+    
+  <%= render 'layouts/footer' %>
+      
   </div>
 
 </body>

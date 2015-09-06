@@ -1,109 +1,195 @@
 <div class="cl-library-detail">
 <h2><%= @library.name %></h2>
 
+
+<div class="cl-address">
+<img src="<%= asset_path 'ic_location_gray.png' %>"/>
+  <span class="cl-address-text">
+    <%= @library.street %>,    
+    <%= @library.zip %>
+    <%= @library.city %>
+  </span>
+
+
+</div>
+
+
+<% if @web || @catalog %>
+  <div class="cl-links">
+    <% if @web %>
+      <a href="<%= @web %>" class="btn btn-primary cl-btn">Web knihovny</a>
+    <% end %>
+    <% if @catalog %>
+      <a href="<%= @catalog %>" class="btn btn-info cl-btn">Otevřít katalog</a>
+    <% end %>
+  </div>
+<% end %>
+
+
+
+
 <div class="row">
   <div class="col-md-8" style="padding-bottom:10px;">
 
   <% unless @library.latitude.nil? || @library.longitude.nil? %>
-    <div id="map-canvas" style="width: 100%; height: 400px;"></div>
-    <br/>
-  <% end %>    
-    <p><%= @library.description %></p>        
+    <div id="map-canvas" style="width: 100%; height: 400px;"></div>   
+  <% end %>        
   </div>
 
   <div class="col-md-4" style="padding-bottom:10px;">
    <div class="cl-right">
-    <p>
-<img src="<%= asset_path 'ic_location.png' %>" style="width:18px; height:26px;padding:4px 0px; margin-right:3px;"/>    
-    <%= @library.street %></p>
-    <p style ="margin-left:26px;"><%= @library.city %>, <%= @library.zip %></p>
-    <br/>
-    <br/>
-    
-<!--
-    <p style="margin-bottom:5px;">
-    <img src="<%= asset_path 'ic_web.png' %>" style="width:16px; height:24px;padding:4px 0px; margin-right:5px;"/>    
-    </p>
--->    
-    <!--
-    <p style="margin-bottom:5px;">
-    <img src="<%= asset_path 'ic_phone.png' %>" style="width:16px; height:24px;padding:4px 0px; margin-right:5px;"/>
-    
-    </p>
-    -->
-    <!--
-    <p>
-    <img src="<%= asset_path 'ic_email.png' %>" style="width:16px; height:24px;padding:4px 0px; margin-right:5px;"/>
-    </p>
-    -->
-    <br/>
-    <br/>
-    <p>Typ: <%= @library.context %></p>    
-    <p>Kraj: <%= @library.district %></p>
-    <p>Město: <%= @library.town %></p>
-    <p>Sigla: <%= @library.sigla %></p>    
-    <p>IČ: <%= @library.ico %></p>    
-    <p>DIČ: <%= @library.dic %></p>    
+  
    </div> 
   </div>
 </div>
 
-</div>
 
 
-<div style="margin-top:15px;">
-<h3>Telefony</h3>
-<% @library.phones.each do |phone| %>
-  <div><%= phone.phone %></div>
-<% end %>
-</div>
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Kontakt</a>
+    </li>
+    <li role="presentation">
+      <a href="#branches" aria-controls="branches" role="tab" data-toggle="tab">Pobočky</a>
+    </li>
+    <li role="presentation">
+      <a href="#services" aria-controls="services" role="tab" data-toggle="tab">Služby</a>
+    </li>
+    <li role="presentation">
+      <a href="#info" aria-controls="info" role="tab" data-toggle="tab">Další</a>
+    </li>    
+  </ul>
+ <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="contact">
+      <div class="cl-contact-wrapper">
+        
+        <div class="cl-category cl-border-bottom">      
+          <div class="cl-title">Telefon</div>
+          <div class="cl-items">
+            <% @library.phones.each do |phone| %>
+              <div class="cl-item"><%= phone.phone %></div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="cl-category cl-border-bottom">      
+          <div class="cl-title">E-mail</div>
+          <div class="cl-items">
+            <% @library.emails.each do |email| %>
+              <div class="cl-item">
+                <%= email.email %>
+                <% if email.note %> 
+                  (<%= email.note %>)
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="cl-category cl-border-bottom">      
+          <div class="cl-title">Fax</div>
+          <div class="cl-items">
+            <% @library.faxes.each do |fax| %>
+              <div class="cl-item"><%= fax.fax %></div>
+            <% end %>
+          </div>
+        </div>    
+
+        <div class="cl-category">      
+          <div class="cl-title">Odpovědné osoby</div>
+          <div class="cl-items">
+            <% @library.people.each_with_index do |person, index| %>              
+              <% if index > 0 %>
+                <br/>  
+              <% end %>
+              <div class="cl-person">
+                <div class="cl-person-name">
+                  <%= person.degree1 %> <%= person.first_name %> <%= person.last_name %> <%= person.degree2 %>
+                  <% if person.role %> 
+                    (<%= person.role %>)
+                  <% end %>                
+                </div>
+                <% if person.email %> 
+                  <div class="cl-person-contact">e-mail: <%= person.email %></div>
+                <% end %>  
+                <% if person.phone %> 
+                  <div class="cl-person-contact">tel.: <%= person.phone %></div>
+                <% end %>
+              </div>
+
+            <% end %>
+          </div>
+        </div>    
 
 
-<div style="margin-top:15px;">
-<h3>Emaily</h3>
-<% @library.emails.each do |email| %>
-  <div><%= email.email %> (<%= email.note %>)</div>
-<% end %>
-</div>
+      </div>
 
-<div style="margin-top:15px;">
-<h3>Websites</h3>
-<% @library.websites.each do |website| %>
-  <div>
-    <%= website.url %> 
-    <% if website.note %> 
-    (<%= website.note %>)
-    <% end %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="branches">
+      <div style="padding:5px;">TODO</div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="services">
+      <div class="cl-contact-wrapper">
+
+        <div class="cl-category">      
+          <div class="cl-title">Webové stránky</div>
+          <div class="cl-items">
+            <% @library.websites.each do |website| %>
+              <div class="cl-item">
+                <%= website.url %> 
+                <% if website.note %> 
+                  (<%= website.note %>)
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>    
+
+      </div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="info">
+      <div class="cl-contact-wrapper">        
+        <div class="cl-category">      
+          <div class="cl-items">   
+            <div class="cl-item" style="padding-bottom:10px;">
+              <strong>Popis</strong>
+              <div><%= @library.description %></div>
+            </div>
+            <div class="cl-item"><strong>Typ</strong> <%= @library.context %></div>
+            <div class="cl-item"><strong>Kraj</Strong> <%= @library.district %></div>
+            <div class="cl-item"><strong>Okres</Strong> <%= @library.town %></div>
+            <div class="cl-item"><strong>Sigla</Strong> <%= @library.sigla %></div>
+            <div class="cl-item"><strong>Zkratka</Strong> <%= @library.code %></div>
+            <div class="cl-item"><strong>IČ</Strong> <%= @library.ico %></div>
+            <div class="cl-item"><strong>DIČ</Strong> <%= @library.dic %></div>
+            <% if @library.active %>
+              <div class="cl-item" style="margin-top:8px;">Knihovna je <Strong>aktivní</Strong></div>
+            <% else %>
+              <div class="cl-item" style="margin-top:8px;">Knihovna je <Strong>zrušena</Strong></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
   </div>
-<% end %>
+</div>
 </div>
 
 
-<div style="margin-top:15px;">
-<h3>Faxy</h3>
-<% @library.faxes.each do |fax| %>
-  <div><%= fax.fax %></div>
-<% end %>
-</div>
+<script type="text/javascript">  
+$('#myTabs a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+});
+</script>
 
-
-<div style="margin-top:15px;">
-<h3>Pobočky</h3>
-<% @library.branches.each do |branch| %>
-  <div><%= branch.name %></div>
-  <div><%= branch.address %></div>
-<% end %>
-</div>
-
-<div style="margin-top:15px;">
-<h3>Odpovědné osoby</h3>
-<% @library.people.each do |person| %>
-  <h4><%= person.role %></h4>
-  <div><%= person.degree1 %> <%= person.first_name %> <%= person.last_name %> <%= person.degree2 %></div>
-  <div>email: <%= person.email %></div>
-  <div>tel.: <%= person.phone %></div>
-<% end %>
-</div>
 
 
 <% unless @library.latitude.nil? || @library.longitude.nil? %>
