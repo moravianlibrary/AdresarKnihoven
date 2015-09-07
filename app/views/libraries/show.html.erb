@@ -204,18 +204,10 @@ $('#myTabs a').click(function (e) {
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
 
-    var contentString = '<div id="content">'+
-      '<div id="siteNotice">'+
-      '</div>'+
-      '<h2 id="firstHeading" class="firstHeading"><%= @library.name%></h1>'+
-      '<div id="bodyContent">'+
-      '<p>' +
-      '<%= @library.street %>' + '<br/>' +
-      '<%= @library.city %>' + '<br/>' +
-      '<%= @library.zip %>' + '<br/>' +
-      '</p>'+
-      '</div>'+
-      '</div>';
+    var contentString = '<div id="content" class="cl-marker-info">'+      
+        '<div class="cl-title"><%= @library.name %></div>'+
+        '<div class="cl-subtitle"><%= @library.street %>, <%= @library.zip %> <%= @library.city %></div>'+
+        '</div>';
 
     var infowindow = new google.maps.InfoWindow({
       content: contentString

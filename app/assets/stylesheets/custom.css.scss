@@ -126,16 +126,14 @@ a:hover, a:focus, a:active {
 .cl-marker-info {
   .cl-title {
     color: #333;
-    font-size: 20px;
-    margin-top: 2px;
-    margin-bottom: 8px;
+    font-size: 16px;
+    margin-top: 2px    
   }
   .cl-subtitle {
     color: #888;
-    font-size: 16px;
-    margin-bottom: 8px;
+    font-size: 14px;
+    margin-bottom: 3px;
   }
-
 }
 
 .pagination {
@@ -277,15 +275,14 @@ a:hover, a:focus, a:active {
     .cl-title {
       margin-bottom: 8px;
       font-size: 17px;
-      color: #444444;
+      color: #777777;
       padding-bottom: 5px;
       border-bottom: 1px solid #eee;
     }
     .cl-question {
       margin-bottom: 5px;
       font-size: 15px;
-      color: #666;
-      font-weight: 600;
+      color: #555;
     }
     .cl-question-body {
       margin-bottom: 4px;
@@ -338,7 +335,7 @@ a:hover, a:focus, a:active {
   .cl-list {
     margin-top: 15px;
     .cl-list-item {
-      padding: 5px;
+      padding: 5px 5px 10px 5px;
       cursor: pointer;
       &:hover {
         background: #f7f7f7;
@@ -351,7 +348,7 @@ a:hover, a:focus, a:active {
         font-size: 16px;
         color: #333;
         padding-left: 2px;
-        margin-bottom: 8px;
+        margin-bottom: 5px;
       }
       .library-address {
         color: #777777;
