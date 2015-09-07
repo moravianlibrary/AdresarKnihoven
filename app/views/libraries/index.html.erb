@@ -22,16 +22,24 @@
 
   </div> 
 
+<% if @query && @libraries.length > 0 %>
+
 
   <div id="map-canvas" style="width: 100%; height: 300px;margin:10px 0;"></div>
-
-
 
   <div class="cl-list">
     <%= render @libraries %>
     <%= will_paginate @libraries, class: "pagination cl-pagination-centered"%>
   </div>  
 </div>
+
+<% elsif @libraries.length == 0 %>
+
+  <div style="width:100%;margin-top:20px;font-size:15px;color:#444;text-align:center;">
+  Nebyly nalezeny žádné výsledky.
+  </div>
+
+<% end %>
 
 
 <script>
@@ -46,8 +54,8 @@ $( document ).ready(function() {
 
 
 
-
-<script type="text/javascript">  
+<% if @query && @libraries.length > 0 %>
+<script type="text/javascript">    
   function initialize() {
     var latlng = new google.maps.LatLng(49.9, 15.6);
     var mapOptions = {
@@ -87,3 +95,4 @@ $( document ).ready(function() {
   }
   initialize();
 </script>
+<% end %>
