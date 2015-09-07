@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
   
-  resources :libraries do
+  resources :libraries, only: [:index, :show] do
     get :autocomplete_library_name, on: :collection
   end
 
   root  'static_pages#home'
   get   'about'      => 'static_pages#about'
 
-  get '/libraries/sigla/:sigla', to: 'libraries#sigla', :defaults => { :format => :json }
+  #get '/libraries/sigla/:sigla', to: 'libraries#sigla', :defaults => { :format => :json }
 
 
   #get '/districts', to: 'districts#index'
-  get '/map', to: 'map#index'
+  #get '/map', to: 'map#index'
   get '/feeder/:sigla', to: 'feeder#handle'
   get '/feeder/show/:sigla', to: 'feeder#show'
 

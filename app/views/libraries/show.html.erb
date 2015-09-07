@@ -89,14 +89,16 @@
           </div>
         </div>
 
-        <div class="cl-category cl-border-bottom">      
-          <div class="cl-title">Fax</div>
-          <div class="cl-items">
-            <% @library.faxes.each do |fax| %>
-              <div class="cl-item"><%= fax.fax %></div>
-            <% end %>
-          </div>
-        </div>    
+        <%if !@library.faxes.empty? %>
+          <div class="cl-category cl-border-bottom">      
+            <div class="cl-title">Fax</div>
+            <div class="cl-items">
+              <% @library.faxes.each do |fax| %>
+                <div class="cl-item"><%= fax.fax %></div>
+              <% end %>
+            </div>
+          </div>    
+        <% end %>
 
         <div class="cl-category">      
           <div class="cl-title">Odpovědné osoby</div>
