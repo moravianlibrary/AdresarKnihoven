@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'net/http'
 require 'rexml/document'
 class FeederController < ApplicationController
 
