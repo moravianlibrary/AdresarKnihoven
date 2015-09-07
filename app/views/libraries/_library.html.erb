@@ -1,6 +1,13 @@
 <%= link_to(library) do %>
 	<div class="cl-list-item <%= cycle('even', 'odd') -%>" data-link="<%= library %>">
 	  <div class="library-name"><%= library.name %></div>
-	  <div class="library-address"><%= (library.street || "") + " " + library.city + ", " + library.zip %></div>
+	  <div class="library-address">
+			<img src="<%= asset_path 'ic_location_gray.png' %>"/>
+  		<span>
+    		<%= library.street %>,    
+    		<%= library.zip %>
+    		<%= library.city %>
+  		</span>
+		</div>
 	</div>
 <% end %>  

@@ -57,11 +57,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
+  color: #555555;  
+  font-size: 21px;
+  font-family: inherit;
+  font-weight: 500;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/*
+h1 {
   font-size: 3em;
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
 }
+*/
 /*
 h2 {
   font-size: 1.2em;
@@ -244,52 +255,115 @@ a:hover, a:focus, a:active {
   }
 }
 
+.btn {
+  border-radius: 0px !important;
+}
 
 
+.cl-home {
+  padding-top: 15px;
+  .cl-search-label {        
+    font-size: 16px;
+    color: #444444;
+    margin-bottom: 5px;
+  }
+  .cl-library-count {
+    font-size: 12px;
+    color: #888888;
+    margin-top: 0px;
+  }
+  .cl-psk {
+    padding-top: 10px;
+    .cl-title {
+      margin-bottom: 8px;
+      font-size: 17px;
+      color: #444444;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #eee;
+    }
+    .cl-question {
+      margin-bottom: 5px;
+      font-size: 15px;
+      color: #666;
+      font-weight: 600;
+    }
+    .cl-question-body {
+      margin-bottom: 4px;
+      font-size: 14px;
+      color: #777;
+    }
+    .cl-btns {
+      margin-top: 6px;
+      margin-bottom: 10px;
+      .cl-btn {
+        margin-right:10px;
+        border-radius: 0px;
+      }
+    }
+    .cl-text {
+      color: #666;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  }
+}
 
 
+.cl-search {
+  clear: both;
+  display: inline-block;
+  width: 100%;
+  margin-top:0px;
+  margin-bottom: 0px;   
+  .cl-search-input {
+    float:left;
+    margin-bottom: 0px;
+    width:calc(100% - 160px);
+    @media (max-width: 480px) {
+      width: 100%;
+    }      
+  }
+  .cl-search-submit {      
+    float:right;
+    width:150px;
+    @media (max-width: 480px) {
+      display: none;
+    }
+  }
+}
 
 
 .cl-libraries {
-  .cl-search {
-    clear: both;
-    display: inline-block;
-    width: 100%;
-    margin-top:20px;
-    .cl-search-label {
-      display: block;
-    }
-    .cl-search-input {
-      float:left;
-      width:calc(100% - 160px);
-      @media (max-width: 480px) {
-        width: 100%;
-      }      
-    }
-    .cl-search-submit {      
-      float:right;
-      width:150px;
-      @media (max-width: 480px) {
-        display: none;
-      }
-    }
-  }
-
+  
   .cl-list {
+    margin-top: 15px;
     .cl-list-item {
       padding: 5px;
       cursor: pointer;
       &:hover {
         background: #f7f7f7;
       }
+      &.odd {
+        background-color: #f4f4f4;
+      }
       border-bottom: 1px solid #eee;
       .library-name {
-        font-size: 18px;
+        font-size: 16px;
         color: #333;
+        padding-left: 2px;
+        margin-bottom: 8px;
       }
       .library-address {
-        font-size: 16px;
-        color: #999;   
+        color: #777777;
+        font-size: 14px;
+        img {
+          width:18px;
+          height:18px;
+          padding-right: 2px;
+          padding-bottom: 2px;
+        }
+
+
       }
     }
   }

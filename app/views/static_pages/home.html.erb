@@ -1,0 +1,61 @@
+<div class="cl-home">
+  
+  
+  <div class="cl-search-label">Vyhledat knihovnu</div>
+  <div class="cl-search">
+    <%= form_tag("/libraries", enforce_utf8: false, method: "get") do %>
+      <%= autocomplete_field_tag :q, @query, autocomplete_library_name_libraries_path, :size => 75,
+        placeholder: "Název, kód, nebo sigla knihovny ..." ,class: "search-query form-control cl-search-input cl-main"%>
+      <%= submit_tag "Vyhledat" , name: nil, class: "search-me btn btn-primary cl-search-submit" %>
+    <% end %>    
+  </div> 
+  <div class="cl-library-count"><%= @count %> knihoven v databázi</div>
+
+  <div style="height:300px;width:100%">
+    <div style="margin-top:150px;text-align:center;">TODO</div>
+  </div>
+
+
+  <div class="cl-psk">
+    <div class="cl-title">Ptejte se knihovny</div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="cl-question">
+          Zvuk v hrnečku s kakaem
+        </div>
+        <div class="cl-question-body">
+          Do hrnečku vlijete horké mléko, vsypete kakao a zamícháte. Pokud lžičku nevyndáte, ale budete s ní jemně ťukat o dno, bude se v čase postupně měnit vydávaný zvuk. Dokážete určit, zda bude tón klesat či stoupat? A zdůvodnit proč přesně?
+        </div>
+        <a href="http://www.ptejteseknihovny.cz/dotazy/proc-duni-kakao">Zobrazit odpověď knihovny</a>
+      </div>
+
+      <div class="col-md-2" style="height:10px;"></div>
+
+      <div class="col-md-4">
+      <div>
+        <div class="cl-btns">
+          <a href="http://www.ptejteseknihovny.cz/" class="btn btn-primary cl-btn">Položit dotaz</a>
+          <a href="http://www.ptejteseknihovny.cz/archiv" class="btn btn-info cl-btn">Archiv dotazů</a>
+        </div>
+        <div class="cl-text">
+          Odborná odpověď zdarma do 48 hodin na váš e-mail.
+        </div>
+        <div class="cl-text">             
+          Službu zajišťuje projekt <a href="http://www.ptejteseknihovny.cz/">Ptejte se knihovny</a>
+        </div>
+      </div>  
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+$( document ).ready(function() {
+  $('.search-query').bind('railsAutocomplete.select', function(event, data) {
+    $('.search-me').trigger('click')
+  });
+});
+</script>

@@ -4,7 +4,8 @@ Rails.application.routes.draw do
     get :autocomplete_library_name, on: :collection
   end
 
-  root "libraries#index"
+  root  'static_pages#home'
+  get   'about'      => 'static_pages#about'
 
   get '/libraries/sigla/:sigla', to: 'libraries#sigla', :defaults => { :format => :json }
 
