@@ -67,7 +67,7 @@ $( document ).ready(function() {
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     <% @libraries.each_with_index do |library, index| %>    
       <% unless library.latitude.nil? || library.longitude.nil? %>
-        libraries.push({id:<%= library.id %>, lat:<%= library.latitude%>, lon:<%= library.longitude %>, name:'<%= library.name %>', address:'<%= library.street %>, <%= library.zip %> <%= library.city %>'});
+        libraries.push({id:'<%= library.sigla %>', lat:<%= library.latitude%>, lon:<%= library.longitude %>, name:'<%= library.name %>', address:'<%= library.street %>, <%= library.zip %> <%= library.city %>'});
       <% end %>
     <% end %>
     var info = [];

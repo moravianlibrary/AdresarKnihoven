@@ -19,7 +19,7 @@ class LibrariesController < ApplicationController
   # GET /libraries/1
   # GET /libraries/1.json
   def show
-    @library = Library.find(params[:id])
+    @library = Library.find_by(sigla: params[:id].upcase)
     no_note = nil
     @library.websites.each do |web|
       if web.note.nil?
