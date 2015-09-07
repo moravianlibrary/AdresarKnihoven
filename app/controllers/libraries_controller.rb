@@ -26,7 +26,7 @@ class LibrariesController < ApplicationController
         no_note = web.url unless no_note
       elsif web.note.downcase == 'web' || web.note.downcase == 'knihovna'
         @web = web.url
-      elsif web.note.downcase == 'online katalog' || web.note.downcase == 'on-line katalog'
+      elsif web.note.downcase == 'online katalog' || web.note.downcase == 'on-line katalog' || web.note.downcase == 'katalog'
         @catalog = web.url
       end        
     end

@@ -8,7 +8,8 @@ def go(sigla=nil)
 		return	
 	end
 	port = 3000
-	url = "http://localhost:3000/feeder/" + sigla + "/"
+	#url = "http://localhost:3000/feeder/" + sigla + "/"
+	url = "http://czech-libraries.herokuapp.com/feeder/" + sigla + "/"
 	puts url
 	encoded_url = URI.encode(url)
 	uri = URI.parse(encoded_url)
@@ -30,6 +31,9 @@ def all
 	File.open("sigla-list.txt", "r") do |f|  		
   		f.each_line do |l|
     		count = count + 1
+    		if count > 600 
+    			return
+    		end
     		puts count.to_s
     		go(l.strip)
   		end
