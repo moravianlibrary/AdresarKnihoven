@@ -131,7 +131,26 @@
 
     </div>
     <div role="tabpanel" class="tab-pane" id="branches">
-      <div style="padding:5px;">TODO</div>
+      
+
+<div class="cl-contact-wrapper">
+
+
+
+      <div class="cl-category">                
+            <% @library.branches.each do |branch| %>
+              <div class="cl-title"><%= branch.name %></div>
+              <div class="cl-items">
+                <div class="cl-item">                
+                  <div><%= branch.address %></div>
+                </div>
+              </div>
+            <% end %>
+        </div>    
+
+
+</div>
+
     </div>
     <div role="tabpanel" class="tab-pane" id="services">
       <div class="cl-contact-wrapper">
