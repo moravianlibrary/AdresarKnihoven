@@ -103,6 +103,14 @@ class FeederController < ApplicationController
       branch = Branch.new
       branch.name = check(b.elements["subfield[@label='n']"])
       branch.address = check(b.elements["subfield[@label='a']"])
+      
+      s_coor = check(b.elements["subfield[@label='g']"])
+      if s_coor
+        coor = latlong s_coor      
+        branch.latitude = coor[:latitude]
+        branch.longitude = coor[:longitude]
+      end
+
       library.branches.push(branch)
     end    
 

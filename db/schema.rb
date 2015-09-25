@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150902001122) do
+ActiveRecord::Schema.define(version: 20150925232604) do
 
   create_table "branches", force: :cascade do |t|
     t.string   "name"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20150902001122) do
     t.integer  "library_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float    "longitude"
+    t.float    "latitude"
   end
 
   add_index "branches", ["library_id"], name: "index_branches_on_library_id"
