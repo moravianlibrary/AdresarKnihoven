@@ -192,8 +192,7 @@ a:hover, a:focus, a:active {
     color: #464646;
   }
   .cl-contact-wrapper {
-    padding-top: 10px;
-    padding-left: 10px;
+    padding: 10px;
     .cl-category {
       margin-top: 10px;
       margin-bottom: 10px;
@@ -203,11 +202,25 @@ a:hover, a:focus, a:active {
         font-size: 20px;
         margin-bottom: 8px;
       }
+      .cl-branch {
+        padding:5px;
+        &.odd {
+          background-color: #f4f4f4;
+        }
+        .cl-branch-name {
+          color: #444444;
+          font-size: 15px;          
+        }
+        .cl-branch-address {
+          color: #777777;
+          font-size: 14px;          
+        }
+      }
       .cl-items {
         .cl-item {
           color: #777777;
           font-size: 14px;          
-        }
+        }        
         .cl-person {
           .cl-person-name {
             color: #666666;

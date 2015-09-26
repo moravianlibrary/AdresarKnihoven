@@ -137,12 +137,12 @@
       <div class="cl-contact-wrapper">
         <div class="cl-category">                
           <% @library.branches.each do |branch| %>
-            <div class="cl-title"><%= branch.name %></div>
-            <div class="cl-items">
-              <div class="cl-item">                
-                <div><%= branch.address %></div>
+            <% if branch.name %>  
+              <div class="cl-branch <%= cycle('even', 'odd') %>">            
+                <div class="cl-branch-name"><%= branch.name %></div>
+                <div class="cl-branch-address"><%= branch.address %></div>
               </div>
-            </div>
+            <% end %>
           <% end %>
         </div>    
       </div>
