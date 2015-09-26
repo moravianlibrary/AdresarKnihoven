@@ -52,9 +52,11 @@
     <li role="presentation" class="active">
       <a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Kontakt</a>
     </li>
+    <% if @library.branches.present? %>
     <li role="presentation">
       <a href="#branches" aria-controls="branches" role="tab" data-toggle="tab">Pobočky</a>
     </li>
+    <% end %>
     <li role="presentation">
       <a href="#services" aria-controls="services" role="tab" data-toggle="tab">Služby</a>
     </li>
@@ -130,28 +132,23 @@
       </div>
 
     </div>
-    <div role="tabpanel" class="tab-pane" id="branches">
-      
-
-<div class="cl-contact-wrapper">
-
-
-
-      <div class="cl-category">                
-            <% @library.branches.each do |branch| %>
-              <div class="cl-title"><%= branch.name %></div>
-              <div class="cl-items">
-                <div class="cl-item">                
-                  <div><%= branch.address %></div>
-                </div>
+    <% if @library.branches.present? %>
+    <div role="tabpanel" class="tab-pane" id="branches">      
+      <div class="cl-contact-wrapper">
+        <div class="cl-category">                
+          <% @library.branches.each do |branch| %>
+            <div class="cl-title"><%= branch.name %></div>
+            <div class="cl-items">
+              <div class="cl-item">                
+                <div><%= branch.address %></div>
               </div>
-            <% end %>
+            </div>
+          <% end %>
         </div>    
-
-
-</div>
-
+      </div>
     </div>
+    <% end %>
+
     <div role="tabpanel" class="tab-pane" id="services">
       <div class="cl-contact-wrapper">
 
@@ -215,39 +212,78 @@ $('#myTabs a').click(function (e) {
 
 <% unless @library.latitude.nil? || @library.longitude.nil? %>
 <script type="text/javascript">  
-  function initialize() {
+  
+  function addLibrary(map, myLatlng) {
+    var contentString = '<div id="content" class="cl-marker-info">'+      
+          '<div class="cl-title"><%= @library.name %></div>'+
+          '<div class="cl-subtitle"><%= @library.street %>, <%= @library.zip %> <%= @library.city %></div>'+
+          '</div>';
 
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
+
+
+
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      icon: "<%= asset_path 'ic_pin_library.png' %>",
+      animation: google.maps.Animation.DROP,
+      zIndex:99999999,
+      title: '<%= @library.name%>'
+    });
+
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(map,marker);
+    });
+  }
+
+  function addBranches(map) {
+    var branches = [];
+    <% @library.branches.each_with_index do |branch, index| %>    
+      <% unless branch.latitude.nil? || branch.longitude.nil? %>
+        branches.push({lat:<%= branch.latitude%>, lon:<%= branch.longitude %>, name:'<%= branch.name %>', address:'<%= branch.address %>'});
+      <% end %>
+    <% end %>
+
+    for(var i = 0; i < branches.length; i++) {
+      var branch = branches[i];
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng (branch.lat, branch.lon),
+        icon: "<%= asset_path 'ic_pin_branch.png' %>",
+        map: map,
+        title: branch.title
+      }); 
+
+      var contentString = '<div id="content" class="cl-marker-info">'+      
+        '<div class="cl-title">pobočka ' + branch.name  + '</div>'+
+        '<div class="cl-subtitle">' + branch.address  + '</div>'+
+        '</div>';
+
+      var infoWindow = new google.maps.InfoWindow();
+
+      google.maps.event.addListener(marker, 'click', (function(marker, content) {
+        return function() {       
+          infoWindow.setContent(content);
+          infoWindow.open(map, marker);
+        }
+      })(marker, contentString));      
+
+    }
+  }
+
+  function initialize() {
     var myLatlng = new google.maps.LatLng(<%= @library.latitude%>, <%= @library.longitude%>);
     var mapOptions = {
       zoom: 10,
       center: myLatlng
     }
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-
-    var contentString = '<div id="content" class="cl-marker-info">'+      
-        '<div class="cl-title"><%= @library.name %></div>'+
-        '<div class="cl-subtitle"><%= @library.street %>, <%= @library.zip %> <%= @library.city %></div>'+
-        '</div>';
-
-    var infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
-
-
-    var marker = new google.maps.Marker({
-      position: myLatlng,
-      map: map,
-      title: '<%= @library.name%>'
-    });
-
-
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.open(map,marker);
-    });
-
-
+    addBranches(map);
+    addLibrary(map, myLatlng);    
   }
+
   initialize();
   /*google.maps.event.addDomListener(window, 'load', initialize);*/
 </script>
