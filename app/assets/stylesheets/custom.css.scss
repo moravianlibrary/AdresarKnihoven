@@ -184,8 +184,25 @@ a:hover, a:focus, a:active {
     }
   }
   .cl-right {
-    padding-left: 0px;
-    /*border-left:1px solid #ddd;*/
+    padding-left: 0px;    
+    .cl-row {
+      overflow: auto;
+      margin-bottom: 10px;
+      .cl-icon {
+        width: 20px;
+        height: 20px;
+        padding: 2px;
+        float: left;
+        margin-right: 5px;
+      }
+      .cl-text {
+        font-size: 14px;
+        line-height: 20px;
+        color: #444444;
+      }
+    }
+
+
   }
   p {
     margin-bottom: 0px;

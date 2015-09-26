@@ -37,9 +37,39 @@
   </div>
 
   <div class="col-md-4" style="padding-bottom:10px;">
-   <div class="cl-right">
-  
+    <div class="cl-right">
+
+
+    <% if @library.phones.present? %>
+      <div class="cl-row">
+        <img class="cl-icon" src="<%= asset_path 'ic_phone.png' %>"/>
+        <div class="cl-text"><%= @library.phones[0].phone %></div>
+      </div>
+    <% end %>
+
+    <% if @library.emails.present? %>
+      <div class="cl-row">
+        <img class="cl-icon" src="<%= asset_path 'ic_email2.png' %>"/>
+        <div class="cl-text"><%= @library.emails[0].email %></div>
+      </div>
+    <% end %>    
+
+    <% if @library.people.present? %>              
+      <div class="cl-row">
+        <img class="cl-icon" src="<%= asset_path 'ic_person2.png' %>"/>
+        <div class="cl-text">
+          <% person = @library.people[0] %>
+          <%= person.degree1 %> <%= person.first_name %> <%= person.last_name %> <%= person.degree2 %>
+          <% if person.role %> 
+            (<%= person.role %>)
+          <% end %>
+        </div>                
+      </div>
+    <% end %>       
    </div> 
+
+
+
   </div>
 </div>
 
