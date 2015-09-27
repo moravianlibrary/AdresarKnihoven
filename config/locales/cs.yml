@@ -2,3 +2,14 @@ cs:
   will_paginate:
     previous_label: "předchozí"
     next_label: "další"
+  app_name: "knihovny.cz"
+  title_home: "Centrální portál českých knihoven"
+  menu:
+    libraries: "Databáze knihoven"
+    info: "Informace o knihovnách"
+    events: "Významné akce"
+  footer:
+    admin_label: "Portál Knihovny.cz spravuje"
+    admin: "Městská knihovna v Praze"
+    about: "O projektu"
+
