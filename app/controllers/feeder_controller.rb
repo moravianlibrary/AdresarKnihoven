@@ -33,6 +33,9 @@ class FeederController < ApplicationController
     library.ico = check(doc.elements["//varfield[@id='ICO']/subfield[@label='a']"])
     library.dic = check(doc.elements["//varfield[@id='ICO']/subfield[@label='b']"])
 
+    library.mvs_description = check(doc.elements["//varfield[@id='MVS']/subfield[@label='c']"])
+    library.mvs_url = check(doc.elements["//varfield[@id='MVS']/subfield[@label='u']"])
+
     if doc.elements["//varfield[@id='STT']"]
       library.active = false
     else
