@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926015347) do
+ActiveRecord::Schema.define(version: 20150927205449) do
 
   create_table "branches", force: :cascade do |t|
     t.string   "name"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20150926015347) do
     t.boolean  "active"
     t.string   "ico"
     t.string   "dic"
+    t.string   "name_en"
   end
 
   add_index "libraries", ["name"], name: "index_libraries_on_name"

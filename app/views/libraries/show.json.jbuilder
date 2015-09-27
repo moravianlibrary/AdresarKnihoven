@@ -1,4 +1,4 @@
-json.extract! @library, :sigla, :name, :code, :city, :street, :zip, :longitude, :latitude, :description, :district, :town, :context, :active, :ico, :dic, :created_at, :updated_at
+json.extract! @library, :sigla, :name, :name_en, :code, :city, :street, :zip, :longitude, :latitude, :description, :district, :town, :context, :active, :ico, :dic, :created_at, :updated_at
 json.people {
 	json.array!(@library.people) do |person|
 	  json.extract! person, :first_name, :last_name, :email, :phone, :degree1, :degree2, :role
@@ -26,6 +26,6 @@ json.faxes {
 }
 json.branches {
 	json.array!(@library.branches) do |branch|
-	  json.extract! branch, :name, :address
+	  json.extract! branch, :name, :address, :longitude, :latitude
 	end
 }

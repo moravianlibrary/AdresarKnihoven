@@ -22,7 +22,9 @@ class FeederController < ApplicationController
 
     doc = record(sigla)
     html = ""
-    library.name = check(doc.elements["//varfield[@id='NAZ']/subfield[@label='a']"])
+    library.name = check(doc.elements["//varfield[@id='NAZ']/subfield[@label='a']"])    
+    library.name_en = check(doc.elements["//varfield[@id='VAR' and @i1='2']/subfield[@label='a']"])
+
     library.code = check(doc.elements["//varfield[@id='ZKR']/subfield[@label='a']"])
     library.district = check(doc.elements["//varfield[@id='KRJ']/subfield[@label='a']"])
     library.town = check(doc.elements["//varfield[@id='KRJ']/subfield[@label='b']"])
