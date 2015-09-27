@@ -2,7 +2,7 @@ en:
   app_name: "knihovny.cz"
   title_home: "Central portal of Czech libraries"
   menu:
-    libraries: "Library databese"
+    libraries: "Library database"
     info: "Information about libraries"
     events: "Important events"
   footer:
