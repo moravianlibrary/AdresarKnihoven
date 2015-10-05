@@ -15,6 +15,15 @@ Rails.application.routes.draw do
   get '/feeder/:sigla', to: 'feeder#handle'
   get '/feeder/show/:sigla', to: 'feeder#show'
 
+
+
+  namespace :admin do
+    
+
+    get 'wysiwyg' => 'test#wysiwyg'
+  end 
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
