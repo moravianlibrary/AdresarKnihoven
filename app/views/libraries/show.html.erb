@@ -91,7 +91,7 @@
       <a href="#services" aria-controls="services" role="tab" data-toggle="tab">Služby</a>
     </li>
     <li role="presentation">
-      <a href="#info" aria-controls="info" role="tab" data-toggle="tab">Další</a>
+      <a href="#info" aria-controls="info" role="tab" data-toggle="tab">Podrobné</a>
     </li>    
   </ul>
  <div class="tab-content">
@@ -213,11 +213,13 @@
             <div class="cl-item"><strong>Zkratka</Strong> <%= @library.code %></div>
             <div class="cl-item"><strong>IČ</Strong> <%= @library.ico %></div>
             <div class="cl-item"><strong>DIČ</Strong> <%= @library.dic %></div>
+            <!--
             <% if @library.active %>
               <div class="cl-item" style="margin-top:8px;">Knihovna je <Strong>aktivní</Strong></div>
             <% else %>
               <div class="cl-item" style="margin-top:8px;">Knihovna je <Strong>zrušena</Strong></div>
             <% end %>
+            -->
           </div>
         </div>
       </div>
