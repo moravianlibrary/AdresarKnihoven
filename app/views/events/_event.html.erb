@@ -1,0 +1,20 @@
+<div class="cl-event-item <%= cycle('even', 'odd') %>">
+  <div class="event-title"><%= event.title %>
+  
+	<div class="event-date">
+		<img src="<%= asset_path 'ic_date_accent.png' %>" />
+  	<span><%= event.date.strftime("%d.%m.%Y") %></span>
+  	</div>
+  </div>
+
+		
+  <div class="event-description"><%= event.description %></div>
+  
+	<div class="event-date">		
+  	<img src="<%= asset_path 'ic_location_gray.png' %>"/>
+  	<span><%= event.place %></span>
+	</div>
+
+	
+  <a class="event-link" href="<%= event.url %>">Více informací</a>
+</div>
