@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     get :autocomplete_library_name, on: :collection
   end
 
+  resources :events, only: [:index, :show]
+
   root  'static_pages#home'
   get   'about'      => 'static_pages#about'
 
