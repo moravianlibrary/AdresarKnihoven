@@ -12,8 +12,18 @@
   </div> 
   <div class="cl-library-count"><%= @count %> knihoven v databázi</div>
 
-  <div style="height:300px;width:100%">
-    <div style="margin-top:150px;text-align:center;">TODO</div>
+
+  <div class="cl-events">
+    <div class="cl-title">Nadcházející akce</div>
+    <% @events.each do |event| %>      
+        <div class="cl-event">
+          <span class="cl-event-date"><%= event.date.strftime("%d.%m.%Y") %></span>
+          <span class="cl-event-title"><%= event.title %></span>            
+        </div>
+    <% end %>
+    <div style="margin-top:5px">
+      <%= link_to "Více akcí", events_path %>
+    </div>
   </div>
 
 

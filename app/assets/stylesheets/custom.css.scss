@@ -330,16 +330,35 @@ a:hover, a:focus, a:active {
     color: #888888;
     margin-top: 0px;
   }
+  .cl-title {
+    margin-bottom: 8px;
+    font-size: 18px;
+    color: #555;
+    padding-bottom: 0px;
+    /*border-bottom: 1px solid #eee;*/
+  } 
+
+  .cl-events {
+    margin-top: 16px;
+    @extend .cl-box; 
+    .cl-event {
+      padding: 5px 0;
+      cursor: pointer;
+      &:hover {
+        background: #f7f7f7;
+      }
+      .cl-event-date {
+        margin-right:5px;
+        color: #777;
+      }
+      .cl-event-title {
+        color: #555;
+      }
+    }       
+  }
   .cl-psk {
-    padding-top: 10px;
-    @extend .cl-box;
-    .cl-title {
-      margin-bottom: 8px;
-      font-size: 17px;
-      color: #777777;
-      padding-bottom: 5px;
-      border-bottom: 1px solid #eee;
-    }
+    margin-top: 16px;
+    @extend .cl-box;    
     .cl-question {
       margin-bottom: 5px;
       font-size: 15px;
@@ -543,7 +562,7 @@ input {
       margin-top: 6px;      
     }
     .event-date {
-      color: $color-primary;
+      color: #888;
       font-size: 14px;
       margin-bottom: 5px;
       img {
