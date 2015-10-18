@@ -1,12 +1,13 @@
 <div>
 <h1>
-<%= link_to "+", new_event_path, class:"btn btn-primary cl-btn" %> 
 Významné akce 
+<%= link_to "+", new_event_path %> 
 </h1>
 
 
 <div class="cl-event-list row2">
 	<%= render @events %>
 </div>
+<%= will_paginate @libraries, class: "pagination cl-pagination-centered"%>
 
 </div>
