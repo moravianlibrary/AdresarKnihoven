@@ -11,28 +11,29 @@
     </div>
   <% end %>
 
+
   <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.label :title, "Název" %><br>
+    <%= f.text_field :title, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.label :description, "Popis" %><br>
+    <%= f.text_field :description, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :url %><br>
-    <%= f.text_field :url %>
+    <%= f.label :url, "URL" %><br>
+    <%= f.text_field :url, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :place %><br>
-    <%= f.text_field :place %>
+    <%= f.label :place, "Místo konání" %><br>
+    <%= f.text_field :place, class: 'form-control' %>
   </div>  
   <div class="field">
-    <%= f.label :date %><br>
-    <%= f.text_field :date, :class => 'datepicker', :value => Date.today %>
+    <%= f.label :date, "Datum konání"  %><br>
+    <%= f.text_field :date, class: 'form-control datepicker' %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Uložit", class: "btn-primary" %>
   </div>
 <% end %>
 

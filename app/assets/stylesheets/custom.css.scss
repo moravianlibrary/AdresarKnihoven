@@ -539,7 +539,7 @@ input {
       font-size: 16px;
       color: #333;
       margin-bottom: 5px;
-      margin-top: 5px;      
+      margin-top: 6px;      
     }
     .event-date {
       color: $color-primary;
@@ -561,7 +561,39 @@ input {
       color: #444444;
       font-size: 14px;
       font-style: italic;;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }               
   }
+}
+
+
+
+
+
+
+
+
+
+.datepicker table tr td.active:hover,
+.datepicker table tr td.active:hover:hover,
+.datepicker table tr td.active.disabled:hover,
+.datepicker table tr td.active.disabled:hover:hover,
+.datepicker table tr td.active:active,
+.datepicker table tr td.active:hover:active,
+.datepicker table tr td.active.disabled:active,
+.datepicker table tr td.active.disabled:hover:active,
+.datepicker table tr td.active.active,
+.datepicker table tr td.active:hover.active,
+.datepicker table tr td.active.disabled.active,
+.datepicker table tr td.active.disabled:hover.active,
+.datepicker table tr td.active.disabled,
+.datepicker table tr td.active:hover.disabled,
+.datepicker table tr td.active.disabled.disabled,
+.datepicker table tr td.active.disabled:hover.disabled,
+.datepicker table tr td.active[disabled],
+.datepicker table tr td.active:hover[disabled],
+.datepicker table tr td.active.disabled[disabled],
+.datepicker table tr td.active.disabled:hover[disabled] {
+    background-color: $color-primary !important;
+;
 }

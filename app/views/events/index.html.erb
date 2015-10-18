@@ -1,5 +1,9 @@
 <div>
-<h1>Významné akce</h1>
+<h1>
+<%= link_to "+", new_event_path, class:"btn btn-primary cl-btn" %> 
+Významné akce 
+</h1>
+
 
 <div class="cl-event-list row2">
 	<%= render @events %>
