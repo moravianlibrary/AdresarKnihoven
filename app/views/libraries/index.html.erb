@@ -48,13 +48,44 @@ $( document ).ready(function() {
     $('.search-me').trigger('click')
   });
 });
+
+
+if (navigator.geolocation) {
+  console.log('Geolocation is supported!');
+
+  window.onload = function() {
+  var startPos;
+    var geoOptions = {
+     timeout: 10 * 1000
+  }
+  var geoSuccess = function(position) {
+    console.log(position);    
+    //document.getElementById('startLat').innerHTML = startPos.coords.latitude;
+    //document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+  };
+  var geoError = function(error) {
+    console.log('Error occurred. Error code: ' + error.code);
+    // error.code can be:
+    //   0: unknown error
+    //   1: permission denied
+    //   2: position unavailable (error response from location provider)
+    //   3: timed out
+  };  
+  navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
+};
+
+}
+else {
+  console.log('Geolocation is not supported for this Browser/OS version yet.');
+}
+
 </script>
 
 
 
 
 
-<% if @query && @libraries.length > 0 %>
+<% if @query && @all.length > 0 %>
 <script type="text/javascript">    
   function initialize() {
     var latlng = new google.maps.LatLng(49.9, 15.6);
@@ -64,8 +95,9 @@ $( document ).ready(function() {
     };
     var infoWindow = new google.maps.InfoWindow();
     var libraries = [];
-    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    <% @libraries.each_with_index do |library, index| %>    
+    var markers = [];    
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);    
+    <% @all.each_with_index do |library, index| %>    
       <% unless library.latitude.nil? || library.longitude.nil? %>
         libraries.push({id:'<%= library.sigla %>', lat:<%= library.latitude%>, lon:<%= library.longitude %>, name:'<%= library.name %>', address:'<%= library.street %>, <%= library.zip %> <%= library.city %>'});
       <% end %>
@@ -85,6 +117,7 @@ $( document ).ready(function() {
         map: map,
         title: l.title
       }); 
+      markers.push(marker);
       google.maps.event.addListener(marker, 'click', (function(marker, index) {
         return function() {       
           infoWindow.setContent(info[index]);
@@ -92,6 +125,10 @@ $( document ).ready(function() {
         }
       })(marker, i));
     }
+    <% if @all.count > 500 %>
+      var mcOptions = {gridSize: 75, maxZoom: 10};
+      var mc = new MarkerClusterer(map, markers, mcOptions);
+    <% end %>
   }
   initialize();
 </script>

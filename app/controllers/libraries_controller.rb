@@ -10,10 +10,15 @@ class LibrariesController < ApplicationController
   def index
     @query = params[:q];
     @q = @query.downcase unless @query.nil?        
-    @libraries = Library.search(@q, params[:page])
-    if @libraries.count == 1 && request.format.html?
-      redirect_to action: "show", id: @libraries[0].sigla
+    if params[:lon] && params[:lat]
+      @all = Library.where("ABS(latitude - #{params[:lat]}) < 0.02 AND ABS(longitude - #{params[:lon]}) < 0.02")
+    else
+      @all = Library.where('LOWER(name) LIKE ? OR LOWER(sigla) = ? OR LOWER(code) = ? OR LOWER(city) = ?', "%#{@q}%", "#{@q}", "#{@q}", "#{@q}")
+      if @all.count == 1 && request.format.html?
+        redirect_to action: "show", id: @all[0].sigla
+      end
     end
+    @libraries = @all.paginate(page: params[:page], per_page: 20)
   end
 
   # GET /libraries/1
