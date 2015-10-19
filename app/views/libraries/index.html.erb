@@ -95,7 +95,8 @@ else {
     };
     var infoWindow = new google.maps.InfoWindow();
     var libraries = [];
-    var markers = [];    
+    var markers = [];  
+    var bounds = new google.maps.LatLngBounds();  
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);    
     <% @all.each_with_index do |library, index| %>    
       <% unless library.latitude.nil? || library.longitude.nil? %>
@@ -117,6 +118,7 @@ else {
         map: map,
         title: l.title
       }); 
+      bounds.extend(marker.getPosition());
       markers.push(marker);
       google.maps.event.addListener(marker, 'click', (function(marker, index) {
         return function() {       
@@ -129,6 +131,13 @@ else {
       var mcOptions = {gridSize: 75, maxZoom: 10};
       var mc = new MarkerClusterer(map, markers, mcOptions);
     <% end %>
+    google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
+      //map.setZoom(map.getZoom()-1);
+      if (this.getZoom() > 15) {
+        this.setZoom(15);
+      }
+    });
+    map.fitBounds(bounds);
   }
   initialize();
 </script>
