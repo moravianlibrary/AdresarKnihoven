@@ -8,12 +8,17 @@ class LibrariesController < ApplicationController
   # GET /libraries
   # GET /libraries.json
   def index
+    @show_results = params.has_key?(:q) || (params.has_key?(:lon) && params.has_key?(:lat))
     @query = params[:q];
-    @q = @query.downcase unless @query.nil?        
+    q = @query.downcase unless @query.nil?        
     if params[:lon] && params[:lat]
       @all = Library.where("ABS(latitude - #{params[:lat]}) < 0.02 AND ABS(longitude - #{params[:lon]}) < 0.02")
     else
-      @all = Library.where('LOWER(name) LIKE ? OR LOWER(sigla) = ? OR LOWER(code) = ? OR LOWER(city) = ?', "%#{@q}%", "#{@q}", "#{@q}", "#{@q}")
+      if @query.nil?
+        @all = Library.all
+      else
+        @all = Library.where('LOWER(name) LIKE ? OR LOWER(sigla) = ? OR LOWER(code) = ? OR LOWER(city) = ?', "%#{q}%", "#{q}", "#{q}", "#{q}")
+      end        
       if @all.count == 1 && request.format.html?
         redirect_to action: "show", id: @all[0].sigla
       end
