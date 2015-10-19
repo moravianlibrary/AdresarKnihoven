@@ -16,10 +16,12 @@
   <div class="cl-events">
     <div class="cl-title">Nadcházející akce</div>
     <% @events.each do |event| %>      
-        <div class="cl-event">
-          <span class="cl-event-date"><%= event.date.strftime("%d.%m.%Y") %></span>
-          <span class="cl-event-title"><%= event.title %></span>            
-        </div>
+        <%= link_to event.url, :target => "_blank" do %>
+          <div class="cl-event">
+            <span class="cl-event-date"><%= event.date.strftime("%d.%m.%Y") %></span>
+            <span class="cl-event-title"><%= event.title %></span>            
+          </div>
+        <% end %> 
     <% end %>
     <div style="margin-top:5px">
       <%= link_to "Více akcí", events_path %>
