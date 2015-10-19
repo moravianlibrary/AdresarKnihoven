@@ -18,7 +18,7 @@ class LibrariesController < ApplicationController
         redirect_to action: "show", id: @all[0].sigla
       end
     end
-    @libraries = @all.paginate(page: params[:page], per_page: 20)
+    @libraries = @all.order(:name).paginate(page: params[:page], per_page: 20)
   end
 
   # GET /libraries/1

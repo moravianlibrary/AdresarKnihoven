@@ -21,8 +21,13 @@
     <% end %>
 
   </div> 
+  <div class="cl-search-count">Výsledky: <b><%= @all.count %></b>
+    <span id="nearby-wrapper" style="display:none">|
+      <a id="nearby" href="#">Knihovny v okolí</a>
+    </span>
+  </div>
 
-<% if @query && @libraries.length > 0 %>
+<% if @libraries.length > 0 %>
 
 
   <div id="map-canvas" style="width: 100%; height: 300px;margin:10px 0;"></div>
@@ -33,7 +38,7 @@
   </div>  
 </div>
 
-<% elsif @libraries.length == 0 %>
+<% else %>
 
   <div style="width:100%;margin-top:20px;font-size:15px;color:#444;text-align:center;">
   Nebyly nalezeny žádné výsledky.
@@ -43,102 +48,122 @@
 
 
 <script>
-$( document ).ready(function() {
-  $('.search-query').bind('railsAutocomplete.select', function(event, data) {
-    $('.search-me').trigger('click')
-  });
-});
+var latitude = null;
+var longitude = null;
+var map = null;
 
 
-if (navigator.geolocation) {
-  console.log('Geolocation is supported!');
-
-  window.onload = function() {
-  var startPos;
-    var geoOptions = {
-     timeout: 10 * 1000
-  }
-  var geoSuccess = function(position) {
-    console.log(position);    
-    //document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-    //document.getElementById('startLon').innerHTML = startPos.coords.longitude;
-  };
-  var geoError = function(error) {
-    console.log('Error occurred. Error code: ' + error.code);
-    // error.code can be:
-    //   0: unknown error
-    //   1: permission denied
-    //   2: position unavailable (error response from location provider)
-    //   3: timed out
-  };  
-  navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
+var geoSuccess = function(position) {
+  console.log(position);    
+  var latitude = position.coords.latitude;
+  var longitude = position.coords.longitude;
+  $("#nearby").click(function(event) {
+    event.preventDefault();
+    window.location.href = "?lat=" + latitude + "&lon=" + longitude;
+  });    
+  console.log("latitude, longitude" + latitude + ", " + longitude + ", " + map);
+    var myLocationIcon = {
+    url: "<%= asset_path 'ic_home_blue.png' %>",    
+    size: new google.maps.Size(32, 32),
+    // The origin for this image is (0, 0).
+    origin: new google.maps.Point(0, 0),
+    // The anchor for this image is the base of the flagpole at (0, 32).
+    anchor: new google.maps.Point(16, 16)
+    };
+  var marker = new google.maps.Marker({
+    position: new google.maps.LatLng (latitude, longitude),
+    icon: myLocationIcon,
+    map: map,
+    title: "My location"
+  }); 
+  $('#nearby-wrapper').show();
 };
 
-}
-else {
-  console.log('Geolocation is not supported for this Browser/OS version yet.');
-}
+var geoError = function(error) {
+  console.log('Error occurred. Error code: ' + error.code);
+  // error.code can be:
+  //   0: unknown error
+  //   1: permission denied
+  //   2: position unavailable (error response from location provider)
+  //   3: timed out
+};  
 
-</script>
-
-
-
-
-
-<% if @query && @all.length > 0 %>
-<script type="text/javascript">    
-  function initialize() {
-    var latlng = new google.maps.LatLng(49.9, 15.6);
-    var mapOptions = {
-        zoom: 7,
-        center: latlng
-    };
-    var infoWindow = new google.maps.InfoWindow();
-    var libraries = [];
-    var markers = [];  
-    var bounds = new google.maps.LatLngBounds();  
-    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);    
-    <% @all.each_with_index do |library, index| %>    
-      <% unless library.latitude.nil? || library.longitude.nil? %>
-        libraries.push({id:'<%= library.sigla %>', lat:<%= library.latitude%>, lon:<%= library.longitude %>, name:'<%= library.name %>', address:'<%= library.street %>, <%= library.zip %> <%= library.city %>'});
-      <% end %>
+function initialize() {
+  var latlng = new google.maps.LatLng(49.9, 15.6);
+  var mapOptions = {
+      zoom: 7,
+      center: latlng
+  };
+  var infoWindow = new google.maps.InfoWindow();
+  var libraries = [];
+  var markers = [];  
+  var bounds = new google.maps.LatLngBounds();  
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);    
+  <% @all.each_with_index do |library, index| %>    
+    <% unless library.latitude.nil? || library.longitude.nil? %>
+      libraries.push({id:'<%= library.sigla %>', lat:<%= library.latitude%>, lon:<%= library.longitude %>, name:'<%= library.name %>', address:'<%= library.street %>, <%= library.zip %> <%= library.city %>'});
     <% end %>
-    var info = [];
-    for(var i = 0; i < libraries.length; i++) {
-      var l = libraries[i];
-     
-      var contentString = '<div id="content" class="cl-marker-info">'+      
-        '<div class="cl-title">' + l.name + '</div>'+
-        '<div class="cl-subtitle">' + l.address + '</div>'+
-        '<a href="/libraries/' + l.id + '">Detail knihovny</a>' +
-        '</div>';
-      info.push(contentString);
-      var marker = new google.maps.Marker({
-        position: new google.maps.LatLng (l.lat, l.lon),
-        map: map,
-        title: l.title
-      }); 
-      bounds.extend(marker.getPosition());
-      markers.push(marker);
-      google.maps.event.addListener(marker, 'click', (function(marker, index) {
-        return function() {       
-          infoWindow.setContent(info[index]);
-          infoWindow.open(map, marker);
-        }
-      })(marker, i));
-    }
-    <% if @all.count > 500 %>
-      var mcOptions = {gridSize: 75, maxZoom: 10};
-      var mc = new MarkerClusterer(map, markers, mcOptions);
-    <% end %>
-    google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
-      //map.setZoom(map.getZoom()-1);
-      if (this.getZoom() > 15) {
-        this.setZoom(15);
+  <% end %>
+  var info = [];
+  for(var i = 0; i < libraries.length; i++) {
+    var l = libraries[i];
+   
+    var contentString = '<div id="content" class="cl-marker-info">'+      
+      '<div class="cl-title">' + l.name + '</div>'+
+      '<div class="cl-subtitle">' + l.address + '</div>'+
+      '<a href="/libraries/' + l.id + '">Detail knihovny</a>' +
+      '</div>';
+    info.push(contentString);
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng (l.lat, l.lon),
+      map: map,
+      title: l.title
+    }); 
+    bounds.extend(marker.getPosition());
+    markers.push(marker);
+    google.maps.event.addListener(marker, 'click', (function(marker, index) {
+      return function() {       
+        infoWindow.setContent(info[index]);
+        infoWindow.open(map, marker);
       }
-    });
-    map.fitBounds(bounds);
+    })(marker, i));
   }
+  <% if @all.count > 500 %>
+    var mcOptions = {gridSize: 75, maxZoom: 10};
+    var mc = new MarkerClusterer(map, markers, mcOptions);
+  <% end %>
+  google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
+    //map.setZoom(map.getZoom()-1);
+    if (this.getZoom() > 15) {
+      this.setZoom(15);
+    } else if(this.getZoom() < 7) {
+      this.setZoom(7);
+    }
+  });
+  map.fitBounds(bounds);
+}
+
+
+
+
+
+
+$(document).ready(function() {
+  $('.search-query').bind('railsAutocomplete.select', function(event, data) {
+    $('.search-me').trigger('click')
+  });  
   initialize();
+  if (navigator.geolocation) {
+    console.log('Geolocation is supported!');
+    var startPos;
+    var geoOptions = {
+     timeout: 10 * 1000
+    }
+    navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
+  } else {
+    console.log('Geolocation is not supported for this Browser/OS version yet.');
+  }
+});
+
+  
 </script>
-<% end %>
