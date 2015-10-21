@@ -1,12 +1,15 @@
 class LibrariesController < ApplicationController
   before_action :set_library, only: [:edit, :update, :destroy]
 
-  autocomplete :library, :name#,  :full => true
+  autocomplete :library, :name, limit:20#,  :full => true
 
-    def get_autocomplete_items(parameters)
-    super(parameters).group(:name).limit(20)
+  # def get_autocomplete_items(parameters)
+  # super(parameters).group(:name)
+  # end
+
+  def get_autocomplete_select_clause(model, method, options)
+    "distinct #{method}"
   end
-
 
   # GET /libraries
   # GET /libraries.json
