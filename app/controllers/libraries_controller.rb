@@ -1,8 +1,11 @@
 class LibrariesController < ApplicationController
   before_action :set_library, only: [:edit, :update, :destroy]
 
+  autocomplete :library, :name#,  :full => true
 
-  autocomplete :library, :name  
+    def get_autocomplete_items(parameters)
+    super(parameters).group(:name).limit(20)
+  end
 
 
   # GET /libraries
@@ -29,6 +32,7 @@ class LibrariesController < ApplicationController
   # GET /libraries/1
   # GET /libraries/1.json
   def show
+    logger.debug "show"
     @library = Library.find_by(sigla: params[:id].upcase)
     no_note = nil
     @library.websites.each do |web|
