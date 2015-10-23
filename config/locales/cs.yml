@@ -7,7 +7,7 @@ cs:
   menu:
     libraries: "Databáze knihoven"
     info: "Informace o knihovnách"
-    events: "Významné akce"
+    events: "Akce knihoven"
   footer:
     admin_label: "Portál Knihovny.cz spravuje"
     admin: "Městská knihovna v Praze"
@@ -19,3 +19,5 @@ cs:
     nearby: "Knihovny v okolí"
     label: "Vyhledat knihovnu"
     count: "%{count} knihoven v databázi"
+  events:
+    title: "Akce knihoven"

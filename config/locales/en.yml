@@ -4,7 +4,7 @@ en:
   menu:
     libraries: "Library database"
     info: "Information about libraries"
-    events: "Important events"
+    events: "Library events"
   footer:
     admin_label: "Knihovny.cz is managed by"
     admin: "Municipal Library of Prague"
@@ -16,3 +16,5 @@ en:
     nearby: "Nearby Libraries"
     label: "Find a library"
     count: "%{count} libraries in a database"
+  events:
+    title: "Library events"
