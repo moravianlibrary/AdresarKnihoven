@@ -23,7 +23,7 @@ class LibrariesController < ApplicationController
       if @query.nil?
         @all = Library.all
       else
-        @all = Library.where('LOWER(name) LIKE ? OR LOWER(sigla) = ? OR LOWER(code) = ? OR LOWER(city) = ?', "%#{q}%", "#{q}", "#{q}", "#{q}")
+        @all = Library.where('LOWER(name) LIKE ? OR LOWER(sigla) = ? OR LOWER(code) = ? OR LOWER(city) = ?', "%#{q}%", "#{q.delete(' ')}", "#{q}", "#{q}")
       end        
       if @all.count == 1 && request.format.html?
         redirect_to action: "show", id: @all[0].sigla
