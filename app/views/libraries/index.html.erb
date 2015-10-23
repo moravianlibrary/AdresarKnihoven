@@ -5,14 +5,14 @@
   <div class="cl-search">
     <%= form_tag("/libraries", enforce_utf8: false, method: "get") do %>
       <%= autocomplete_field_tag :q, @query, autocomplete_library_name_libraries_path, :size => 75,
-        placeholder: "Název, kód, nebo sigla knihovny ..." ,class: "search-query form-control cl-search-input"%>
-      <%= submit_tag "Vyhledat" , name: nil, class: "search-me btn btn-primary cl-search-submit" %>
+        placeholder: t('search.placeholder') ,class: "search-query form-control cl-search-input"%>
+      <%= submit_tag t('search.action') , name: nil, class: "search-me btn btn-primary cl-search-submit" %>
     <% end %>
   </div> 
   
-  <div class="cl-search-count">Výsledky: <b><%= @all.count %></b>
+  <div class="cl-search-count"><%= t('search.results') %>: <b><%= @all.count %></b>
     <span id="nearby-wrapper" style="display:none">|
-      <a id="nearby" href="#">Knihovny v okolí</a>
+      <a id="nearby" href="#"><%= t('search.nearby') %></a>
     </span>
   </div>
 

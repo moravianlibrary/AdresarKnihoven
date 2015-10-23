@@ -9,3 +9,10 @@ en:
     admin_label: "Knihovny.cz is managed by"
     admin: "Municipal Library of Prague"
     about: "About"
+  search:
+    placeholder: "Search by city or library name"
+    action: "Search"
+    results: "Results"
+    nearby: "Nearby Libraries"
+    label: "Find a library"
+    count: "%{count} libraries in a database"

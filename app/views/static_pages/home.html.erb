@@ -2,16 +2,15 @@
 <div class="cl-home">
   
   
-  <div class="cl-search-label">Vyhledat knihovnu</div>
+  <div class="cl-search-label"><%= t('search.label') %></div>
   <div class="cl-search">
     <%= form_tag("/libraries", enforce_utf8: false, method: "get") do %>
       <%= autocomplete_field_tag :q, @query, autocomplete_library_name_libraries_path, :size => 75,
-        placeholder: "Název, kód, nebo sigla knihovny ..." ,class: "search-query form-control cl-search-input cl-main"%>
-      <%= submit_tag "Vyhledat" , name: nil, class: "search-me btn btn-primary cl-search-submit" %>
+        placeholder: t('search.placeholder') ,class: "search-query form-control cl-search-input cl-main"%>
+      <%= submit_tag t('search.action') , name: nil, class: "search-me btn btn-primary cl-search-submit" %>
     <% end %>    
   </div> 
-  <div class="cl-library-count"><%= @count %> knihoven v databázi</div>
-
+  <div class="cl-library-count"><%= t('search.count', count: @count)%></div>
 
   <div class="cl-events">
     <div class="cl-title">Nadcházející akce</div>

@@ -12,4 +12,10 @@ cs:
     admin_label: "Portál Knihovny.cz spravuje"
     admin: "Městská knihovna v Praze"
     about: "O projektu"
-
+  search:
+    placeholder: "Zadejte město nebo název či siglu knihovny"
+    action: "Vyhledat"
+    results: "Výsledky"
+    nearby: "Knihovny v okolí"
+    label: "Vyhledat knihovnu"
+    count: "%{count} knihoven v databázi"
