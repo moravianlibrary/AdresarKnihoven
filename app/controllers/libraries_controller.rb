@@ -1,7 +1,7 @@
 class LibrariesController < ApplicationController
   before_action :set_library, only: [:edit, :update, :destroy]
 
-  autocomplete :library, :name, limit:20#,  :full => true
+  autocomplete :library, :name, limit:20, where:"active='t'"#,  :full => true
 
   # def get_autocomplete_items(parameters)
   # super(parameters).group(:name)
