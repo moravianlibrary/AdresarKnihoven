@@ -11,7 +11,8 @@ Rails.application.routes.draw do
 
   #get '/districts', to: 'districts#index'
   #get '/map', to: 'map#index'
-  get '/feeder/:sigla', to: 'feeder#handle'
+  get '/feeder/sigla/:sigla', to: 'feeder#sigla'
+  get '/feeder/sysno/:sysno', to: 'feeder#sysno'
   get '/feeder/show/:sigla', to: 'feeder#show'
 
 

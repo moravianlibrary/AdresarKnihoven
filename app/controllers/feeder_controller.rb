@@ -3,8 +3,34 @@ require 'net/http'
 require 'rexml/document'
 class FeederController < ApplicationController
 
-  def handle
-  	sigla = params[:sigla].upcase
+
+
+  def sigla
+    sigla = params[:sigla].upcase
+    doc = record("sig", sigla)
+    if doc.nil?
+      render :text => "nok",:content_type => "text/plain"
+    else
+      handle(sigla, doc)
+      render :text => "ok",:content_type => "text/plain"
+    end    
+  end
+
+  def sysno
+    sysno = params[:sysno]
+    doc = record("sys", sysno)
+    sigla = check(doc.elements["//varfield[@id='SGL']/subfield[@label='a']"]) unless doc.nil?
+    if sigla.nil?
+      render :text => "nok",:content_type => "text/plain"
+    else
+      handle(sigla, doc)
+      render :text => "ok",:content_type => "text/plain"
+    end
+  end
+
+
+  def handle(sigla, doc)
+  	
 
     library = Library.find_by(sigla:sigla)
     if library.nil? 
@@ -20,8 +46,7 @@ class FeederController < ApplicationController
       
     library.sigla = sigla.upcase
 
-    doc = record(sigla)
-    html = ""
+    
     library.name = check(doc.elements["//varfield[@id='NAZ']/subfield[@label='a']"])    
     library.name_en = check(doc.elements["//varfield[@id='VAR' and @i1='2']/subfield[@label='a']"])
 
@@ -119,7 +144,7 @@ class FeederController < ApplicationController
       library.branches.push(branch)
     end    
 
-    render :text => html,:content_type => "text/plain"
+    
 
     #respond_to do |format|
     #  format.json { head :ok }  
@@ -129,10 +154,13 @@ class FeederController < ApplicationController
 
 
   def show
-    sigla = params[:sigla]  
-    xml = record(sigla)
-    html = xml
-    render :text => html,:content_type => "text/plain"
+    value = params[:sigla]
+    key = "sig"
+    if params[:sys]
+      key = "sys"
+    end
+    xml = record(key, value)        
+    render :text => xml,:content_type => "text/plain"
   end
 
 
@@ -140,20 +168,23 @@ def check(value)
   return value.text unless value.nil?
 end
 
-def set_number(sigla)
-  url = "http://aleph.nkp.cz/X?op=find&find_code=wrd&base=ADR&request=sig=" + sigla
+def set_number(key, value)
+  url = "http://aleph.nkp.cz/X?op=find&find_code=wrd&base=ADR&request=" + key + "=" + value
   xml_data = Net::HTTP.get_response(URI.parse(url)).body
   doc = REXML::Document.new(xml_data)
-  return doc.elements().to_a('find/set_number').first.text
+  el = doc.elements().to_a('find/set_number').first
+  check(el)
 end
 
-def record(sigla)
-  num = set_number(sigla)
-  puts num
-  url = "http://aleph.nkp.cz/X?op=present&set_entry=000000001&format=marc&set_no=" + num
-  xml_data = Net::HTTP.get_response(URI.parse(url)).body
-  return REXML::Document.new(xml_data)
+def record(key, value)
+  num = set_number(key, value)
+  unless num.nil?
+    url = "http://aleph.nkp.cz/X?op=present&set_entry=000000001&format=marc&set_no=" + num
+    xml_data = Net::HTTP.get_response(URI.parse(url)).body
+    REXML::Document.new(xml_data)
+  end
 end
+
 
 def latlong(coor)
   match = coor.match(/(\d*)°(\d*)'([0-9]*\.?[0-9]+)".*N, (\d*)°(\d*)'([0-9]*\.?[0-9]+)"/)
