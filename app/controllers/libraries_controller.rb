@@ -19,12 +19,14 @@ class LibrariesController < ApplicationController
     q = @query.downcase unless @query.nil?        
     if params[:lon] && params[:lat]
       @all = Library.where("ABS(latitude - #{params[:lat]}) < 0.02 AND ABS(longitude - #{params[:lon]}) < 0.02")
+      @all = @all.where(active:true) if params[:inactive].nil?  
     else
       if @query.nil?
         @all = Library.all
       else
         @all = Library.where('LOWER(name) LIKE ? OR LOWER(sigla) = ? OR LOWER(code) = ? OR LOWER(city) = ?', "%#{q}%", "#{q.delete(' ')}", "#{q}", "#{q}")
-      end        
+      end     
+      @all = @all.where(active:true) if params[:inactive].nil?     
       if @all.count == 1 && request.format.html?
         redirect_to action: "show", id: @all[0].sigla
       end
@@ -35,7 +37,6 @@ class LibrariesController < ApplicationController
   # GET /libraries/1
   # GET /libraries/1.json
   def show
-    logger.debug "show"
     @library = Library.find_by(sigla: params[:id].upcase)
     no_note = nil
     @library.websites.each do |web|
