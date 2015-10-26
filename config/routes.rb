@@ -9,9 +9,6 @@ Rails.application.routes.draw do
   root  'static_pages#home'
   get   'about'      => 'static_pages#about'
 
-  #get '/libraries/sigla/:sigla', to: 'libraries#sigla', :defaults => { :format => :json }
-
-
   #get '/districts', to: 'districts#index'
   #get '/map', to: 'map#index'
   get '/feeder/:sigla', to: 'feeder#handle'
@@ -19,11 +16,9 @@ Rails.application.routes.draw do
 
 
 
-  namespace :admin do
-    
-
-    get 'wysiwyg' => 'test#wysiwyg'
-  end 
+  #namespace :admin do  
+  #  get 'wysiwyg' => 'test#wysiwyg'
+  #end 
 
 
   # The priority is based upon order of creation: first created -> highest priority.
