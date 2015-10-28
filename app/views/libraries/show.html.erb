@@ -28,18 +28,20 @@
 
 
 
-<div class="row">
-  <div class="col-md-8" style="padding-bottom:10px;">
+<div class="row" style="padding-bottom:10px;">
+  <div class="col-md-9">
 
   <% unless @library.latitude.nil? || @library.longitude.nil? %>
     <div id="map-canvas" style="width: 100%; height: 400px;"></div>   
   <% end %>        
   </div>
 
-  <div class="col-md-4" style="padding-bottom:10px;">
+  <div class="col-md-3">
     <div class="cl-right">
 
+    <%= render partial: "opening_hours", locals: {loh: @library.opening_hour} %>
 
+<!--
     <% if @library.phones.present? %>
       <div class="cl-row">
         <img class="cl-icon" src="<%= asset_path 'ic_phone.png' %>"/>
@@ -66,6 +68,8 @@
         </div>                
       </div>
     <% end %>       
+-->   
+
    </div> 
 
 

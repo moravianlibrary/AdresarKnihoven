@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  library_id: 
+  mo: MyString
+  tu: MyString
+  we: MyString
+  th: MyString
+  fr: MyString
+  sa: MyString
+  su: MyString
+  note: MyString
+
+two:
+  library_id: 
+  mo: MyString
+  tu: MyString
+  we: MyString
+  th: MyString
+  fr: MyString
+  sa: MyString
+  su: MyString
+  note: MyString

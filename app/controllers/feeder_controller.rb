@@ -42,6 +42,7 @@ class FeederController < ApplicationController
       library.emails.destroy_all
       library.websites.destroy_all
       library.branches.destroy_all
+      library.opening_hour.destroy if library.opening_hour
     end
       
     library.sigla = sigla.upcase
@@ -82,7 +83,25 @@ class FeederController < ApplicationController
       end
     end
     
+
+    otd = doc.elements["//varfield[@id='OTD']"]    
+    if otd
+      oh = OpeningHour.new
+      oh.library = library
+      oh.mo = check(otd.elements["subfield[@label='1']"])
+      oh.tu = check(otd.elements["subfield[@label='2']"])
+      oh.we = check(otd.elements["subfield[@label='3']"])
+      oh.th = check(otd.elements["subfield[@label='4']"])
+      oh.fr = check(otd.elements["subfield[@label='5']"])
+      oh.sa = check(otd.elements["subfield[@label='6']"])
+      oh.su = check(otd.elements["subfield[@label='7']"])
+      oh.note = check(otd.elements["subfield[@label='p']"])
+    end
+    
+
     library.save
+
+
 
     phone_array = doc.elements["//varfield[@id='TEL']"]
     if phone_array

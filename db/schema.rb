@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151017011330) do
+ActiveRecord::Schema.define(version: 20151028024930) do
 
   create_table "branches", force: :cascade do |t|
     t.string   "name"
@@ -81,6 +81,22 @@ ActiveRecord::Schema.define(version: 20151017011330) do
 
   add_index "libraries", ["name"], name: "index_libraries_on_name"
   add_index "libraries", ["sigla"], name: "index_libraries_on_sigla"
+
+  create_table "opening_hours", force: :cascade do |t|
+    t.integer  "library_id"
+    t.string   "mo"
+    t.string   "tu"
+    t.string   "we"
+    t.string   "th"
+    t.string   "fr"
+    t.string   "sa"
+    t.string   "su"
+    t.string   "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "opening_hours", ["library_id"], name: "index_opening_hours_on_library_id"
 
   create_table "people", force: :cascade do |t|
     t.string   "first_name"

@@ -596,7 +596,37 @@ input {
 
 
 
-
+.cl-oh {  
+  .cl-oh-label {
+    color: #555;
+    font-size: 18px;
+  }
+  .cl-oh-note {
+    color: #777;
+    font-size: 14px;
+  }  
+  .cl-oh-table {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    .cl-oh-row {
+      padding-top: 6px;
+      padding-bottom: 6px;
+      font-size: 16px;
+      color: #666;
+      &.cl-oh-row-active {        
+        color: $color-primary;
+      }
+      .cl-oh-day {
+        padding-left: 5px;
+      }
+      .cl-oh-hours {
+        padding-right: 5px;
+        text-align: right;
+      }
+    }
+  }
+}
 
 
 
