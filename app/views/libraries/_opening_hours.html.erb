@@ -1,42 +1,36 @@
 <div class="cl-oh">
   <div class="cl-oh-label">Otevírací doba</div>
-  <!--
-  <div>today: <%= Date.today.wday %></div>
-  -->
   <div>
-    <% if loh %>
-      <table class="cl-oh-table">
-        <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 1 %>">
-          <td class="cl-oh-day">Pondělí</td>
-          <td class="cl-oh-hours"><%= loh.mo %></td>
-        </tr>
-        <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 2 %>">
-          <td class="cl-oh-day">Úterý</td>
-          <td class="cl-oh-hours"><%= loh.tu %></td>
-        </tr>
-        <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 3 %>">
-          <td class="cl-oh-day">Středa</td>
-          <td class="cl-oh-hours"><%= loh.we %></td>
-        </tr>
-        <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 4 %>">
-          <td class="cl-oh-day">Čtvrtek</td>
-          <td class="cl-oh-hours"><%= loh.th %></td>
-        </tr>
-        <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 5 %>">
-          <td class="cl-oh-day">Pátek</td>
-          <td class="cl-oh-hours"><%= loh.fr %></td>
-        </tr>
-        <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 6 %>">
-          <td class="cl-oh-day">Sobota</td>
-          <td class="cl-oh-hours"><%= loh.sa %></td>
-        </tr>
-        <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 7 %>">
-          <td class="cl-oh-day">Neděle</td>
-          <td class="cl-oh-hours"><%= loh.su %></td>
-        </tr>                                                
-      </table>
-      <div class="cl-oh-note"><%= loh.note %></div>
-    <% end %>
-
+    <table class="cl-oh-table">
+      <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 1 %>">
+        <td class="cl-oh-day">Pondělí</td>
+        <td class="cl-oh-hours"><%= loh.mo %></td>
+      </tr>
+      <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 2 %>">
+        <td class="cl-oh-day">Úterý</td>
+        <td class="cl-oh-hours"><%= loh.tu %></td>
+      </tr>
+      <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 3 %>">
+        <td class="cl-oh-day">Středa</td>
+        <td class="cl-oh-hours"><%= loh.we %></td>
+      </tr>
+      <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 4 %>">
+        <td class="cl-oh-day">Čtvrtek</td>
+        <td class="cl-oh-hours"><%= loh.th %></td>
+      </tr>
+      <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 5 %>">
+        <td class="cl-oh-day">Pátek</td>
+        <td class="cl-oh-hours"><%= loh.fr %></td>
+      </tr>
+      <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 6 %>">
+        <td class="cl-oh-day">Sobota</td>
+        <td class="cl-oh-hours"><%= loh.sa %></td>
+      </tr>
+      <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 7 %>">
+        <td class="cl-oh-day">Neděle</td>
+        <td class="cl-oh-hours"><%= loh.su %></td>
+      </tr>                                                
+    </table>
+    <div class="cl-oh-note"><%= loh.note %></div>
   </div>
 </div>
