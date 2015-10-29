@@ -81,7 +81,6 @@
 
 <div>
 
-  <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active">
       <a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Kontakt</a>
@@ -94,6 +93,9 @@
     <li role="presentation">
       <a href="#services" aria-controls="services" role="tab" data-toggle="tab">Služby</a>
     </li>
+    <li role="presentation">
+      <a href="#projects" aria-controls="projects" role="tab" data-toggle="tab">Projekty</a>
+    </li>    
     <li role="presentation">
       <a href="#info" aria-controls="info" role="tab" data-toggle="tab">Podrobné</a>
     </li>    
@@ -187,14 +189,10 @@
       <div class="cl-contact-wrapper">
 
         <div class="cl-category">      
-          <div class="cl-title">Webové stránky</div>
           <div class="cl-items">
-            <% @library.websites.each do |website| %>
+            <% @library.services.each do |service| %>
               <div class="cl-item">
-                <%= website.url %> 
-                <% if website.note %> 
-                  (<%= website.note %>)
-                <% end %>
+                <%= service.name %> 
               </div>
             <% end %>
           </div>
@@ -202,6 +200,24 @@
 
       </div>
     </div>
+
+    <div role="tabpanel" class="tab-pane" id="projects">
+      <div class="cl-contact-wrapper">
+        <div class="cl-category">      
+          <div class="cl-items">
+            <% @library.projects.each do |project| %>
+              <div class="cl-item">
+                <%= project.name %> 
+              </div>
+            <% end %>
+          </div>
+        </div>    
+
+      </div>
+    </div>    
+
+
+
     <div role="tabpanel" class="tab-pane" id="info">
       <div class="cl-contact-wrapper">        
         <div class="cl-category">      
@@ -226,6 +242,19 @@
             -->
           </div>
         </div>
+                <div class="cl-category">      
+          <div class="cl-title">Webové stránky</div>
+          <div class="cl-items">
+            <% @library.websites.each do |website| %>
+              <div class="cl-item">
+                <%= website.url %> 
+                <% if website.note %> 
+                  (<%= website.note %>)
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>  
       </div>
 
 
