@@ -45,14 +45,14 @@
     <% if @library.phones.present? %>
       <div class="cl-row">
         <img class="cl-icon" src="<%= asset_path 'ic_phone.png' %>"/>
-          <div class="cl-text"><%= @library.phones[0].phone %></div>
+          <div class="cl-text"><%= @library.phones.order(:id)[0].phone %></div>
         </div>
       <% end %>
 
       <% if @library.emails.present? %>
         <div class="cl-row">
           <img class="cl-icon" src="<%= asset_path 'ic_email2.png' %>"/>
-          <div class="cl-text"><%= @library.emails[0].email %></div>
+          <div class="cl-text"><%= @library.emails.order(:id)[0].email %></div>
         </div>
       <% end %>    
 
@@ -60,7 +60,7 @@
         <div class="cl-row">
           <img class="cl-icon" src="<%= asset_path 'ic_person2.png' %>"/>
           <div class="cl-text">
-            <% person = @library.people[0] %>
+            <% person = @library.people.order(:id)[0] %>
             <%= person.degree1 %> <%= person.first_name %> <%= person.last_name %> <%= person.degree2 %>
             <% if person.role %> 
               (<%= person.role %>)
@@ -253,10 +253,10 @@
             -->
           </div>
         </div>
-                <div class="cl-category">      
+        <div class="cl-category">      
           <div class="cl-title">Webové stránky</div>
           <div class="cl-items">
-            <% @library.websites.each do |website| %>
+            <% @library.websites.order(:id).each do |website| %>
               <div class="cl-item">
                 <%= website.url %> 
                 <% if website.note %> 
