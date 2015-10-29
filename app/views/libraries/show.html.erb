@@ -86,16 +86,20 @@
       <a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Kontakt</a>
     </li>
     <% if @library.branches.present? %>
-    <li role="presentation">
-      <a href="#branches" aria-controls="branches" role="tab" data-toggle="tab">Pobočky</a>
-    </li>
+      <li role="presentation">
+        <a href="#branches" aria-controls="branches" role="tab" data-toggle="tab">Pobočky</a>
+      </li>
     <% end %>
-    <li role="presentation">
-      <a href="#services" aria-controls="services" role="tab" data-toggle="tab">Služby</a>
-    </li>
-    <li role="presentation">
-      <a href="#projects" aria-controls="projects" role="tab" data-toggle="tab">Projekty</a>
-    </li>    
+    <% if @library.services.present? %>
+      <li role="presentation">
+        <a href="#services" aria-controls="services" role="tab" data-toggle="tab">Služby</a>
+      </li>
+    <% end %>
+    <% if @library.projects.present? %>    
+      <li role="presentation">
+        <a href="#projects" aria-controls="projects" role="tab" data-toggle="tab">Projekty</a>
+      </li>
+    <% end %>  
     <li role="presentation">
       <a href="#info" aria-controls="info" role="tab" data-toggle="tab">Podrobné</a>
     </li>    
@@ -103,29 +107,33 @@
  <div class="tab-content cl-box">
     <div role="tabpanel" class="tab-pane active" id="contact">
       <div class="cl-contact-wrapper">
-        
-        <div class="cl-category cl-border-bottom">      
-          <div class="cl-title">Telefon</div>
-          <div class="cl-items">
-            <% @library.phones.each do |phone| %>
-              <div class="cl-item"><%= phone.phone %></div>
-            <% end %>
-          </div>
-        </div>
 
-        <div class="cl-category cl-border-bottom">      
-          <div class="cl-title">E-mail</div>
-          <div class="cl-items">
-            <% @library.emails.each do |email| %>
-              <div class="cl-item">
-                <%= email.email %>
-                <% if email.note %> 
-                  (<%= email.note %>)
-                <% end %>
-              </div>
-            <% end %>
+        <%if !@library.phones.empty? %>        
+          <div class="cl-category cl-border-bottom">      
+            <div class="cl-title">Telefon</div>
+            <div class="cl-items">
+              <% @library.phones.each do |phone| %>
+                <div class="cl-item"><%= phone.phone %></div>
+              <% end %>
+            </div>
           </div>
-        </div>
+        <% end %>
+
+        <%if !@library.emails.empty? %>
+          <div class="cl-category cl-border-bottom">      
+            <div class="cl-title">E-mail</div>
+            <div class="cl-items">
+              <% @library.emails.each do |email| %>
+                <div class="cl-item">
+                  <%= email.email %>
+                  <% if email.note %> 
+                    (<%= email.note %>)
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
 
         <%if !@library.faxes.empty? %>
           <div class="cl-category cl-border-bottom">      
@@ -138,36 +146,37 @@
           </div>    
         <% end %>
 
-        <div class="cl-category">      
-          <div class="cl-title">Odpovědné osoby</div>
-          <div class="cl-items">
-            <% @library.people.each_with_index do |person, index| %>              
-              <% if index > 0 %>
-                <br/>  
-              <% end %>
-              <div class="cl-person">
-                <div class="cl-person-name">
-                  <%= person.degree1 %> <%= person.first_name %> <%= person.last_name %> <%= person.degree2 %>
-                  <% if person.role %> 
-                    (<%= person.role %>)
-                  <% end %>                
-                </div>
-                <% if person.email %> 
-                  <div class="cl-person-contact">e-mail: <%= person.email %></div>
-                <% end %>  
-                <% if person.phone %> 
-                  <div class="cl-person-contact">tel.: <%= person.phone %></div>
+        <%if !@library.people.empty? %>
+          <div class="cl-category">      
+            <div class="cl-title">Odpovědné osoby</div>
+            <div class="cl-items">
+              <% @library.people.each_with_index do |person, index| %>              
+                <% if index > 0 %>
+                  <br/>  
                 <% end %>
-              </div>
-
-            <% end %>
-          </div>
-        </div>    
-
+                <div class="cl-person">
+                  <div class="cl-person-name">
+                    <%= person.degree1 %> <%= person.first_name %> <%= person.last_name %> <%= person.degree2 %>
+                    <% if person.role %> 
+                      (<%= person.role %>)
+                    <% end %>                
+                  </div>
+                  <% if person.email %> 
+                    <div class="cl-person-contact">e-mail: <%= person.email %></div>
+                  <% end %>  
+                  <% if person.phone %> 
+                    <div class="cl-person-contact">tel.: <%= person.phone %></div>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>    
+        <% end %>
 
       </div>
 
     </div>
+
     <% if @library.branches.present? %>
     <div role="tabpanel" class="tab-pane" id="branches">      
       <div class="cl-contact-wrapper">
@@ -185,37 +194,39 @@
     </div>
     <% end %>
 
-    <div role="tabpanel" class="tab-pane" id="services">
-      <div class="cl-contact-wrapper">
 
-        <div class="cl-category">      
-          <div class="cl-items">
-            <% @library.services.each do |service| %>
-              <div class="cl-item">
-                <%= service.name %> 
-              </div>
-            <% end %>
-          </div>
-        </div>    
+    <% if @library.services.present? %>
+      <div role="tabpanel" class="tab-pane" id="services">
+        <div class="cl-contact-wrapper">
 
+          <div class="cl-category">      
+            <div class="cl-items">
+              <% @library.services.each do |service| %>
+                <div class="cl-item">
+                  <%= service.name %> 
+                </div>
+              <% end %>
+            </div>
+          </div>    
+        </div>
       </div>
-    </div>
+    <% end %>
 
-    <div role="tabpanel" class="tab-pane" id="projects">
-      <div class="cl-contact-wrapper">
-        <div class="cl-category">      
-          <div class="cl-items">
-            <% @library.projects.each do |project| %>
-              <div class="cl-item">
-                <%= project.name %> 
-              </div>
-            <% end %>
-          </div>
-        </div>    
-
-      </div>
-    </div>    
-
+    <% if @library.services.present? %>
+      <div role="tabpanel" class="tab-pane" id="projects">
+        <div class="cl-contact-wrapper">
+          <div class="cl-category">      
+            <div class="cl-items">
+              <% @library.projects.each do |project| %>
+                <div class="cl-item">
+                  <%= project.name %> 
+                </div>
+              <% end %>
+            </div>
+          </div>    
+        </div>
+      </div>    
+    <% end %>
 
 
     <div role="tabpanel" class="tab-pane" id="info">
