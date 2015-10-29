@@ -22,8 +22,7 @@ class LibrariesController < ApplicationController
     else
       if @query.nil?
         @all = Library.all
-      else
-        like_clause = (postgres? ? 'ILIKE' : 'LIKE')
+      else        
         @all = Library.where("LOWER(name) #{like_clause} ? OR LOWER(sigla) = ? OR LOWER(code) = ? OR LOWER(city) = ?", "%#{q}%", "#{q.delete(' ')}", "#{q}", "#{q}")
       end     
       @all = @all.where(active:true) if params[:inactive].nil?     
@@ -56,9 +55,12 @@ class LibrariesController < ApplicationController
 
  
   private
-
-    def postgres?
-      ActiveRecord::Base.connection.instance_values["config"][:adapter] == 'postgresql'
+    def like_clause
+      if ActiveRecord::Base.connection.instance_values["config"][:adapter] == 'postgresql'
+        'ILIKE'
+      else 
+        'LIKE'
+      end
     end
 
     def library_params
