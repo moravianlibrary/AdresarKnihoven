@@ -43,6 +43,8 @@ class FeederController < ApplicationController
       library.websites.destroy_all
       library.branches.destroy_all
       library.opening_hour.destroy if library.opening_hour
+      library.services.destroy_all
+      library.projects.destroy_all
     end
       
     library.sigla = sigla.upcase
@@ -120,6 +122,28 @@ class FeederController < ApplicationController
         library.faxes.push(fax)
       end
     end
+
+    service_array = doc.elements["//varfield[@id='SLU']"]
+    if service_array
+      service_array.elements().each("subfield[@label='a']") do |s|      
+        service_code = check(s)
+        if service_code
+          service = Service.find_by(code: service_code)
+          library.services << service unless service.nil?
+        end
+      end
+    end    
+
+    project_array = doc.elements["//varfield[@id='PRK']"]
+    if project_array
+      project_array.elements().each("subfield[@label='a']") do |p|      
+        project_code = check(p)
+        if project_code
+          project = Project.find_by(code: project_code)
+          library.projects << project unless project.nil?
+        end
+      end
+    end  
 
     doc.elements().each("//varfield[@id='JMN']") do |p|      
       person = Person.new

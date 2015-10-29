@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028024930) do
+ActiveRecord::Schema.define(version: 20151029014008) do
 
   create_table "branches", force: :cascade do |t|
     t.string   "name"
@@ -82,6 +82,22 @@ ActiveRecord::Schema.define(version: 20151028024930) do
   add_index "libraries", ["name"], name: "index_libraries_on_name"
   add_index "libraries", ["sigla"], name: "index_libraries_on_sigla"
 
+  create_table "libraries_projects", force: :cascade do |t|
+    t.integer "library_id"
+    t.integer "project_id"
+  end
+
+  add_index "libraries_projects", ["library_id"], name: "index_libraries_projects_on_library_id"
+  add_index "libraries_projects", ["project_id"], name: "index_libraries_projects_on_project_id"
+
+  create_table "libraries_services", id: false, force: :cascade do |t|
+    t.integer "library_id"
+    t.integer "service_id"
+  end
+
+  add_index "libraries_services", ["library_id"], name: "index_libraries_services_on_library_id"
+  add_index "libraries_services", ["service_id"], name: "index_libraries_services_on_service_id"
+
   create_table "opening_hours", force: :cascade do |t|
     t.integer  "library_id"
     t.string   "mo"
@@ -123,6 +139,20 @@ ActiveRecord::Schema.define(version: 20151028024930) do
   end
 
   add_index "phones", ["library_id"], name: "index_phones_on_library_id"
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "code"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string   "code"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "websites", force: :cascade do |t|
     t.string   "url"
