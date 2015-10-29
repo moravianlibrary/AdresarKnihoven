@@ -23,7 +23,8 @@ class LibrariesController < ApplicationController
       if @query.nil?
         @all = Library.all
       else
-        @all = Library.where('LOWER(name) LIKE ? OR LOWER(sigla) = ? OR LOWER(code) = ? OR LOWER(city) = ?', "%#{q}%", "#{q.delete(' ')}", "#{q}", "#{q}")
+        like_clause = (postgres?(model) ? 'ILIKE' : 'LIKE')
+        @all = Library.where('LOWER(name) #{like_clause} ? OR LOWER(sigla) = ? OR LOWER(code) = ? OR LOWER(city) = ?', "%#{q}%", "#{q.delete(' ')}", "#{q}", "#{q}")
       end     
       @all = @all.where(active:true) if params[:inactive].nil?     
       if @all.count == 1 && request.format.html?
@@ -55,6 +56,10 @@ class LibrariesController < ApplicationController
 
  
   private
+
+    def postgres?(model)
+      ActiveRecord::Base.connection.instance_values["config"][:adapter] == 'postgresql'
+    end
 
     def library_params
       params.require(:library).permit(:name, :code, :city, :street, :zip, :description, :longitude, :latitude, :email, :sigla, :district, :town, :url, :context, :phone)
