@@ -112,7 +112,7 @@
           <div class="cl-category cl-border-bottom">      
             <div class="cl-title">Telefon</div>
             <div class="cl-items">
-              <% @library.phones.each do |phone| %>
+              <% @library.phones.order(:id).each do |phone| %>
                 <div class="cl-item"><%= phone.phone %></div>
               <% end %>
             </div>
@@ -123,7 +123,7 @@
           <div class="cl-category cl-border-bottom">      
             <div class="cl-title">E-mail</div>
             <div class="cl-items">
-              <% @library.emails.each do |email| %>
+              <% @library.emails.order(:id).each do |email| %>
                 <div class="cl-item">
                   <%= email.email %>
                   <% if email.note %> 
@@ -139,7 +139,7 @@
           <div class="cl-category cl-border-bottom">      
             <div class="cl-title">Fax</div>
             <div class="cl-items">
-              <% @library.faxes.each do |fax| %>
+              <% @library.faxes.order(:id).each do |fax| %>
                 <div class="cl-item"><%= fax.fax %></div>
               <% end %>
             </div>
@@ -150,7 +150,7 @@
           <div class="cl-category">      
             <div class="cl-title">Odpovědné osoby</div>
             <div class="cl-items">
-              <% @library.people.each_with_index do |person, index| %>              
+              <% @library.people.order(:id).each_with_index do |person, index| %>              
                 <% if index > 0 %>
                   <br/>  
                 <% end %>
