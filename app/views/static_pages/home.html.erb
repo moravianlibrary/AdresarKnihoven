@@ -1,16 +1,17 @@
 <% provide(:title, t('title_home')) %>
 <div class="cl-home">
   
-  
-  <div class="cl-search-label"><%= t('search.label') %></div>
+
+  <div class="cl-search-label">Hledat v titulech</div>
   <div class="cl-search">
-    <%= form_tag("/libraries", enforce_utf8: false, method: "get") do %>
-      <%= autocomplete_field_tag :q, @query, autocomplete_library_name_libraries_path, :size => 75,
-        placeholder: t('search.placeholder') ,class: "search-query form-control cl-search-input cl-main"%>
-      <%= submit_tag t('search.action') , name: nil, class: "search-me btn btn-primary cl-search-submit" %>
-    <% end %>    
-  </div> 
-  <div class="cl-library-count"><%= t('search.count', count: @count)%></div>
+    <form role="search" method="get" action="https://beta.knihovny.cz/Search/Results">
+        <input placeholder="Zadejte název nebo autora" class="form-control search-query ui-autocomplete-input cl-search-input" id="search-query" type="text" autofocus="" autocomplete="off" spellcheck="false">
+        <input type="hidden" name="type" value="AllFields">
+        <button type="submit" id="search-submit" class="search-me btn btn-primary cl-search-submit">Hledat</button>
+        <input type="hidden" name="limit" value="10">
+        <input type="hidden" name="sort" value="relevance">
+    </form>
+  </div>
 
   <div class="cl-events">
     <div class="cl-title">Nadcházející akce</div>
@@ -66,8 +67,32 @@
 
 <script>
 $( document ).ready(function() {
-  $('.search-query').bind('railsAutocomplete.select', function(event, data) {
-    $('.search-me').trigger('click')
-  });
+  $( "#search-query").autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+          url: "https://cpk-front.mzk.cz/AJAX/JSON", // change to beta.knihovny.cz after new release
+          dataType: "json",
+          data: {
+            q: request.term,
+            method:'getACSuggestions',
+            searcher:'Solr'
+          },
+          success: function( data ) {
+            response( data.data );
+          },
+          error: function( xhr, ajaxOptions, thrownError ) {
+            console.log(xhr.responseText + '; ' + ajaxOptions + '; ' + thrownError);
+          }
+        });
+      },
+      minLength: 3,
+      select: function (event, ui) {        
+         if(ui.item) {
+            $('#search-submit').val(ui.item.value);
+         }
+         $(event.target.form).submit();
+      }
+    });
+
 });
 </script>

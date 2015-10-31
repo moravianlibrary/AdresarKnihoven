@@ -76,6 +76,7 @@
     //   3: timed out
   };  
 
+<% if @show_results && @libraries.length > 0 %> 
   function initialize() {
     var latlng = new google.maps.LatLng(49.9, 15.6);
     var mapOptions = {
@@ -128,7 +129,7 @@
     });
     map.fitBounds(bounds);
   }
-
+<% end %>
 
   $(document).ready(function() {
     $('.search-query').bind('railsAutocomplete.select', function(event, data) {
