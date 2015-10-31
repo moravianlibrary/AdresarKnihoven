@@ -4,8 +4,8 @@
 
   <div class="cl-search-label">Hledat v titulech</div>
   <div class="cl-search">
-    <form role="search" method="get" action="https://beta.knihovny.cz/Search/Results">
-        <input placeholder="Zadejte název nebo autora" class="form-control search-query ui-autocomplete-input cl-search-input" id="search-query" type="text" autofocus="" autocomplete="off" spellcheck="false">
+    <form role="search" id="search-form" method="get" action="https://beta.knihovny.cz/Search/Results">
+        <input placeholder="Zadejte název nebo autora" class="form-control search-query ui-autocomplete-input cl-search-input" id="search-query" type="text" name="lookfor" autofocus="" autocomplete="off" spellcheck="false">
         <input type="hidden" name="type" value="AllFields">
         <button type="submit" id="search-submit" class="search-me btn btn-primary cl-search-submit">Hledat</button>
         <input type="hidden" name="limit" value="10">
@@ -66,9 +66,9 @@
 
 
 <script>
-$( document ).ready(function() {
-  $( "#search-query").autocomplete({
-      source: function( request, response ) {
+  $(document).ready(function() {
+    $("#search-query").autocomplete({
+      source: function(request, response) {
         $.ajax({
           url: "https://cpk-front.mzk.cz/AJAX/JSON", // change to beta.knihovny.cz after new release
           dataType: "json",
@@ -77,22 +77,21 @@ $( document ).ready(function() {
             method:'getACSuggestions',
             searcher:'Solr'
           },
-          success: function( data ) {
-            response( data.data );
+          success: function(data) {
+            response(data.data);
           },
-          error: function( xhr, ajaxOptions, thrownError ) {
-            console.log(xhr.responseText + '; ' + ajaxOptions + '; ' + thrownError);
+          error: function(xhr, ajaxOptions, thrownError) {
+            //console.log(xhr.responseText + '; ' + ajaxOptions + '; ' + thrownError);
           }
         });
       },
       minLength: 3,
       select: function (event, ui) {        
-         if(ui.item) {
-            $('#search-submit').val(ui.item.value);
-         }
-         $(event.target.form).submit();
+        if(ui.item) {
+          $("#search-query").val(ui.item.value);
+          $("#search-form").submit(); 
+        }                  
       }
     });
-
-});
+  });
 </script>
