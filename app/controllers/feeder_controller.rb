@@ -54,8 +54,8 @@ class FeederController < ApplicationController
     library.name_en = check(doc.elements["//varfield[@id='VAR' and @i1='2']/subfield[@label='a']"])
 
     library.code = check(doc.elements["//varfield[@id='ZKR']/subfield[@label='a']"])
-    library.district = check(doc.elements["//varfield[@id='KRJ']/subfield[@label='a']"])
-    library.town = check(doc.elements["//varfield[@id='KRJ']/subfield[@label='b']"])
+    library.region = check(doc.elements["//varfield[@id='KRJ']/subfield[@label='a']"])
+    library.district = check(doc.elements["//varfield[@id='KRJ']/subfield[@label='b']"])
     library.description = check(doc.elements["//varfield[@id='POI']/subfield[@label='a']"])
     library.context = check(doc.elements["//varfield[@id='TYP']/subfield[@label='b']"])
     library.ico = check(doc.elements["//varfield[@id='ICO']/subfield[@label='a']"])

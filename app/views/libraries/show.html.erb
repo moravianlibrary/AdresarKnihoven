@@ -45,14 +45,14 @@
     <% if @library.phones.present? %>
       <div class="cl-row">
         <img class="cl-icon" src="<%= asset_path 'ic_phone.png' %>"/>
-          <div class="cl-text"><%= @library.phones.order(:id)[0].phone %></div>
+          <div class="cl-text"><%= @library.phones.first.phone %></div>
         </div>
       <% end %>
 
       <% if @library.emails.present? %>
         <div class="cl-row">
           <img class="cl-icon" src="<%= asset_path 'ic_email2.png' %>"/>
-          <div class="cl-text"><%= @library.emails.order(:id)[0].email %></div>
+          <div class="cl-text"><%= @library.emails.first.email %></div>
         </div>
       <% end %>    
 
@@ -60,7 +60,7 @@
         <div class="cl-row">
           <img class="cl-icon" src="<%= asset_path 'ic_person2.png' %>"/>
           <div class="cl-text">
-            <% person = @library.people.order(:id)[0] %>
+            <% person = @library.people.first %>
             <%= person.degree1 %> <%= person.first_name %> <%= person.last_name %> <%= person.degree2 %>
             <% if person.role %> 
               (<%= person.role %>)
@@ -85,34 +85,44 @@
     <li role="presentation" class="active">
       <a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Kontakt</a>
     </li>
+    <% if @library.services.present? || @library.projects.present? %>
+      <li role="presentation">
+        <a href="#services" aria-controls="services" role="tab" data-toggle="tab">Služby a projekty</a>
+      </li>
+    <% end %>
     <% if @library.branches.present? %>
       <li role="presentation">
         <a href="#branches" aria-controls="branches" role="tab" data-toggle="tab">Pobočky</a>
       </li>
-    <% end %>
-    <% if @library.services.present? %>
-      <li role="presentation">
-        <a href="#services" aria-controls="services" role="tab" data-toggle="tab">Služby</a>
-      </li>
-    <% end %>
-    <% if @library.projects.present? %>    
-      <li role="presentation">
-        <a href="#projects" aria-controls="projects" role="tab" data-toggle="tab">Projekty</a>
-      </li>
-    <% end %>  
-    <li role="presentation">
-      <a href="#info" aria-controls="info" role="tab" data-toggle="tab">Podrobné</a>
-    </li>    
+    <% end %>    
   </ul>
  <div class="tab-content cl-box">
     <div role="tabpanel" class="tab-pane active" id="contact">
       <div class="cl-contact-wrapper">
 
+
+
+        <%if !@library.websites.empty? %>        
+          <div class="cl-category cl-border-bottom">      
+            <div class="cl-title">Webové stránky</div>
+            <div class="cl-items">
+              <% @library.websites.each do |website| %>
+                <div class="cl-item">
+                  <%= website.url %> 
+                  <% if website.note %> 
+                    (<%= website.note %>)
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div> 
+        <% end %>
+
         <%if !@library.phones.empty? %>        
           <div class="cl-category cl-border-bottom">      
             <div class="cl-title">Telefon</div>
             <div class="cl-items">
-              <% @library.phones.order(:id).each do |phone| %>
+              <% @library.phones.each do |phone| %>
                 <div class="cl-item"><%= phone.phone %></div>
               <% end %>
             </div>
@@ -123,7 +133,7 @@
           <div class="cl-category cl-border-bottom">      
             <div class="cl-title">E-mail</div>
             <div class="cl-items">
-              <% @library.emails.order(:id).each do |email| %>
+              <% @library.emails.each do |email| %>
                 <div class="cl-item">
                   <%= email.email %>
                   <% if email.note %> 
@@ -139,7 +149,7 @@
           <div class="cl-category cl-border-bottom">      
             <div class="cl-title">Fax</div>
             <div class="cl-items">
-              <% @library.faxes.order(:id).each do |fax| %>
+              <% @library.faxes.each do |fax| %>
                 <div class="cl-item"><%= fax.fax %></div>
               <% end %>
             </div>
@@ -150,7 +160,7 @@
           <div class="cl-category">      
             <div class="cl-title">Odpovědné osoby</div>
             <div class="cl-items">
-              <% @library.people.order(:id).each_with_index do |person, index| %>              
+              <% @library.people.each_with_index do |person, index| %>              
                 <% if index > 0 %>
                   <br/>  
                 <% end %>
@@ -195,82 +205,38 @@
     <% end %>
 
 
-    <% if @library.services.present? %>
+    <% if @library.services.present? || @library.projects.present? %>
       <div role="tabpanel" class="tab-pane" id="services">
         <div class="cl-contact-wrapper">
-
-          <div class="cl-category">      
-            <div class="cl-items">
-              <% @library.services.each do |service| %>
-                <div class="cl-item">
-                  <%= service.name %> 
-                </div>
-              <% end %>
-            </div>
-          </div>    
-        </div>
-      </div>
-    <% end %>
-
-    <% if @library.services.present? %>
-      <div role="tabpanel" class="tab-pane" id="projects">
-        <div class="cl-contact-wrapper">
-          <div class="cl-category">      
-            <div class="cl-items">
-              <% @library.projects.each do |project| %>
-                <div class="cl-item">
-                  <%= project.name %> 
-                </div>
-              <% end %>
-            </div>
-          </div>    
-        </div>
-      </div>    
-    <% end %>
-
-
-    <div role="tabpanel" class="tab-pane" id="info">
-      <div class="cl-contact-wrapper">        
-        <div class="cl-category">      
-          <div class="cl-items">   
-            <div class="cl-item" style="padding-bottom:10px;">
-              <strong>Popis</strong>
-              <div><%= @library.description %></div>
-            </div>
-            <div class="cl-item"><strong>Typ</strong> <%= @library.context %></div>
-            <div class="cl-item"><strong>Kraj</Strong> <%= @library.region %></div>
-            <div class="cl-item"><strong>Okres</Strong> <%= @library.district %></div>
-            <div class="cl-item"><strong>Sigla</Strong> <%= @library.sigla %></div>
-            <div class="cl-item"><strong>Zkratka</Strong> <%= @library.code %></div>
-            <div class="cl-item"><strong>IČ</Strong> <%= @library.ico %></div>
-            <div class="cl-item"><strong>DIČ</Strong> <%= @library.dic %></div>
-            <!--
-            <% if @library.active %>
-              <div class="cl-item" style="margin-top:8px;">Knihovna je <Strong>aktivní</Strong></div>
-            <% else %>
-              <div class="cl-item" style="margin-top:8px;">Knihovna je <Strong>zrušena</Strong></div>
-            <% end %>
-            -->
-          </div>
-        </div>
-        <div class="cl-category">      
-          <div class="cl-title">Webové stránky</div>
-          <div class="cl-items">
-            <% @library.websites.order(:id).each do |website| %>
-              <div class="cl-item">
-                <%= website.url %> 
-                <% if website.note %> 
-                  (<%= website.note %>)
+         
+          <% if @library.services.present? %>
+            <div class="cl-category">
+              <div class="cl-title">Služby</div>      
+              <div class="cl-items">
+                <% @library.services.each do |service| %>
+                  <div class="cl-item">
+                    <%= service.name %> 
+                  </div>
                 <% end %>
               </div>
-            <% end %>
-          </div>
-        </div>  
+            </div>    
+          <% end %>
+
+          <% if @library.projects.present? %>
+            <div class="cl-category"> 
+              <div class="cl-title">Projekty</div>     
+              <div class="cl-items">
+                <% @library.projects.each do |project| %>
+                  <div class="cl-item">
+                    <%= project.name %> 
+                  </div>
+                <% end %>
+              </div>
+            </div> 
+          <% end %>
+        </div>
       </div>
-
-
-    </div>
-
+    <% end %>
 
   </div>
 </div>

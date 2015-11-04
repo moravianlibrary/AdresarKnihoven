@@ -40,7 +40,7 @@ class LibrariesController < ApplicationController
   def show
     @library = Library.find_by(sigla: params[:id].upcase)
     no_note = nil
-    @library.websites.order(:id).each do |web|
+    @library.websites.each do |web|
       if web.note.nil?
         no_note = web.url unless no_note
       elsif web.note.downcase == 'web' || web.note.downcase == 'knihovna'
