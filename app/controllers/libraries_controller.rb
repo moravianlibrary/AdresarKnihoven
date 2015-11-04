@@ -23,7 +23,7 @@ class LibrariesController < ApplicationController
       if @query.nil?
         @all = Library.all
       else        
-        @all = Library.where("LOWER(name) #{like_clause} ? OR LOWER(sigla) = ? OR LOWER(code) = ? OR LOWER(city) = ?", "%#{q}%", "#{q.delete(' ')}", "#{q}", "#{q}")
+        @all = Library.where("LOWER(name) #{like_clause} ? OR LOWER(sigla) = ? OR LOWER(code) = ? OR LOWER(city) #{like_clause} ?", "%#{q}%", "#{q.delete(' ')}", "#{q}", "#{q}%")
       end     
       @all = @all.where(active:true) if params[:inactive].nil?     
       if @all.count == 1 && request.format.html?
