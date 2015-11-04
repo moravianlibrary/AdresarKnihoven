@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151029014008) do
+ActiveRecord::Schema.define(version: 20151104222039) do
 
   create_table "branches", force: :cascade do |t|
     t.string   "name"
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 20151029014008) do
     t.string   "zip"
     t.string   "description"
     t.string   "sigla"
+    t.string   "region"
     t.string   "district"
-    t.string   "town"
     t.string   "context"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
