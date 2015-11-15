@@ -593,22 +593,31 @@ input {
 }
 
 .cl-project-list {
-  .cl-project-item {
+  .cl-project-item-wrapper {    
     @extend .cl-box;
     margin-top: 8px;
-    .project-name {
-      font-size: 16px;
-      color: #444;
-      margin-bottom: 6px;
-      margin-top: 0px;      
-    }    
-    .project-description {
-      font-size: 14px;
-      color: #5e5e5e;
-      margin-bottom: 5px;
-    }      
-    .project-url {
-    }               
+    .cl-project-item {
+      &:before { 
+        display: block; 
+        content: " "; 
+        margin-top: -60px; 
+        height: 60px; 
+        visibility: hidden; 
+      }
+      .project-name {
+        font-size: 16px;
+        color: #444;
+        margin-bottom: 6px;
+        margin-top: 0px;      
+      }    
+      .project-description {
+        font-size: 14px;
+        color: #5e5e5e;
+        margin-bottom: 5px;
+      }      
+      .project-url {      
+      }             
+    }  
   }
 }
 

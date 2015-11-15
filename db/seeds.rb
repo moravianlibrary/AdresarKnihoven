@@ -12,7 +12,8 @@ Project.create!([
 {
 	code: "02",
 	name: "eBook on Demand",
-	description: "E-knihy na objednávku"	
+	description: "E-knihy na objednávku",
+	url: "https://books2ebooks.eu/cs"	
 },
 {
 	code: "03", 

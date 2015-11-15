@@ -229,6 +229,7 @@
                 <% @library.projects.each do |project| %>
                   <div class="cl-item">
                     <%= project.name %> 
+                    (<%= link_to "více zde", projects_path(anchor: "project-#{project.code}") %>)
                   </div>
                 <% end %>
               </div>

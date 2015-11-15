@@ -1,10 +1,11 @@
-<div class="cl-project-item <%= cycle('even', 'odd') %>">
-  <div class="project-name"><%= project.name %></div>
+<div class="cl-project-item-wrapper <%= cycle('even', 'odd') %>">
+  <div id="project-<%= project.code %>" class="cl-project-item">
+    <div class="project-name"><%= project.name %></div>
 
-  <div class="project-description"><%= project.description %></div>
-  
-  <% if project.url %>
-    <a href="<%= project.url %>" class="project-url">Web projektu</a>
-  <% end %>
-
+    <div class="project-description"><%= project.description %></div>
+    
+    <% if project.url %>
+      <a href="<%= project.url %>" class="project-url">Web projektu</a>
+    <% end %>
+  </div>
 </div>
