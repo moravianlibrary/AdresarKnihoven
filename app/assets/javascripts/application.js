@@ -17,6 +17,5 @@
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.en-GB.js
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.cs.js
-//= require autocomplete-rails
 //= require turbolinks
 //= require_tree .

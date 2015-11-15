@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  
 
-  resources :libraries, only: [:index, :show] do
-    get :autocomplete_library_name, on: :collection
-  end
+
+  get '/libraries/autocomplete', to: 'libraries#autocomplete'  
+
+  resources :libraries, only: [:index, :show]
 
   resources :events
 

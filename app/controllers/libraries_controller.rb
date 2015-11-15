@@ -1,14 +1,11 @@
 class LibrariesController < ApplicationController
 
-  autocomplete :library, :name, limit:20, where:"active='t'"#,  :full => true
-
-  # def get_autocomplete_items(parameters)
-  # super(parameters).group(:name)
-  # end
-
-  def get_autocomplete_select_clause(model, method, options)
-    "distinct #{method}"
-  end
+  def autocomplete
+    q = params[:q] || ""
+    limit = params[:limit] || 20
+    @all = Library.distinct.where("LOWER(name) #{like_clause} ? AND active='t'", "#{q}%").limit(limit).pluck(:name)
+    render json: @all
+  end 
 
   # GET /libraries
   # GET /libraries.json

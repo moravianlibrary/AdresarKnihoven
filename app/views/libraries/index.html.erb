@@ -2,13 +2,15 @@
 
 <div class="cl-libraries">
 
+
   <div class="cl-search">
-    <%= form_tag("/libraries", enforce_utf8: false, method: "get") do %>
-      <%= autocomplete_field_tag :q, @query, autocomplete_library_name_libraries_path, :size => 75,
-        placeholder: t('search.placeholder') ,class: "search-query form-control cl-search-input"%>
-      <%= submit_tag t('search.action') , name: nil, class: "search-me btn btn-primary cl-search-submit" %>
+    <%= form_tag("/libraries", enforce_utf8: false, method: "get", id: "search-form") do %>
+      <%= text_field_tag :q, @query, 
+          placeholder: t('search.placeholder'), class: "search-query ui-autocomplete-input form-control cl-search-input", id:"search-query", autofocus:"", spellcheck:"false" %>
+      <%= submit_tag t('search.action'), name: nil, class: "search-me btn btn-primary cl-search-submit", id:"search-submit"  %>
     <% end %>
   </div> 
+
   
   <div class="cl-search-count"><%= t('search.results') %>: <b><%= @all.count %></b>
     <span id="nearby-wrapper" style="display:none">|
@@ -132,9 +134,31 @@
 <% end %>
 
   $(document).ready(function() {
-    $('.search-query').bind('railsAutocomplete.select', function(event, data) {
-      $('.search-me').trigger('click')
-    }); 
+    $("#search-query").autocomplete({
+      source: function(request, response) {
+        $.ajax({
+          url: "/libraries/autocomplete",
+          dataType: "json",
+          data: {
+            q: request.term          
+          },
+          success: function(data) {
+            response(data);
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+          }
+        });
+      },
+      minLength: 2,
+      select: function (event, ui) {        
+        if(ui.item) {
+          $("#search-query").val(ui.item.value);
+          $("#search-form").submit(); 
+        }                  
+      }
+    });
+
+
     <% if @show_results && @libraries.length > 0 %> 
       initialize();
     <% end %>
@@ -151,3 +175,4 @@
   });
   
 </script>
+
