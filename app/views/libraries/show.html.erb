@@ -100,10 +100,19 @@
     <div role="tabpanel" class="tab-pane active" id="contact">
       <div class="cl-contact-wrapper">
 
-
+        <div class="cl-category">      
+          <div class="cl-title">Adresa</div>
+          <div class="cl-items">
+            <div class="cl-item">
+              <%= @library.street %>,    
+              <%= @library.zip %>
+              <%= @library.city %>
+            </div>
+          </div>
+        </div> 
 
         <%if !@library.websites.empty? %>        
-          <div class="cl-category cl-border-bottom">      
+          <div class="cl-category">      
             <div class="cl-title">Webové stránky</div>
             <div class="cl-items">
               <% @library.websites.each do |website| %>
@@ -119,7 +128,7 @@
         <% end %>
 
         <%if !@library.phones.empty? %>        
-          <div class="cl-category cl-border-bottom">      
+          <div class="cl-category">      
             <div class="cl-title">Telefon</div>
             <div class="cl-items">
               <% @library.phones.each do |phone| %>
@@ -130,7 +139,7 @@
         <% end %>
 
         <%if !@library.emails.empty? %>
-          <div class="cl-category cl-border-bottom">      
+          <div class="cl-category">      
             <div class="cl-title">E-mail</div>
             <div class="cl-items">
               <% @library.emails.each do |email| %>
@@ -146,7 +155,7 @@
         <% end %>
 
         <%if !@library.faxes.empty? %>
-          <div class="cl-category cl-border-bottom">      
+          <div class="cl-category">      
             <div class="cl-title">Fax</div>
             <div class="cl-items">
               <% @library.faxes.each do |fax| %>
