@@ -558,15 +558,14 @@ input {
 
 
 .cl-event-list {
-  padding-top: 5px;
   .cl-event-item {
     @extend .cl-box;
     margin-top: 8px;
     .event-title {
       font-size: 16px;
-      color: #333;
-      margin-bottom: 5px;
-      margin-top: 6px;      
+      color: #444;
+      margin-bottom: 10px;
+      margin-top: 0px;      
     }
     .event-date {
       color: #888;
@@ -592,6 +591,28 @@ input {
     }               
   }
 }
+
+.cl-project-list {
+  .cl-project-item {
+    @extend .cl-box;
+    margin-top: 8px;
+    .project-name {
+      font-size: 16px;
+      color: #444;
+      margin-bottom: 6px;
+      margin-top: 0px;      
+    }    
+    .project-description {
+      font-size: 14px;
+      color: #5e5e5e;
+      margin-bottom: 5px;
+    }      
+    .project-url {
+    }               
+  }
+}
+
+
 
 
 

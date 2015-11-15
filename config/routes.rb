@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   
+
   resources :libraries, only: [:index, :show] do
     get :autocomplete_library_name, on: :collection
   end
 
   resources :events
+
+  resources :projects, only: [:index]
 
   root  'static_pages#home'
   get   'about'      => 'static_pages#about'

@@ -1,0 +1,10 @@
+<div class="cl-project-item <%= cycle('even', 'odd') %>">
+  <div class="project-name"><%= project.name %></div>
+
+  <div class="project-description"><%= project.description %></div>
+  
+  <% if project.url %>
+    <a href="<%= project.url %>" class="project-url">Web projektu</a>
+  <% end %>
+
+</div>

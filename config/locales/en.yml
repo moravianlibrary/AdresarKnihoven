@@ -18,3 +18,5 @@ en:
     count: "%{count} libraries in a database"
   events:
     title: "Library events"
+  projects:
+    title: "Library projects"

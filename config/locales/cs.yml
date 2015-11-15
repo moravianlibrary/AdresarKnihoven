@@ -21,3 +21,5 @@ cs:
     count: "%{count} knihoven v databázi"
   events:
     title: "Akce knihoven"
+  projects:
+    title: "Projekty knihoven"
