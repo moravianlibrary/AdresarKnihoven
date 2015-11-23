@@ -95,8 +95,8 @@ class FeederController < ApplicationController
       oh.we = check(otd.elements["subfield[@label='3']"])
       oh.th = check(otd.elements["subfield[@label='4']"])
       oh.fr = check(otd.elements["subfield[@label='5']"])
-      oh.sa = check(otd.elements["subfield[@label='6']"])
-      oh.su = check(otd.elements["subfield[@label='7']"])
+      oh.sa = check(otd.elements["subfield[@label='s']"])
+      oh.su = check(otd.elements["subfield[@label='n']"])
       oh.note = check(otd.elements["subfield[@label='p']"])
     end
     
