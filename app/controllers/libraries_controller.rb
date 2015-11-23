@@ -3,7 +3,7 @@ class LibrariesController < ApplicationController
   def autocomplete
     q = params[:q] || ""
     limit = params[:limit] || 20
-    @all = Library.distinct.where("LOWER(name) #{like_clause} ? AND active='t'", "#{q}%").limit(limit).pluck(:name)
+    @all = Library.distinct.where("LOWER(name) #{like_clause} ? AND active='t'", "#{q}%").order(:priority, :name).limit(limit).pluck(:name)
     render json: @all
   end 
 
@@ -28,7 +28,7 @@ class LibrariesController < ApplicationController
       end
     end
     if @show_results
-      @libraries = @all.order(:name).paginate(page: params[:page], per_page: 20)   
+      @libraries = @all.order(:priority, :name).paginate(page: params[:page], per_page: 20)   
     end
   end
 
