@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115182947) do
+ActiveRecord::Schema.define(version: 20151123033025) do
 
   create_table "branches", force: :cascade do |t|
     t.string   "name"
@@ -77,6 +77,13 @@ ActiveRecord::Schema.define(version: 20151115182947) do
     t.string   "name_en"
     t.string   "mvs_description"
     t.string   "mvs_url"
+    t.string   "category"
+    t.integer  "priority"
+    t.string   "last_update"
+    t.string   "bname"
+    t.string   "cname"
+    t.string   "bname_en"
+    t.string   "cname_en"
   end
 
   add_index "libraries", ["name"], name: "index_libraries_on_name"

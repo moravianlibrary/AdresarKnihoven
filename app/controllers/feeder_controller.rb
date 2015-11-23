@@ -31,6 +31,7 @@ class FeederController < ApplicationController
 
   def handle(sigla, doc)
   	
+  ActiveRecord::Base.transaction do
 
     library = Library.find_by(sigla:sigla)
     if library.nil? 
@@ -51,18 +52,25 @@ class FeederController < ApplicationController
 
     
     library.name = check(doc.elements["//varfield[@id='NAZ']/subfield[@label='a']"])    
+    library.bname = check(doc.elements["//varfield[@id='NAZ']/subfield[@label='b']"])    
+    library.cname = check(doc.elements["//varfield[@id='NAZ']/subfield[@label='c']"])    
     library.name_en = check(doc.elements["//varfield[@id='VAR' and @i1='2']/subfield[@label='a']"])
+    library.bname_en = check(doc.elements["//varfield[@id='VAR' and @i1='2']/subfield[@label='b']"])
+    library.cname_en = check(doc.elements["//varfield[@id='VAR' and @i1='2']/subfield[@label='c']"])
 
     library.code = check(doc.elements["//varfield[@id='ZKR']/subfield[@label='a']"])
     library.region = check(doc.elements["//varfield[@id='KRJ']/subfield[@label='a']"])
     library.district = check(doc.elements["//varfield[@id='KRJ']/subfield[@label='b']"])
     library.description = check(doc.elements["//varfield[@id='POI']/subfield[@label='a']"])
+    library.category = check(doc.elements["//varfield[@id='TYP']/subfield[@label='a']"])
     library.context = check(doc.elements["//varfield[@id='TYP']/subfield[@label='b']"])
     library.ico = check(doc.elements["//varfield[@id='ICO']/subfield[@label='a']"])
     library.dic = check(doc.elements["//varfield[@id='ICO']/subfield[@label='b']"])
 
     library.mvs_description = check(doc.elements["//varfield[@id='MVS']/subfield[@label='c']"])
     library.mvs_url = check(doc.elements["//varfield[@id='MVS']/subfield[@label='u']"])
+
+    library.last_update = check(doc.elements["//varfield[@id='AKT']/subfield[@label='a']"])
 
     if doc.elements["//varfield[@id='STT']"]
       library.active = false
@@ -187,7 +195,7 @@ class FeederController < ApplicationController
       library.branches.push(branch)
     end    
 
-    
+  end    
 
     #respond_to do |format|
     #  format.json { head :ok }  
