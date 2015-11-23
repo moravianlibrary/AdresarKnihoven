@@ -1,6 +1,9 @@
 <% provide(:title, @library.name) %>
 <div class="cl-library-detail">
 <h1><%= @library.name %></h1>
+<% if @library.bname || @library.cname %>
+  <h2 class="cl-additional_name"><%= @library.bname %><%= " - #{@library.cname}" if @library.cname %></h2>
+<% end %>
 
 <div class="cl-address">
 <img src="<%= asset_path 'ic_location_gray.png' %>"/>

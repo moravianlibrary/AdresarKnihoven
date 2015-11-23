@@ -191,12 +191,17 @@ a:hover, a:focus, a:active {
 
 
 .cl-library-detail {  
+  h1 {
+    margin-bottom: 0px;
+  }
   h2 {
-    color: #555555;
-    font-size: 21px;
-    margin-bottom: 20px;
+    color: #606060;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 0px;
   }
   .cl-address {
+    margin-top: 20px;
     margin-bottom: 8px;
     img {
       width:20px;
