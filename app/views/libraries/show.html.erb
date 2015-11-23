@@ -1,8 +1,16 @@
 <% provide(:title, @library.name) %>
 <div class="cl-library-detail">
-<h1><%= @library.name %></h1>
-<% if @library.bname || @library.cname %>
-  <h2 class="cl-additional_name"><%= @library.bname %><%= " - #{@library.cname}" if @library.cname %></h2>
+
+<% if I18n.locale == :cs || @library.name_en.nil? %>
+  <h1><%= @library.name %></h1>
+  <% if @library.bname || @library.cname %>
+    <h2 class="cl-additional_name"><%= @library.bname %><%= " - #{@library.cname}" if @library.cname %></h2>
+  <% end %>
+<% else %>
+  <h1><%= @library.name_en %></h1>
+  <% if @library.bname_en || @library.cname_en %>
+    <h2 class="cl-additional_name"><%= @library.bname_en %><%= " - #{@library.cname_en}" if @library.cname_en %></h2>
+  <% end %>
 <% end %>
 
 <div class="cl-address">
