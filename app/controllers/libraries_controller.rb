@@ -3,7 +3,7 @@ class LibrariesController < ApplicationController
   def autocomplete
     q = params[:q] || ""
     limit = params[:limit] || 20
-    @all = Library.where("LOWER(name) #{like_clause} ? AND active='t'", "#{q}%").order(:priority, :name).uniq().limit(limit).pluck(:name)
+    @all = Library.select(:id, :name, :priority).distinct.where("LOWER(name) #{like_clause} ? AND active='t'", "#{q}%").order(:priority, :name).limit(limit)
     render json: @all
   end 
 

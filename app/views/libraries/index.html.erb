@@ -143,7 +143,14 @@
             q: request.term          
           },
           success: function(data) {
-            response(data);
+            //response(data);
+            response($.map(data, function(v){
+                    return {
+                                label: v.name,
+                                value: v.name                            
+                    }
+                }));
+
           },
           error: function(xhr, ajaxOptions, thrownError) {
           }
