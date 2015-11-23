@@ -437,7 +437,13 @@ a:hover, a:focus, a:active {
       margin-top:1px;
       .library-name {
         font-size: 16px;
-        color: #333;
+        color: #222;
+        padding-left: 2px;
+        margin-bottom: 5px;
+      }
+      .library-additional-name {
+        font-size: 15px;
+        color: #666;
         padding-left: 2px;
         margin-bottom: 5px;
       }
