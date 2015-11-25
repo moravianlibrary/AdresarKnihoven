@@ -128,10 +128,12 @@
             <div class="cl-items">
               <% @library.websites.each do |website| %>
                 <div class="cl-item">
-                  <%= website.url %> 
-                  <% if website.note %> 
-                    (<%= website.note %>)
-                  <% end %>
+                  <a href="<%= website.url %>">
+                    <%= website.url %> 
+                    <% if website.note %> 
+                      (<%= website.note %>)
+                    <% end %>
+                  </a>
                 </div>
               <% end %>
             </div>
