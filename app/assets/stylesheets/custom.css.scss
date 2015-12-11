@@ -189,6 +189,8 @@ a:hover, a:focus, a:active {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px #E10F4E;
 }
 
+
+
 .cl-library-detail {  
   h1 {
     margin-bottom: 0px;
@@ -199,6 +201,15 @@ a:hover, a:focus, a:active {
     margin-top: 10px;
     margin-bottom: 0px;
   }
+  
+  .cl-disclaimer {
+    p {
+      font-style: italic;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+  }
+
   .cl-address {
     margin-top: 20px;
     margin-bottom: 8px;
