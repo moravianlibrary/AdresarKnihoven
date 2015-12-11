@@ -101,7 +101,7 @@
         <a href="#services" aria-controls="services" role="tab" data-toggle="tab">Služby a projekty</a>
       </li>
     <% end %>
-    <% if @library.branches.present? %>
+    <% if @library.branches.present? || @library.branches_url? %>
       <li role="presentation">
         <a href="#branches" aria-controls="branches" role="tab" data-toggle="tab">Pobočky</a>
       </li>
@@ -230,7 +230,7 @@
 
     </div>
 
-    <% if @library.branches.present? %>
+    <% if @library.branches.present? || @library.branches_url? %>
     <div role="tabpanel" class="tab-pane" id="branches">      
       <div class="cl-contact-wrapper">
         <div class="cl-category">                
@@ -241,6 +241,9 @@
                 <div class="cl-branch-address"><%= branch.address %></div>
               </div>
             <% end %>
+          <% end %>
+          <% if @library.branches_url? %>
+            <a style="display:inline-block;margin-top:16px;" href="<%= @library.branches_url %>">Podrobné informace o pobočkách</a>
           <% end %>
         </div>    
       </div>
