@@ -70,7 +70,7 @@
     $("#search-query").autocomplete({
       source: function(request, response) {
         $.ajax({
-          url: "https://cpk-front.mzk.cz/AJAX/JSON", // change to beta.knihovny.cz after new release
+          url: "https://beta.knihovny.cz/AJAX/JSON", // change to beta.knihovny.cz after new release
           dataType: "json",
           data: {
             q: request.term,
@@ -78,7 +78,7 @@
             searcher:'Solr'
           },
           success: function(data) {
-            response(data.data);
+            response(data.data.byTitle);
           },
           error: function(xhr, ajaxOptions, thrownError) {
             //console.log(xhr.responseText + '; ' + ajaxOptions + '; ' + thrownError);
