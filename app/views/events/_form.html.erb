@@ -2,7 +2,6 @@
   <% if @event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
-
       <ul>
       <% @event.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,29 +10,28 @@
     </div>
   <% end %>
 
-
   <div class="field">
-    <%= f.label :title, "Název" %><br>
+    <%= f.label :title, t('events.new.title') %><br>
     <%= f.text_field :title, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :description, "Popis" %><br>
+    <%= f.label :description, t('events.new.description') %><br>
     <%= f.text_area :description, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :url, "URL" %><br>
+    <%= f.label :url, t('events.new.url') %><br>
     <%= f.text_field :url, class: 'form-control' %>
   </div>
   <div class="field">
-    <%= f.label :place, "Místo konání" %><br>
+    <%= f.label :place, t('events.new.place') %><br>
     <%= f.text_field :place, class: 'form-control' %>
   </div>  
   <div class="field">
-    <%= f.label :date, "Datum konání"  %><br>
+    <%= f.label :date, t('events.new.date') %><br>
     <%= f.text_field :date, class: 'form-control datepicker' %>
   </div>
   <div class="actions">
-    <%= f.submit "Uložit", class: "btn-primary" %>
+    <%= f.submit t('common.save'), class: "btn-primary" %>
   </div>
 <% end %>
 

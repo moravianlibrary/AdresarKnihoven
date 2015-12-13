@@ -1,25 +1,111 @@
 cs:
   will_paginate:
-    previous_label: "předchozí"
-    next_label: "další"
+    previous_label: "Předchozí"
+    next_label: "Další"
   app_name: "knihovny.cz"
-  title_home: "Centrální portál českých knihoven"
+  common:
+    save: "Uložit"
+    edit: "Upravit"
+    delete: "Smazat"
+    back: "Zpět"
   menu:
     libraries: "Databáze knihoven"
     info: "Informace o knihovnách"
     events: "Akce knihoven"
   footer:
-    admin_label: "Portál Knihovny.cz spravuje"
-    admin: "Městská knihovna v Praze"
+    admin:
+      label: "Portál Knihovny.cz spravuje"
+      name: "Městská knihovna v Praze"
+      url: "http://www.mlp.cz/"
     about: "O projektu"
-  search:
-    placeholder: "Zadejte město nebo název či siglu knihovny"
-    action: "Vyhledat"
-    results: "Výsledky"
-    nearby: "Knihovny v okolí"
-    label: "Vyhledat knihovnu"
-    count: "%{count} knihoven v databázi"
+  home:
+    page_title: "Centrální portál českých knihoven"
+    search:
+      label: "Hledat v titulech"
+      placeholder: "Zadejte název nebo autora"
+      action: "Hledat"
+    events:
+      title: "Nadcházející akce"
+      more: "Více akcí"
+    psk:
+      title: "Ptejte se knihovny"
+      show_answer: "Zobrazit odpověď knihovny"
+      ask: "Položit dotaz"
+      archive: "Archiv dotazů"
+      info:
+        title: "Ptejte se knihovny"
+        description: "Odborná odpověď zdarma do 48 hodin na váš e-mail."
+        label: "Službu zajišťuje projekt"
+  about:
+    page_title: "O projektu"
+    page_header: "O projektu" 
+  libraries:
+    page_title: "Databáze knihoven"
+    page_header: "Databáze knihoven" 
+    search:
+      placeholder: "Zadejte město nebo název či siglu knihovny"
+      action: "Vyhledat"
+      results: "Výsledky"
+      nearby: "Knihovny v okolí"
+      no_results: "Nebyly nalezeny žádné výsledky."
+      my_location: "Moje pozice"
+  detail:
+    website: "Web knihovny"
+    catalog: "Otevřít katalog"
+    contacts:
+      title: "Kontakt"
+      address: "Adresa"
+      websites: "Webové stránky"
+      phone: "Telefon"
+      email: "E-mail"
+      fax: "Fax"
+      people: "Odpovědné osoby"
+    branches:
+      title: "Pobočky"
+      website: "Podrobné informace o pobočkách"
+    services:
+      title: "Služby a projekty"
+      services: "Služby"
+      projects: "Projekty"
+    disclaimer: "Za správnost údajů zodpovídá samotná knihovna."
+    opening_hours:
+      title: "Otevírací doba"
+      mo: "Pondělí"
+      tu: "Úterý"
+      we: "Středa"
+      th: "Čtvrtek"
+      fr: "Pátek"
+      sa: "Sobota"
+      su: "Neděle"
   events:
-    title: "Akce knihoven"
+    page_title: "Akce knihoven"
+    page_header: "Akce knihoven"
+    detail: "Detail"
+    delete_warn: "Opravdu chcete smazat akci?"
+    new:
+      page_title: "Nová akce"
+      page_header: "Nová akce"
+      title: "Název"
+      description: "Popis"
+      url: "URL"
+      place: "Místo konání"
+      date: "Datum konání"
+    edit:
+      page_title: "Úprava akce"
+      page_header: "Úprava akce"
+    action:
+      on_create: "Akce byla vytvořena."
+      on_update: "Akce byla upravena."
+      on_destroy: "Akce byla odstraněna."
   projects:
-    title: "Projekty knihoven"
+    page_title: "Projekty knihoven"
+    page_header: "Projekty knihoven"
+    website: "Web projektu"
+    description: "Současné projekty knihoven odráží změny, které přinesl rozvoj online technologií, digitalizace knihovních fondů, nárůst informací i nové možnosti vzdáleného přístupu k nim. Úkolem knihoven v 21. století je hledat nové funkce, které umožní shromažďování a třídění tohoto obrovského množství dat, a využít při tom moderní technologie tak, aby každý z nás mohl objevovat bohaté kulturní dědictví v pohodlí, kdekoli a kdykoli."
+  exception:
+    not_found:
+      title: "Stránka nenalezena"
+      description: "Požadovaná stránka nebyla nalezena."
+    internal_server_error:
+      title: "Chyba"
+      description: "Požadovanou stránku se nepodařilo zpracovat."

@@ -1,22 +1,111 @@
 en:
+  will_paginate:
+    previous_label: "Previous"
+    next_label: "Next"
   app_name: "knihovny.cz"
-  title_home: "Central portal of Czech libraries"
+  common:
+    save: "Save"
+    edit: "Edit"
+    delete: "Delete"
+    back: "Back"  
   menu:
     libraries: "Library database"
     info: "Information about libraries"
     events: "Library events"
   footer:
-    admin_label: "Knihovny.cz is managed by"
-    admin: "Municipal Library of Prague"
+    admin:
+      label: "Knihovny.cz is managed by"
+      name: "Municipal Library of Prague"
+      url: "http://www.mlp.cz/"    
     about: "About"
-  search:
-    placeholder: "Search by city or library name"
-    action: "Search"
-    results: "Results"
-    nearby: "Nearby Libraries"
-    label: "Find a library"
-    count: "%{count} libraries in a database"
+  home:
+    page_title: "Central portal of Czech libraries"
+    search:
+      label: "Search in titles"
+      placeholder: "Search by title or author"
+      action: "Search"
+    events:
+      title: "Upcoming Events"
+      more: "More events"
+    psk:
+      title: "Ask your Library"
+      show_answer: "Show Answer"
+      ask: "Ask a question"
+      archive: "Archive"
+      info:
+        title: "Ask your Library"
+        description: "Professional answer within 48 hours to your e-mail for free."
+        label: "The service is managed by project"    
+  about:
+    page_title: "About"
+    page_header: "About"
+  libraries:
+    page_title: "Library Database"
+    page_header: "Library Database" 
+    search:
+      placeholder: "Search by city or library name"
+      action: "Search"
+      results: "Results"
+      nearby: "Nearby Libraries"
+      no_results: "No results found."
+      my_location: "My location"
+  detail:
+  detail:
+    website: "Library Website"
+    catalog: "Open Catalog"
+    contacts:
+      title: "Contact"
+      address: "Address"
+      websites: "Websites"
+      phone: "Phone"
+      email: "Email"
+      fax: "Fax"
+      people: "Responsible Persons"
+    branches:
+      title: "Branches"
+      website: "More about branches"
+    services:
+      title: "Services and Projects"
+      services: "Services"
+      projects: "Projects"
+    disclaimer: "The library is responsible for data accuracy."  
+    opening_hours:
+      title: "Opening Hours"
+      mo: "Monday"
+      tu: "Tuesday"
+      we: "Wednesday"
+      th: "Thursday"
+      fr: "Friday"
+      sa: "Saturday"
+      su: "Sunday"    
   events:
-    title: "Library events"
+    page_title: "Library Events"
+    page_header: "Library Events"  
+    detail: "Detail"
+    delete_warn: "Are you sure you want to delete the event?"    
+    new:
+      page_title: "New Event"
+      page_header: "New Event"
+      title: "Title"
+      description: "Description"
+      url: "URL"
+      place: "Place"
+      date: "Date"
+    edit:
+      page_title: "Edit Event"
+      page_header: "Edit Event"
+    action:
+      on_create: "The event has been created."
+      on_update: "The event has been updated."
+      on_destroy: "The event has been deleted."      
   projects:
-    title: "Library projects"
+    page_title: "Library Projects" 
+    page_header: "Library Projects" 
+    website: "Project website"
+  exception:
+    not_found:
+      title: "Not Found"
+      description: "We could not find the page you were looking for."
+    internal_server_error:
+      title: "Internal Server Error"
+      description: "Sorry, something went wrong while processing your request."

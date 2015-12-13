@@ -1,5 +1,3 @@
-<h1>Úprava akce</h1>
-
+<% provide(:title, t('events.edit.page_title')) %>
+<h1><%= t('events.edit.page_header') %></h1>
 <%= render 'form' %>
-
-<%= link_to 'Zpět', events_path %>

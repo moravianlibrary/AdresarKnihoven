@@ -1,24 +1,21 @@
-<h1>Databáze knihoven <%= @ttt %> </h1>
+<% provide(:title, t('libraries.page_title')) %>
+<h1><%= t('libraries.page_header') %></h1>
 
 <div class="cl-libraries">
-
-
   <div class="cl-search">
     <%= form_tag("/libraries", enforce_utf8: false, method: "get", id: "search-form") do %>
       <%= text_field_tag :q, @query, 
-          placeholder: t('search.placeholder'), class: "search-query ui-autocomplete-input form-control cl-search-input", id:"search-query", autofocus:"", spellcheck:"false" %>
-      <%= submit_tag t('search.action'), name: nil, class: "search-me btn btn-primary cl-search-submit", id:"search-submit"  %>
+          placeholder: t('libraries.search.placeholder'), class: "search-query ui-autocomplete-input form-control cl-search-input", id:"search-query", autofocus:"", spellcheck:"false" %>
+      <%= submit_tag t('libraries.search.action'), name: nil, class: "search-me btn btn-primary cl-search-submit", id:"search-submit"  %>
     <% end %>
   </div> 
-
   
-  <div class="cl-search-count"><%= t('search.results') %>: <b><%= @all.count %></b>
+  <div class="cl-search-count"><%= t('libraries.search.results') %>: <b><%= @all.count %></b>
     <span id="nearby-wrapper" style="display:none">|
-      <a id="nearby" href="#"><%= t('search.nearby') %></a>
+      <a id="nearby" href="#"><%= t('libraries.search.nearby') %></a>
     </span>
   </div>
 
-  
   <% if @show_results %>
     <% if @libraries.length > 0 %>
       <div id="map-canvas" style="width: 100%; height: 300px;margin:10px 0;"></div>
@@ -28,7 +25,7 @@
       </div>  
     <% else %>
       <div style="width:100%;margin-top:20px;font-size:15px;color:#444;text-align:center;">
-        Nebyly nalezeny žádné výsledky.
+        <%= t('libraries.search.no_result') %>
       </div>
     <% end %>
   <% end %>
@@ -36,14 +33,10 @@
 </div>
 
 
-
-
-
 <script>
   var latitude = null;
   var longitude = null;
   var map = null;
-
 
   var geoSuccess = function(position) {
     var latitude = position.coords.latitude;
@@ -63,7 +56,7 @@
         position: new google.maps.LatLng (latitude, longitude),
         icon: myLocationIcon,
         map: map,
-        title: "My location"
+        title: "<%= t('libraries.search.my_location') %>"
       });
     }
     $('#nearby-wrapper').show();

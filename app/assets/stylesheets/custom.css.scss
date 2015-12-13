@@ -98,32 +98,6 @@ h1 {
   margin-bottom: 20px;
 }
 
-/*
-h1 {
-  font-size: 3em;
-  letter-spacing: -2px;
-  margin-bottom: 30px;
-  text-align: center;
-}
-*/
-/*
-h2 {
-  font-size: 1.2em;
-  letter-spacing: -1px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: normal;
-  color: $gray-light;
-}
-*/
-/*
-p {
-  font-size: 1.1em;
-  line-height: 1.7em;
-}
-*/
-
-/* header */
 
 
 .flash {
@@ -356,6 +330,12 @@ a:hover, a:focus, a:active {
 
 .btn {
   border-radius: 0px !important;
+}
+
+.cl-exception {
+  .cl-description {
+    color: #666;
+  }
 }
 
 
@@ -637,7 +617,7 @@ input {
 }
 
 .cl-projects {
-  .cl-message {
+  .cl-description {
     margin-top:20px;
     margin-bottom: 20px;
   }

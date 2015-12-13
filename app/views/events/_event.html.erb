@@ -1,20 +1,12 @@
 <div class="cl-event-item <%= cycle('even', 'odd') %>">
-  <div class="event-title"><%= event.title %>
-  
-  </div>
-
+  <div class="event-title"><%= event.title %></div>
 	<div class="event-date">
 		<img src="<%= asset_path 'ic_date_gray.png' %>" />
     <%= event.date.strftime("%d.%m.%Y") %>
   </div>
-
-  <div class="event-description"><%= event.description %></div>
-  
+  <div class="event-description"><%= event.description %></div>  
 	<div class="event-place"><%= event.place %></div>
-
-  <a href="<%= event.url %>">Detail akce</a> |
-  <%= link_to 'Upravit', edit_event_path(event) %> |
-  <%= link_to 'Smazat',  { action: :destroy, id: event.id }, method: :delete, data: { confirm: 'Opravdu chcete smazat akci?' } %>
-
-
+  <a href="<%= event.url %>"><%= t('events.detail') %></a> |
+  <%= link_to t('common.edit'), edit_event_path(event) %> |
+  <%= link_to t('common.delete'),  { action: :destroy, id: event.id }, method: :delete, data: { confirm: t('events.delete_warn') } %>
 </div>

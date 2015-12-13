@@ -1,12 +1,13 @@
-<% provide(:title, @library.name) %>
 <div class="cl-library-detail">
 
 <% if I18n.locale == :cs || @library.name_en.nil? %>
-  <h1><%= @library.name %></h1>
+  <% provide(:title, @library.name) %>
+  <h1><%= @library.name %></h1>  
   <% if @library.bname || @library.cname %>
     <h2 class="cl-additional_name"><%= @library.bname %><%= " - #{@library.cname}" if @library.cname %></h2>
   <% end %>
 <% else %>
+  <% provide(:title, @library.name_en) %>
   <h1><%= @library.name_en %></h1>
   <% if @library.bname_en || @library.cname_en %>
     <h2 class="cl-additional_name"><%= @library.bname_en %><%= " - #{@library.cname_en}" if @library.cname_en %></h2>
@@ -14,95 +15,85 @@
 <% end %>
 
 <div class="cl-address">
-<img src="<%= asset_path 'ic_location_gray.png' %>"/>
+  <img src="<%= asset_path 'ic_location_gray.png' %>"/>
   <span class="cl-address-text">
     <%= @library.street %>,    
     <%= @library.zip %>
     <%= @library.city %>
   </span>
-
-
 </div>
 
 
 <% if @web || @catalog %>
   <div class="cl-links">
     <% if @web %>
-      <a href="<%= @web %>" class="btn btn-primary cl-btn">Web knihovny</a>
+      <a href="<%= @web %>" class="btn btn-primary cl-btn"><%= t('detail.website') %></a>
     <% end %>
     <% if @catalog %>
-      <a href="<%= @catalog %>" class="btn btn-info cl-btn">Otevřít katalog</a>
+      <a href="<%= @catalog %>" class="btn btn-info cl-btn"><%= t('detail.catalog') %></a>
     <% end %>
   </div>
 <% end %>
 
 
-
-
 <div class="row" style="padding-bottom:10px;">
+  
   <div class="col-md-9">
-
-  <% unless @library.latitude.nil? || @library.longitude.nil? %>
-    <div id="map-canvas" style="width: 100%; height: 400px;"></div>   
-  <% end %>        
+    <% unless @library.latitude.nil? || @library.longitude.nil? %>
+      <div id="map-canvas" style="width: 100%; height: 400px;"></div>   
+    <% end %>        
   </div>
 
   <div class="col-md-3">
     <div class="cl-right">
 
-    <% if @library.opening_hour %>
-      <%= render partial: "opening_hours", locals: {loh: @library.opening_hour} %>
-    <% else %>
-    <% if @library.phones.present? %>
-      <div class="cl-row">
-        <img class="cl-icon" src="<%= asset_path 'ic_phone.png' %>"/>
-          <div class="cl-text"><%= @library.phones.first.phone %></div>
-        </div>
+      <% if @library.opening_hour %>
+        <%= render partial: "opening_hours", locals: {loh: @library.opening_hour} %>
+      <% else %>
+        <% if @library.phones.present? %>
+        <div class="cl-row">
+          <img class="cl-icon" src="<%= asset_path 'ic_phone.png' %>"/>
+            <div class="cl-text"><%= @library.phones.first.phone %></div>
+          </div>
+        <% end %>
+
+        <% if @library.emails.present? %>
+          <div class="cl-row">
+            <img class="cl-icon" src="<%= asset_path 'ic_email2.png' %>"/>
+            <div class="cl-text"><%= @library.emails.first.email %></div>
+          </div>
+        <% end %>    
+
+        <% if @library.people.present? %>              
+          <div class="cl-row">
+            <img class="cl-icon" src="<%= asset_path 'ic_person2.png' %>"/>
+            <div class="cl-text">
+              <% person = @library.people.first %>
+              <%= person.degree1 %> <%= person.first_name %> <%= person.last_name %> <%= person.degree2 %>
+              <% if person.role %> 
+                (<%= person.role %>)
+              <% end %>
+            </div>                
+          </div>
+        <% end %>       
       <% end %>
-
-      <% if @library.emails.present? %>
-        <div class="cl-row">
-          <img class="cl-icon" src="<%= asset_path 'ic_email2.png' %>"/>
-          <div class="cl-text"><%= @library.emails.first.email %></div>
-        </div>
-      <% end %>    
-
-      <% if @library.people.present? %>              
-        <div class="cl-row">
-          <img class="cl-icon" src="<%= asset_path 'ic_person2.png' %>"/>
-          <div class="cl-text">
-            <% person = @library.people.first %>
-            <%= person.degree1 %> <%= person.first_name %> <%= person.last_name %> <%= person.degree2 %>
-            <% if person.role %> 
-              (<%= person.role %>)
-            <% end %>
-          </div>                
-        </div>
-      <% end %>       
-    <% end %>
-
-   </div> 
-
-
-
+    </div> 
   </div>
 </div>
 
-
 <div>
-
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active">
-      <a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Kontakt</a>
+      <a href="#contact" aria-controls="contact" role="tab" data-toggle="tab"><%= t('detail.contacts.title') %></a>
     </li>
     <% if @library.services.present? || @library.projects.present? %>
       <li role="presentation">
-        <a href="#services" aria-controls="services" role="tab" data-toggle="tab">Služby a projekty</a>
+        <a href="#services" aria-controls="services" role="tab" data-toggle="tab"><%= t('detail.services.title') %></a>
       </li>
     <% end %>
     <% if @library.branches.present? || @library.branches_url? %>
       <li role="presentation">
-        <a href="#branches" aria-controls="branches" role="tab" data-toggle="tab">Pobočky</a>
+        <a href="#branches" aria-controls="branches" role="tab" data-toggle="tab"><%= t('detail.branches.title') %></a>
       </li>
     <% end %>    
   </ul>
@@ -111,7 +102,7 @@
       <div class="cl-contact-wrapper">
 
         <div class="cl-category">      
-          <div class="cl-title">Adresa</div>
+          <div class="cl-title"><%= t('detail.contacts.address') %></div>
           <div class="cl-items">
             <div class="cl-item">
               <%= @library.street %>,    
@@ -123,7 +114,7 @@
 
         <%if !@library.websites.empty? %>        
           <div class="cl-category">      
-            <div class="cl-title">Webové stránky</div>
+            <div class="cl-title"><%= t('detail.contacts.websites') %></div>
             <div class="cl-items">
               <% @library.websites.each do |website| %>
                 <div class="cl-item">
@@ -141,7 +132,7 @@
 
         <%if !@library.phones.empty? %>        
           <div class="cl-category">      
-            <div class="cl-title">Telefon</div>
+            <div class="cl-title"><%= t('detail.contacts.phone') %></div>
             <div class="cl-items">
               <% @library.phones.each_with_index do |phone, index| %>
                 <% if index == 5 %>
@@ -159,7 +150,7 @@
 
         <%if !@library.emails.empty? %>
           <div class="cl-category">      
-            <div class="cl-title">E-mail</div>
+            <div class="cl-title"><%= t('detail.contacts.email') %></div>
             <div class="cl-items">              
               <% @library.emails.each_with_index do |email, index| %>
                 <% if index == 5 %>
@@ -186,7 +177,7 @@
           
             <%if !@library.faxes.empty? %>
               <div class="cl-category">      
-                <div class="cl-title">Fax</div>
+                <div class="cl-title"><%= t('detail.contacts.fax') %></div>
                 <div class="cl-items">
                   <% @library.faxes.take(3).each do |fax| %>
                     <div class="cl-item"><%= fax.fax %></div>
@@ -197,7 +188,7 @@
 
             <%if !@library.people.empty? %>
               <div class="cl-category">      
-                <div class="cl-title">Odpovědné osoby</div>
+                <div class="cl-title"><%= t('detail.contacts.people') %></div>
                 <div class="cl-items">
                   <% @library.people.each_with_index do |person, index| %>              
                     <% if index > 0 %>
@@ -242,7 +233,7 @@
             <% end %>
           <% end %>
           <% if @library.branches_url? %>
-            <a style="display:inline-block;margin-top:16px;" href="<%= @library.branches_url %>">Podrobné informace o pobočkách</a>
+            <a style="display:inline-block;margin-top:16px;" href="<%= @library.branches_url %>"><%= t('detail.branches.website') %></a>
           <% end %>
         </div>    
       </div>
@@ -256,7 +247,7 @@
          
           <% if @library.services.present? %>
             <div class="cl-category">
-              <div class="cl-title">Služby</div>      
+              <div class="cl-title"><%= t('detail.services.services') %></div>      
               <div class="cl-items">
                 <% @library.services.each do |service| %>
                   <div class="cl-item">
@@ -269,7 +260,7 @@
 
           <% if @library.projects.present? %>
             <div class="cl-category"> 
-              <div class="cl-title">Projekty</div>     
+              <div class="cl-title"><%= t('detail.services.projects') %></div>     
               <div class="cl-items">
                 <% @library.projects.each do |project| %>
                   <div class="cl-item">
@@ -288,9 +279,7 @@
 
 
 <div class="cl-disclaimer">
-  <p>
-    Za správnost údajů zodpovídá samotná knihovna.
-  </p>
+  <p><%= t('detail.disclaimer') %></p>
 </div>
 
 </div>

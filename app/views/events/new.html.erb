@@ -1,5 +1,3 @@
-<h1>Nová akce</h1>
-
+<% provide(:title, t('events.new.page_title')) %>
+<h1><%= t('events.new.page_header') %></h1>
 <%= render 'form' %>
-
-<%= link_to 'Zpět', events_path %>

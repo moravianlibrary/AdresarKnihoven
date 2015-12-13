@@ -1,13 +1,12 @@
+<% provide(:title, t('events.page_title')) %>
 <div>
-<h1>
-<%= t('events.title') %>
-<%= link_to "+", new_event_path %> 
-</h1>
+	<h1>
+		<%= t('events.page_header') %>
+		<%= link_to "+", new_event_path %> 
+	</h1>
 
-
-<div class="cl-event-list row2">
-	<%= render @events %>
-</div>
-<%= will_paginate @libraries, class: "pagination cl-pagination-centered"%>
-
+	<div class="cl-event-list">
+		<%= render @events %>
+	</div>
+	<%= will_paginate @libraries, class: "pagination cl-pagination-centered"%>
 </div>

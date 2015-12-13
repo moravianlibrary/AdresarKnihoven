@@ -1,20 +1,21 @@
-<% provide(:title, t('title_home')) %>
+<% provide(:title, t('home.page_title')) %>
 <div class="cl-home">
   
 
-  <div class="cl-search-label">Hledat v titulech</div>
+
+  <div class="cl-search-label"><%= t('home.search.label') %></div>
   <div class="cl-search">
     <form role="search" id="search-form" method="get" action="https://beta.knihovny.cz/Search/Results">
-        <input placeholder="Zadejte název nebo autora" class="form-control search-query ui-autocomplete-input cl-search-input" id="search-query" type="text" name="lookfor" autofocus="" autocomplete="off" spellcheck="false">
+        <input placeholder="<%= t('home.search.placeholder') %>" class="form-control search-query ui-autocomplete-input cl-search-input" id="search-query" type="text" name="lookfor" autofocus="" autocomplete="off" spellcheck="false">
         <input type="hidden" name="type" value="AllFields">
-        <button type="submit" id="search-submit" class="search-me btn btn-primary cl-search-submit">Hledat</button>
+        <button type="submit" id="search-submit" class="search-me btn btn-primary cl-search-submit"><%= t('home.search.action') %></button>
         <input type="hidden" name="limit" value="20">
         <input type="hidden" name="sort" value="relevance">
     </form>
   </div>
 
   <div class="cl-events">
-    <div class="cl-title">Nadcházející akce</div>
+    <div class="cl-title"><%= t('home.events.title') %></div>
     <% @events.each do |event| %>      
         <%= link_to event.url, :target => "_blank" do %>
           <div class="cl-event">
@@ -24,13 +25,13 @@
         <% end %> 
     <% end %>
     <div style="margin-top:5px">
-      <%= link_to "Více akcí", events_path %>
+      <%= link_to t('home.events.more'), events_path %>
     </div>
   </div>
 
 
   <div class="cl-psk">
-    <div class="cl-title">Ptejte se knihovny</div>
+    <div class="cl-title"><%= t('home.psk.title') %></div>
     <div class="row">
       <div class="col-md-6">
         <div class="cl-question">
@@ -39,7 +40,7 @@
         <div class="cl-question-body">
           Do hrnečku vlijete horké mléko, vsypete kakao a zamícháte. Pokud lžičku nevyndáte, ale budete s ní jemně ťukat o dno, bude se v čase postupně měnit vydávaný zvuk. Dokážete určit, zda bude tón klesat či stoupat? A zdůvodnit proč přesně?
         </div>
-        <a href="http://www.ptejteseknihovny.cz/dotazy/proc-duni-kakao">Zobrazit odpověď knihovny</a>
+        <a href="http://www.ptejteseknihovny.cz/dotazy/proc-duni-kakao"><%= t('home.psk.show_answer') %></a>
       </div>
 
       <div class="col-md-2" style="height:10px;"></div>
@@ -47,14 +48,12 @@
       <div class="col-md-4">
       <div>
         <div class="cl-btns">
-          <a href="http://www.ptejteseknihovny.cz/" class="btn btn-primary cl-btn">Položit dotaz</a>
-          <a href="http://www.ptejteseknihovny.cz/archiv" class="btn btn-info cl-btn">Archiv dotazů</a>
+          <a href="http://www.ptejteseknihovny.cz/" class="btn btn-primary cl-btn"><%= t('home.psk.ask') %></a>
+          <a href="http://www.ptejteseknihovny.cz/archiv" class="btn btn-info cl-btn"><%= t('home.psk.archive') %></a>
         </div>
-        <div class="cl-text">
-          Odborná odpověď zdarma do 48 hodin na váš e-mail.
-        </div>
+        <div class="cl-text"><%= t('home.psk.info.description') %></div>
         <div class="cl-text">             
-          Službu zajišťuje projekt <a href="http://www.ptejteseknihovny.cz/">Ptejte se knihovny</a>
+          <%= t('home.psk.info.label') %> <a href="http://www.ptejteseknihovny.cz/"><%= t('home.psk.info.title') %></a>
         </div>
       </div>  
       </div>

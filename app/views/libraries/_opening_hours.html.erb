@@ -1,33 +1,33 @@
 <div class="cl-oh">
-  <div class="cl-oh-label">Otevírací doba</div>
+  <div class="cl-oh-label"><%= t('detail.opening_hours.title') %></div>
   <div>
     <table class="cl-oh-table">
       <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 1 %>">
-        <td class="cl-oh-day">Pondělí</td>
+        <td class="cl-oh-day"><%= t('detail.opening_hours.mo') %></td>
         <td class="cl-oh-hours"><%= loh.mo %></td>
       </tr>
       <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 2 %>">
-        <td class="cl-oh-day">Úterý</td>
+        <td class="cl-oh-day"><%= t('detail.opening_hours.tu') %></td>
         <td class="cl-oh-hours"><%= loh.tu %></td>
       </tr>
       <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 3 %>">
-        <td class="cl-oh-day">Středa</td>
+        <td class="cl-oh-day"><%= t('detail.opening_hours.we') %></td>
         <td class="cl-oh-hours"><%= loh.we %></td>
       </tr>
       <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 4 %>">
-        <td class="cl-oh-day">Čtvrtek</td>
+        <td class="cl-oh-day"><%= t('detail.opening_hours.th') %></td>
         <td class="cl-oh-hours"><%= loh.th %></td>
       </tr>
       <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 5 %>">
-        <td class="cl-oh-day">Pátek</td>
+        <td class="cl-oh-day"><%= t('detail.opening_hours.fr') %></td>
         <td class="cl-oh-hours"><%= loh.fr %></td>
       </tr>
       <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 6 %>">
-        <td class="cl-oh-day">Sobota</td>
+        <td class="cl-oh-day"><%= t('detail.opening_hours.sa') %></td>
         <td class="cl-oh-hours"><%= loh.sa %></td>
       </tr>
       <tr class="cl-oh-row <%= 'cl-oh-row-active' if Date.today.wday == 7 %>">
-        <td class="cl-oh-day">Neděle</td>
+        <td class="cl-oh-day"><%= t('detail.opening_hours.su') %></td>
         <td class="cl-oh-hours"><%= loh.su %></td>
       </tr>                                                
     </table>

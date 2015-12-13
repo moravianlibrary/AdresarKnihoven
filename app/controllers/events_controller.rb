@@ -20,7 +20,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     respond_to do |format|
       if @event.save
-        format.html { redirect_to events_url, notice: 'Akce byla vytvořena.' }
+        format.html { redirect_to events_url, notice: t('events.action.on_create') }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
@@ -32,7 +32,7 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to events_url, notice: 'Akce byla upravena.' }
+        format.html { redirect_to events_url, notice: t('events.action.on_update') }
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit }
@@ -44,7 +44,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Akce byla odstraněna.' }
+      format.html { redirect_to events_url, notice: t('events.action.on_destroy') }
       format.json { head :no_content }
     end
   end
