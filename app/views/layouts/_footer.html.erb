@@ -1,5 +1,44 @@
 <footer class="footer">
-  <div>
+  <div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<h4>O projektu</h4>
+				<ul>
+					<li><a href="#">O portálu Knihovny.cz</a></li>
+					<li><a href="#">Milníky ve vývoji</a></li>
+					<li><%= link_to "Zakladajici knihovny", zakladajici_knihovny_path %></li>
+					<li><a href="#">Nápověda</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-4">
+				<h4>O knihovnách</h4>
+				<ul>
+					<li><%= link_to "Projekty knihoven", projects_path %></li>
+					<li><a href="#">Služby knihoven</a></li>
+					<li><a href="#">Nejvýznamnější akce knihoven pro čtenáře</a></li>
+					<li><a href="#">Knihovny zvou malé čtenáře</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-4">
+				<h4>Sledujte nás</h4>
+				<a class="cl-social" href="#">
+					<%= fa_icon "facebook", class: "social-icon" %>
+				</a>
+				<a class="cl-social" href="#">
+					<%= fa_icon "youtube-play", class: "social-icon" %>
+				</a>
+				<a class="cl-social" href="#">
+					<%= fa_icon "slideshare", class: "social-icon" %>
+				</a>
+				</div>
+			</div>
+
+		</div>
+		<div class="row footer-bottom-gap hidden-xs">
+  </div>
+
+
+  <div style="display:none;">
   <%= t('footer.admin.label') %> <a href="<%= t('footer.admin.url') %>"><%= t('footer.admin.name') %></a> |
   <%= link_to t('footer.about'), about_path %></li>
   </div>

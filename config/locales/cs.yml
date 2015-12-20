@@ -39,6 +39,9 @@ cs:
   about:
     page_title: "O projektu"
     page_header: "O projektu" 
+  founders:
+    page_title: "Zakládající knihovny"
+    page_header: "Knihovny zapojené do projektu Knihovny.cz" 
   libraries:
     page_title: "Databáze knihoven"
     page_header: "Databáze knihoven" 

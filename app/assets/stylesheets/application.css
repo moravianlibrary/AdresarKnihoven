@@ -13,6 +13,8 @@
  
  *= require jquery-ui
  *= require bootstrap-datepicker3
+ *= require font-awesome
+ *= require bootstrap-social
  *= require_tree .
  *= require_self
 
