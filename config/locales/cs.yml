@@ -9,7 +9,7 @@ cs:
     delete: "Smazat"
     back: "Zpět"
   menu:
-    libraries: "Databáze knihoven"
+    libraries: "Vyhledat knihovnu"
     info: "Informace o knihovnách"
     events: "Akce knihoven"
   footer:
@@ -40,14 +40,14 @@ cs:
     page_title: "O projektu"
     page_header: "O projektu" 
   founders:
-    page_title: "Zakládající knihovny"
+    page_title: "Zapojené knihovny"
     page_header: "Knihovny zapojené do projektu Knihovny.cz" 
   libraries:
     page_title: "Databáze knihoven"
-    page_header: "Databáze knihoven" 
+    page_header: "Vyhledat knihovnu" 
     search:
-      placeholder: "Zadejte město nebo název či siglu knihovny"
-      action: "Vyhledat"
+      placeholder: "Zadejte město nebo název knihovny"
+      action: "Hledat"
       results: "Výsledky"
       nearby: "Knihovny v okolí"
       no_results: "Nebyly nalezeny žádné výsledky."

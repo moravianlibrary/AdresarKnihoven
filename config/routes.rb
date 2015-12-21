@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   root  'static_pages#home'
   get   'about'      => 'static_pages#about'
-  get   'zakladajici-knihovny'      => 'static_pages#founders'
+  get   'zapojene-knihovny'      => 'static_pages#founders'
 
   get '/feeder/sigla/:sigla', to: 'feeder#sigla'
   get '/feeder/sysno/:sysno', to: 'feeder#sysno'
