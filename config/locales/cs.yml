@@ -47,6 +47,9 @@ cs:
   services:
     page_title: "Služby knihoven"
     page_header: "Služby knihoven pro vás" 
+  milestones:
+    page_title: "Milníky ve vývoji portálu"
+    page_header: "Milníky ve vývoji portálu Knihovny.cz"
   libraries:
     page_title: "Databáze knihoven"
     page_header: "Vyhledat knihovnu" 

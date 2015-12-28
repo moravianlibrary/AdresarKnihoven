@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get   'o-portalu'           => 'static_pages#about'
   get   'zapojene-knihovny'   => 'static_pages#founders'
   get   'sluzby-knihoven'     => 'static_pages#services'
+  get   'milniky'             => 'static_pages#milestones'
 
   get '/feeder/sigla/:sigla', to: 'feeder#sigla'
   get '/feeder/sysno/:sysno', to: 'feeder#sysno'
