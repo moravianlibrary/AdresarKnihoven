@@ -4,7 +4,7 @@
 			<div class="col-sm-4">
 				<h4>O projektu</h4>
 				<ul>
-					<li><a href="#">O portálu Knihovny.cz</a></li>
+					<li><%= link_to "O portálu Knihovny.cz", o_portalu_path %></li>
 					<li><a href="#">Milníky ve vývoji portálu</a></li>
 					<li><%= link_to "Zapojené knihovny", zapojene_knihovny_path %></li>
 					<li><a href="#">Nápověda</a></li>
@@ -37,9 +37,4 @@
 		<div class="row footer-bottom-gap hidden-xs">
   </div>
 
-
-  <div style="display:none;">
-  <%= t('footer.admin.label') %> <a href="<%= t('footer.admin.url') %>"><%= t('footer.admin.name') %></a> |
-  <%= link_to t('footer.about'), about_path %></li>
-  </div>
 </footer>

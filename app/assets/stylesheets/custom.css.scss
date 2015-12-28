@@ -658,11 +658,14 @@ input {
 
 .cl-article {
   h2 {
-    color: #4B4B4B;
+    color: #333;
     font-weight: 600;
     font-size: 16px;
     margin-top: 25px;
     margin-bottom: 12px;
+  }
+  strong {
+    color: #555;
   }
 }
 

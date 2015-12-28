@@ -37,8 +37,8 @@ cs:
         description: "Odborná odpověď zdarma do 48 hodin na váš e-mail."
         label: "Službu zajišťuje projekt"
   about:
-    page_title: "O projektu"
-    page_header: "O projektu" 
+    page_title: "O portálu Knihovny.cz"
+    page_header: "Proč portál Knihovny.cz vznikl a komu je určen" 
   founders:
     page_title: "Zapojené knihovny"
     page_header: "Knihovny zapojené do projektu Knihovny.cz" 
