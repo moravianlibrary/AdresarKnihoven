@@ -12,8 +12,9 @@ Rails.application.routes.draw do
   resources :projects, only: [:index]
 
   root  'static_pages#home'
-  get   'o-portalu'      => 'static_pages#about'
-  get   'zapojene-knihovny'      => 'static_pages#founders'
+  get   'o-portalu'           => 'static_pages#about'
+  get   'zapojene-knihovny'   => 'static_pages#founders'
+  get   'sluzby-knihoven'     => 'static_pages#services'
 
   get '/feeder/sigla/:sigla', to: 'feeder#sigla'
   get '/feeder/sysno/:sysno', to: 'feeder#sysno'

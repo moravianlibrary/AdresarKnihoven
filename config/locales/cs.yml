@@ -42,6 +42,9 @@ cs:
   founders:
     page_title: "Zapojené knihovny"
     page_header: "Knihovny zapojené do projektu Knihovny.cz" 
+  services:
+    page_title: "Služby knihoven"
+    page_header: "Služby knihoven pro vás" 
   libraries:
     page_title: "Databáze knihoven"
     page_header: "Vyhledat knihovnu" 
