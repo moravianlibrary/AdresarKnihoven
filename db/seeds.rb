@@ -24,7 +24,7 @@ Project.create!([
 {
 	code: "04", 
 	name: "Knihovny.cz",
-	description: "Společný portál českých knihoven vám umožní získat knihu či jiné dokumenty, které nabízí knihovny a další subjekty, a to kdykoli a odkudkoli. Kromě knihovních fondů soustřeďuje portál na jednom místě také další knihovnické a informační služby, které lze jeho prostřednictvím využívat, aniž byste danou knihovnu museli navštívit.",
+	description: "Společný portál českých knihoven vám umožní získat knihy či jiné dokumenty, které nabízí knihovny a další subjekty, a to kdykoli a odkudkoli. Kromě knihovních fondů soustřeďuje portál na jednom místě také další knihovnické a informační služby, které lze jeho prostřednictvím využívat, aniž byste danou knihovnu museli navštívit.",
 	url: "http://www.knihovny.cz/"
 },
 {
@@ -66,7 +66,7 @@ Project.create!([
 {
 	code: "11", 
 	name: "Jednotná informační brána",
-	description: "Jednotná informační brána (JIB) je společný projekt Národní knihovny České republiky a Univerzity Karlova v Praze zacílený na sjednocení různorodých informačních zdrojů. Jednotná informační brána je portál, který již od roku 2002 slouží k vyhledávání bibliografických záznamů. Umožňuje vám z jednoho místa vstupovat do českých a zahraničních katalogů knihoven, souborných katalogů, databází a dalších informačních zdrojů. Zároveň zde můžete vyhledávat plné texty dokumentů, recenze knih nebo si objednat elektronické dodání dokumentu. JIB poskytuje také informace o existenci zdrojů, které nejsou volně přístupné.",
+	description: "Jednotná informační brána (JIB) je projekt Národní knihovny České republiky zacílený na propojení různorodých informačních zdrojů. Jednotná informační brána je portál, který již od roku 2002 slouží k vyhledávání bibliografických záznamů. Umožňuje vám z jednoho místa vstupovat do českých a zahraničních katalogů knihoven, souborných katalogů, databází a dalších informačních zdrojů. Zároveň zde můžete vyhledávat plné texty dokumentů, recenze knih nebo si objednat elektronické dodání dokumentu. JIB poskytuje také informace o existenci zdrojů, které nejsou volně přístupné.",
 	url: "http://www.jib.cz/"
 },
 {
