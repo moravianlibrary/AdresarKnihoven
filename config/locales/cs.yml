@@ -19,7 +19,7 @@ cs:
       url: "http://www.mlp.cz/"
     about: "O projektu"
   home:
-    page_title: "Centrální portál českých knihoven"
+    page_title: "Knihovny na jednom místě"
     search:
       label: "Hledat v titulech"
       placeholder: "Zadejte název nebo autora"
