@@ -20,6 +20,8 @@ cs:
     about: "O projektu"
   home:
     page_title: "Knihovny na jednom místě"
+    welcome_title: "Vítejte na portálu Knihovny.cz"
+    welcome_text: "Využijte komfort a jednoduchost prohledávání fondů desítek českých knihoven současně. Objednávejte, stahujte a využijte služeb knihoven kdykoli, odkudkoli a kdekoli."
     search:
       label: "Hledat v titulech"
       placeholder: "Zadejte název nebo autora"
