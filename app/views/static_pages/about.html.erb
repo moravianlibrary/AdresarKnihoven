@@ -97,7 +97,8 @@ soustřeďuje aktuální informace o českých knihovnách, jejich službách a 
 centrální úrovni. 
 <strong>
 Nyní vám stačí navštívit jediný web, abyste se dozvěděli o akcích a 
-<a href="#">službách [zde prosím upravit odkaz na článek služby]</a> knihoven po celé České republice. 
+<%= link_to "službách", services_path %>
+knihoven po celé České republice. 
 </strong>
 Spojení služeb českých knihoven pod společný portál vám pomůže snadno se zorientovat v 
 nabídkách a činnostech, které české knihovny poskytují, a lépe využívat jejich informační 
@@ -137,7 +138,8 @@ k informacím a dokumentům a nabídnout fondy knihoven včetně jejich služeb
 místě. 
 </p>
 
-Přečtěte si více o <%= link_to "knihovnách zapojených", zapojene_knihovny_path %> do 
+Přečtěte si více o <%= link_to "knihovnách zapojených", founders_path %> do 
 portálu Knihovny.cz nebo o 
-<a href="#">důležitých milnících vývoje [doplnit link na milníky]</a> portálu.
+<%= link_to "důležitých milnících vývoje", milestones_path %>
+portálu.
 </div>

@@ -50,6 +50,12 @@ cs:
   milestones:
     page_title: "Milníky ve vývoji portálu"
     page_header: "Milníky ve vývoji portálu Knihovny.cz"
+  readers:
+    page_title: "Nejvýznamnější akce knihoven pro čtenáře"
+    page_header: "Nejvýznamnější akce knihoven pro čtenáře"
+  children:
+    page_title: "Knihovny zvou malé čtenáře"
+    page_header: "Knihovny zvou malé čtenáře"
   libraries:
     page_title: "Databáze knihoven"
     page_header: "Vyhledat knihovnu" 
