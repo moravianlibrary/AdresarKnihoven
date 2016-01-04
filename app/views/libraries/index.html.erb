@@ -10,7 +10,7 @@
     <% end %>
   </div> 
   
-  <div class="cl-search-count"><%= t('libraries.search.results') %>: <b><%= @all.count %></b>
+  <div class="cl-search-count"><%= t('libraries.search.results') %>: <b><%= @all.length %></b>
     <span id="nearby-wrapper" style="display:none">|
       <a id="nearby" href="#"><%= t('libraries.search.nearby') %></a>
     </span>
@@ -19,10 +19,86 @@
   <% if @show_results %>
     <% if @libraries.length > 0 %>
       <div id="map-canvas" style="width: 100%; height: 300px;margin:10px 0;"></div>
-      <div class="cl-list">
-        <%= render @libraries %>
-        <%= will_paginate @libraries, class: "pagination cl-pagination-centered"%>
-      </div>  
+      
+      <div class="row" style="padding-top:5px;">
+        <div class="col-md-9">
+          <div class="cl-list">
+            <%= render @libraries %>
+            <%= will_paginate @libraries, class: "pagination cl-pagination-centered"%>
+          </div>  
+        </div>
+        <div class="col-md-3 cl-filters">
+
+          <div class="panel panel-primary cl-panel" id="panelRegion">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapseRegion">
+                  Kraj
+                </a>
+              </h4>
+            </div>
+            <div id="collapseRegion" class="panel-collapse collapse in">
+              <div class="cl-panel-body">
+                <% @region_map.each do |key, value| %>                    
+                  <% if @region && @region == key %>
+                    <%= link_to libraries_path(region: nil, services: @service_codes.join(",") ,q: @query) do %>
+                      <div class="cl-item">                                                
+                        <img class="cl-remove" src="<%= asset_path 'ic_remove.png' %>"/>
+                        <%= key %> 
+                        </div>
+                    <% end %>                  
+                  <% else %>
+                    <%= link_to libraries_path(region: key, services: @service_codes.join(","), q: @query) do %>
+                      <div class="cl-item">
+                        <span class="cl-count"><%= value %></span>
+                        <%= key %>
+                      </div>
+                    <% end %>                  
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel-primary cl-panel" id="panelService">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapseService">
+                  Služby
+                </a>
+              </h4>
+            </div>
+            <div id="collapseService" class="panel-collapse collapse in">
+              <div class="cl-panel-body">
+                <% @service_map.each do |key, value| %>                    
+                    <% if @service_codes.index(key) %>
+                      <%= link_to libraries_path(services: (@service_codes - [key]).join(","), region: @region, q: @query) do %>
+                        <div class="cl-item cl-active">
+                          <img class="cl-remove" src="<%= asset_path 'ic_remove.png' %>"/>
+                          <%= @services.find_by(code: key).name %>                        
+                        </div>
+                      <% end %>                                    
+                    <% else %>
+                      <%= link_to libraries_path(services: (@service_codes + [key]).join(","), region: @region, q: @query) do %>
+                        <div class="cl-item">
+                          <span class="cl-count"><%= value %></span>
+                          <%= @services.find_by(code: key).name %>                        
+                        </div>
+                      <% end %>                                    
+                    <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+
+
+
+        </div>
+      </div>
+
+
+
     <% else %>
       <div style="width:100%;margin-top:20px;font-size:15px;color:#444;text-align:center;">
         <%= t('libraries.search.no_result') %>
@@ -111,7 +187,7 @@
         }
       })(marker, i));
     }
-    <% if @all.count > 500 %>
+    <% if @all.length > 500 %>
       var mcOptions = {gridSize: 75, maxZoom: 10};
       var mc = new MarkerClusterer(map, markers, mcOptions);
     <% end %>

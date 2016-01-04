@@ -432,8 +432,43 @@ a:hover, a:focus, a:active {
 
 .cl-libraries {
   
+  .cl-filters {
+    padding-left: 0px;
+    .cl-panel {
+      @include box-shadow(0px 1px 3px rgba(0,0,0,0.2)); 
+      border: none;
+      border-radius: 0px;
+      .cl-item {
+        color: #333;
+        padding: 5px 12px;
+        cursor: pointer;
+        .cl-count {
+          color: #888;
+          float:right;
+          margin-left: 5px;
+        }
+        .cl-remove {
+          width:20px; 
+          height:20px; 
+          margin-left: 8px;
+          float:right;
+        }
+        &:hover {
+          color: #333;
+          background: #eee;
+        }
+        &.cl-active {
+          color: $color-primary;
+        }
+      }
+      .cl-panel-body {
+        padding: 8px 0px;
+      }      
+    }
+  }
+
   .cl-list {
-    margin-top: 15px;
+    margin-top: 0px;
     .cl-list-item {
       @extend .cl-box-selectable;
       /*padding: 5px 5px 10px 5px;
