@@ -31,13 +31,18 @@ class Api::LibrariesController < ApiController
     q = params[:q];
     q = q.downcase unless q.nil?
     params[:limit] ||= 15
+    if params[:lang] == "en"
+      search_field = "name_en"
+    else
+      search_field = "name"
+    end
     if q.nil?
       all = Library.all
     else        
-      all = Library.where("LOWER(libraries.name) #{like_clause} ?", "#{q}%")
+      all = Library.where("LOWER(libraries.#{search_field}) #{like_clause} ?", "#{q}%")
     end     
     all = all.where(active:true)
-    @libraries = all.order(:priority, :name).limit(params[:limit])      
+    @list = all.order(:priority, :name).limit(params[:limit]).pluck(search_field).uniq   
   end
 
 
