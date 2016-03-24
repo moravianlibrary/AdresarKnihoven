@@ -42,7 +42,7 @@ class Api::LibrariesController < ApiController
       all = Library.where("LOWER(libraries.#{search_field}) #{like_clause} ?", "#{q}%")
     end     
     all = all.where(active:true)
-    @list = all.order(:priority, :name).limit(params[:limit]).pluck(search_field).uniq   
+    @list = all.order(:priority, :name).select(search_field).uniq.limit(params[:limit]).pluck(search_field)
   end
 
 
