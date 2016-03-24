@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     end
     resources :projects, only: [:index, :show]
     resources :services, only: [:index, :show]
+    get 'autocomplete'   => 'libraries#autocomplete'
   end 
 
 end

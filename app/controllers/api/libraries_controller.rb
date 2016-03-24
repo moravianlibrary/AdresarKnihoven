@@ -27,6 +27,21 @@ class Api::LibrariesController < ApiController
     end
   end
 
+  def autocomplete
+    q = params[:q];
+    q = q.downcase unless q.nil?
+    params[:limit] ||= 15
+    if q.nil?
+      all = Library.all
+    else        
+      all = Library.where("LOWER(libraries.name) #{like_clause} ?", "#{q}%")
+    end     
+    all = all.where(active:true)
+    @libraries = all.order(:priority, :name).limit(params[:limit])      
+  end
+
+
+
  
   private
     def like_clause
