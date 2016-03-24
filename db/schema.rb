@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 20151211155900) do
   add_index "libraries", ["name"], name: "index_libraries_on_name"
   add_index "libraries", ["sigla"], name: "index_libraries_on_sigla"
 
-  create_table "libraries_projects", force: :cascade do |t|
+  create_table "libraries_projects", id: false, force: :cascade do |t|
     t.integer "library_id"
     t.integer "project_id"
   end

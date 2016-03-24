@@ -24,6 +24,16 @@ Rails.application.routes.draw do
   get '/feeder/sysno/:sysno', to: 'feeder#sysno'
   get '/feeder/show/:sigla', to: 'feeder#show'
 
+
+  namespace :api do
+    resources :libraries, only: [:index, :show] do
+      resources :projects, only: [:index, :show]
+      resources :services, only: [:index, :show]
+    end
+    resources :projects, only: [:index, :show]
+    resources :services, only: [:index, :show]
+  end 
+
 end
 
 

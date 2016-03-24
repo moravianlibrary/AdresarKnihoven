@@ -52,6 +52,7 @@ class FeederController < ApplicationController
 
       
       library.name = check(doc.elements["//varfield[@id='NAZ']/subfield[@label='a']"])    
+
       library.bname = check(doc.elements["//varfield[@id='NAZ']/subfield[@label='b']"])    
       library.cname = check(doc.elements["//varfield[@id='NAZ']/subfield[@label='c']"])    
       library.name_en = check(doc.elements["//varfield[@id='VAR' and @i1='2']/subfield[@label='a']"])
@@ -108,6 +109,7 @@ class FeederController < ApplicationController
         oh.note = check(otd.elements["subfield[@label='p']"])
       end
       
+
       phone_array = doc.elements["//varfield[@id='TEL']"]
       if phone_array
         phone_array.elements().each("subfield[@label='a']") do |p|
@@ -194,6 +196,7 @@ class FeederController < ApplicationController
           library.branches_url = url
         end  
       end   
+      # logger.debug library.sigla
       library.save 
   end    
 
