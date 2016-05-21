@@ -187,7 +187,7 @@
         }
       })(marker, i));
     }
-    <% if @all.length > 10 %>
+    <% if @all.length > 500 %>
       var mcOptions = {gridSize: 75, maxZoom: 10};
       var mc = new MarkerClusterer(map, markers, mcOptions);
     <% end %>
