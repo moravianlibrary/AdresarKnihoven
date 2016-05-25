@@ -1,4 +1,4 @@
-json.extract! @library, :sigla, :name, :name_en, :code, :city, :street, :zip, :longitude, :latitude, :description, :region, :district, :context, :active, :ico, :dic, :mvs_description, :mvs_url, :created_at, :updated_at
+json.extract! @library, :sigla, :name, :name_en, :bname, :bname_en, :cname, :cname_en, :code, :city, :street, :zip, :longitude, :latitude, :description, :region, :district, :context, :active, :ico, :dic, :mvs_description, :mvs_url, :created_at, :updated_at
 json.people {
 	json.array!(@library.people) do |person|
 	  json.extract! person, :first_name, :last_name, :email, :phone, :degree1, :degree2, :role
