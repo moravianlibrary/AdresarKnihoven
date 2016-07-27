@@ -32,11 +32,7 @@ class Api::V1::LibrariesController < ApiController
     else        
       all = Library.where("LOWER(libraries.name) #{like_clause} ? OR LOWER(sigla) = ? OR LOWER(libraries.code) = ? OR LOWER(city) #{like_clause} ?", "%#{q}%", "#{q.delete(' ')}", "#{q}", "#{q}%")
     end     
-    if params[:status] == "active"
-      all = all.where(active:true)
-    elsif params[:status] == "inactive"
-      all = all.where(active:false)
-    end
+    all = all.where(active:true).where.not(latitude:nil).where.not(longitude:nil)
     @libraries = all
   end
 
