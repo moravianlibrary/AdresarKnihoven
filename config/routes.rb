@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :libraries, only: [:index, :show]
       get 'markers'   => 'libraries#markers'
+      get 'autocomplete'   => 'libraries#autocomplete'
     end 
 
   end 
