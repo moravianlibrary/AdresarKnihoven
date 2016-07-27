@@ -33,6 +33,13 @@ Rails.application.routes.draw do
     resources :projects, only: [:index, :show]
     resources :services, only: [:index, :show]
     get 'autocomplete'   => 'libraries#autocomplete'
+
+
+    namespace :v1 do
+      resources :libraries, only: [:index, :show]
+      get 'markers'   => 'libraries#markers'
+    end 
+
   end 
 
 end
