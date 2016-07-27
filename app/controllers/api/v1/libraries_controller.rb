@@ -16,8 +16,10 @@ class Api::V1::LibrariesController < ApiController
     elsif params[:status] == "inactive"
       all = all.where(active:false)
     end
+    @count = all.count
     @libraries = all.order(:priority, :name).offset(params[:offset]).limit(params[:limit])   
-    @count = Library.count
+    @limit = params[:limit]
+    @offset = params[:offset]
   end
 
 
