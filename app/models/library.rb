@@ -14,6 +14,32 @@ class Library < ActiveRecord::Base
 	end
 
 	def to_param
-   		sigla
-  	end	
+   	sigla
+  end	
+
+
+	def marker_name(lang = "cs")
+		if lang == "en" && name_en
+			format_name(name_en, bname_en, cname_en)
+		else 
+			format_name(name, bname, cname)
+		end
+	end
+
+
+	def marker_address
+		"#{street}, #{zip} #{city}"
+	end
+
+
+	private 
+  	def format_name(a, b, c)
+  		result = ""
+  		result = a if a
+  		result = "#{result}, #{b}" if b
+  		result = "#{result} - #{c}" if c
+  		result
+  	end
+
+
 end

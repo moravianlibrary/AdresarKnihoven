@@ -33,7 +33,8 @@ class Api::V1::LibrariesController < ApiController
       all = Library.where("LOWER(libraries.name) #{like_clause} ? OR LOWER(sigla) = ? OR LOWER(libraries.code) = ? OR LOWER(city) #{like_clause} ?", "%#{q}%", "#{q.delete(' ')}", "#{q}", "#{q}%")
     end     
     all = all.where(active:true).where("latitude IS NOT NULL AND longitude IS NOT NULL")
-    @libraries = all
+    @libraries = all.limit(200)
+    @lang = params[:lang]
   end
 
 
