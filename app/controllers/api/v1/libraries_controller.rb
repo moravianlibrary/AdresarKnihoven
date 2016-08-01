@@ -102,7 +102,7 @@ class Api::V1::LibrariesController < ApiController
     #lon = 16.59402778
     def select_clause(lat, lon)
       if postgres? && lat && lon
-        '*, (2 * 3961 * asin(sqrt((sin(radians((latitude - #{lat}) / 2))) ^ 2 + cos(radians(#{lat})) * cos(radians(latitude)) * (sin(radians((longitude - #{lon}) / 2))) ^ 2))) as distance'
+        "*, (2 * 3961 * asin(sqrt((sin(radians((latitude - #{lat}) / 2))) ^ 2 + cos(radians(#{lat})) * cos(radians(latitude)) * (sin(radians((longitude - #{lon}) / 2))) ^ 2))) as distance"
       else
         '*, null as distance'
       end
