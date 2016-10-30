@@ -8,9 +8,9 @@ class Api::V1::LibrariesController < ApiController
     params[:offset] ||= 0
     params[:sort] ||= "priority"
     result = Library.all
-    if !q.nil?    
-      result = result.where("LOWER(libraries.name) #{like_clause} ? OR LOWER(sigla) = ? OR LOWER(libraries.code) = ? OR LOWER(city) #{like_clause} ?", "%#{q}%", "#{q.delete(' ')}", "#{q}", "#{q}%")
-    end     
+    if !q.nil?
+      result = result.where("LOWER(libraries.name) #{like_clause} ? OR LOWER(libraries.bname) #{like_clause} ? OR LOWER(libraries.cname) #{like_clause} ? OR LOWER(sigla) = ? OR LOWER(libraries.code) = ? OR LOWER(city) #{like_clause} ?", "%#{q}%", "%#{q}%", "%#{q}%", "#{q.delete(' ')}", "#{q}", "#{q}%")
+    end
     if params[:status] == "active"
       result = result.where(active:true)
     elsif params[:status] == "inactive"
@@ -18,9 +18,9 @@ class Api::V1::LibrariesController < ApiController
     end
     @count = result.count
     result = result.select(select_clause(params[:lat], params[:lon]))
-    
 
-    #@libraries = all.order(:priority, :name).offset(params[:offset]).limit(params[:limit])  
+
+    #@libraries = all.order(:priority, :name).offset(params[:offset]).limit(params[:limit])
 
     #query = "SELECT * FROM libraries"# LIMIT #{params[:limit]} OFFSET #{params[:offset]}"
     #@libraries = Library.connection.execute(query)
@@ -31,13 +31,13 @@ class Api::V1::LibrariesController < ApiController
       result = result.order(:name, :priority)
     elsif params[:sort] == "distance" && params[:lon] && params[:lat]
       result = result.order("distance", :priority, :name)
-    else 
+    else
       result = result.order(:priority, :name)
     end
     result = result.order(:priority, :name)
 
 
-    @libraries = result.offset(params[:offset]).limit(params[:limit])  
+    @libraries = result.offset(params[:offset]).limit(params[:limit])
     @limit = params[:limit]
     @offset = params[:offset]
   end
@@ -49,9 +49,9 @@ class Api::V1::LibrariesController < ApiController
     params[:status] ||= "active"
     if q.nil?
       all = Library.all
-    else        
-      all = Library.where("LOWER(libraries.name) #{like_clause} ? OR LOWER(sigla) = ? OR LOWER(libraries.code) = ? OR LOWER(city) #{like_clause} ?", "%#{q}%", "#{q.delete(' ')}", "#{q}", "#{q}%")
-    end     
+    else
+      all = Library.where("LOWER(libraries.name) #{like_clause} ? OR LOWER(libraries.bname) #{like_clause} ? OR LOWER(libraries.cname) #{like_clause} ? OR LOWER(sigla) = ? OR LOWER(libraries.code) = ? OR LOWER(city) #{like_clause} ?", "%#{q}%", "#{q.delete(' ')}", "#{q}", "#{q}%")
+    end
     all = all.where(active:true).where("latitude IS NOT NULL AND longitude IS NOT NULL")
     @libraries = all
     @lang = params[:lang]
@@ -60,7 +60,7 @@ class Api::V1::LibrariesController < ApiController
 
   def show
     @library = Library.find_by(sigla: params[:id].upcase)
-    if(@library.nil?) 
+    if(@library.nil?)
       render json: {error: "library not found"}, status: :not_found
     end
   end
@@ -69,23 +69,18 @@ class Api::V1::LibrariesController < ApiController
     q = params[:q];
     q = q.downcase unless q.nil?
     params[:limit] ||= 15
-    if params[:lang] == "en"
-      search_field = "name_en"
-    else
-      search_field = "name"
-    end
     if q.nil?
       all = Library.all
-    else        
-      all = Library.where("LOWER(libraries.#{search_field}) #{like_clause} ?", "#{q}%")
-    end     
+    else
+      all = Library.where("LOWER(libraries.name) #{like_clause} ?", "#{q}%")
+    end
     all = all.where(active:true)
-    @list = all.order(search_field).select(search_field).uniq.limit(params[:limit]).pluck(search_field)
+    @list = all.order(:name).select(:name).uniq.limit(params[:limit]).pluck(:name)
   end
 
 
 
- 
+
   private
     def postgres?
       ActiveRecord::Base.connection.instance_values["config"][:adapter] == 'postgresql'
@@ -94,7 +89,7 @@ class Api::V1::LibrariesController < ApiController
     def like_clause
       if postgres?
         'ILIKE'
-      else 
+      else
         'LIKE'
       end
     end

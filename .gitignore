@@ -19,3 +19,4 @@
 # Ignore local helpers and tempfiles
 /utils
 
+.DS_Store
