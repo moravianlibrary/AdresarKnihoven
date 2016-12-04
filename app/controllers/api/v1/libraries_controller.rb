@@ -50,7 +50,7 @@ class Api::V1::LibrariesController < ApiController
     if q.nil?
       all = Library.all
     else
-      all = Library.where("LOWER(libraries.name) #{like_clause} ? OR LOWER(libraries.bname) #{like_clause} ? OR LOWER(libraries.cname) #{like_clause} ? OR LOWER(sigla) = ? OR LOWER(libraries.code) = ? OR LOWER(city) #{like_clause} ?", "%#{q}%", "#{q.delete(' ')}", "#{q}", "#{q}%")
+      all = Library.where("LOWER(libraries.name) #{like_clause} ? OR LOWER(libraries.bname) #{like_clause} ? OR LOWER(libraries.cname) #{like_clause} ? OR LOWER(sigla) = ? OR LOWER(libraries.code) = ? OR LOWER(city) #{like_clause} ?", "%#{q}%", "%#{q}%", "%#{q}%", "#{q.delete(' ')}", "#{q}", "#{q}%")
     end
     all = all.where(active:true).where("latitude IS NOT NULL AND longitude IS NOT NULL")
     @libraries = all
